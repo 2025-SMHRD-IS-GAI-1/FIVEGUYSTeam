@@ -103,7 +103,7 @@
                     onclick="location.href='${ctx}/join.do'">회원가입</button>
           </div>
 
-          <div class="or">또는</div>
+          <div class="or">또는1</div>
 
           <button class="btn btn-ghost" type="button"
                   onclick="location.href='${ctx}/guest.do'">게스트로 계속하기</button>
