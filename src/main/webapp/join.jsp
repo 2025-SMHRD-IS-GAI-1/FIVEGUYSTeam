@@ -83,7 +83,7 @@ String ctx = request.getContextPath();
 
 						<!-- 버튼: 좌/우 열에 배치 -->
 						<div class="btn-left">
-							<button type="submit" class="btn btn-primary">회원가입 완료 ➜</button>
+							<button type="submit" class="btn btn-primary">회원가입 완료</button>
 						</div>
 						<div class="btn-right">
 							<a href="<%=ctx%>/login.jsp" class="btn btn-ghost"
@@ -104,19 +104,6 @@ String ctx = request.getContextPath();
 		</div>
 	</div>
 
-	<!-- (선택) 비밀번호 일치 프론트 검증 -->
-	<script>
-		(function() {
-			const form = document.querySelector('form');
-			form.addEventListener('submit', function(e) {
-				const pw = document.getElementById('pw').value;
-				const pw2 = document.getElementById('pw2').value;
-				if (pw !== pw2) {
-					e.preventDefault();
-					alert('비밀번호가 일치하지 않습니다.');
-				}
-			});
-		})();
-	</script>
+
 </body>
 </html>

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace : 해당하는 파일을 구분할 수 있는 고유의 이름을 정해주는 작업 "해당하는 공간에는, mapper 파일을 
+	사용하게 될 DAO의 full name을 기술하는 것을 원칙으로 한다." -->
+<mapper namespace="com.smhrd.model.MemberDAO">
+	<!-- SQL 구문들을 기술할 수 있는 공간 -->
+	
+	<!-- 어떤 SQL 구문을 사용하느냐에 따라서, 태그를 바꾸면서 사용하자 
+		: insert, delete, update, select
+		* 각 태그들의 공통 속성값
+		(1) id : 해당하는 sql구문을 구분할 수 있는 고유값 "중복 불가능"
+		(2) resultType : 반환된 결과값을 JAVA에서 표현할 수 있는 형태로 자료형을 지정
+			>> 기본으로 제공되는 자료형 생략가능. (+ String, ArrayList등등)
+		(3) parameterType : 매개변수로 받아온 자료형을 지정하는 공간! (기본자료 생략가능!)
+		
+		* \#{} : # == ? 느낌  마이메터스 // getter랑 느낌이 같다
+		 		JDBC기준 ?인자를 대신해서 사용하는 방식
+		 		Java에서 전달받은 매개변수를 채울 때, 사용하는 mybatis만의 방식
+	-->
+	<insert id="join" parameterType="com.smhrd.model.MemberVO">
+		INSERT INTO WEB_MEMBER(EMAIL, PW, TEL, ADDRESS)
+		VALUES(#{email},#{pw},#{tel},#{address})
+	
+	</insert>
+	
+	<!-- 로그인을 위한 sql구문 작성! -->
+	<select id="login" parameterType="com.smhrd.model.MemberVO" 
+	resultType="com.smhrd.model.MemberVO">
+		SELECT *
+		FROM WEB_MEMBER
+		WHERE EMAIL=#{email} AND PW=#{pw}
+	</select>
+	
+	<select id="selectAll" resultType="com.smhrd.model.MemberVO">
+		SELECT EMAIL, TEL , ADDRESS 
+		FROM WEB_MEMBER
+		WHERE EMAIL != 'admin'
+	</select>
+	
+	
+	
+	
+	
+</mapper>
