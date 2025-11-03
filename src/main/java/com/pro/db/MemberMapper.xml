@@ -28,7 +28,7 @@
  	
  	<select id="login" parameterType="com.pro.model.MemberVO" resultType="com.pro.model.MemberVO">
  		SELECT *
- 		FROM MEM_BER WHERE ID=#{id} and PW=#{pw}
+ 		FROM T_MEMBER WHERE ID=#{id} and PW=#{pw}
  	</select>
  
 </mapper>
