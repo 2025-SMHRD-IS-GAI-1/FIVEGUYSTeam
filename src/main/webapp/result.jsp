@@ -29,7 +29,7 @@ String ctx = request.getContextPath();
 			</div>
 			<nav class="mini-nav">
 				<a href="<%=ctx%>/home.jsp">홈</a> <a class="primary-outline"
-					href="<%=ctx%>/join.jsp">회원가입</a>
+					href="<%=ctx%>/join.jsp">마이페이지</a>       <!-- 경로 바꿔줘야함!!  -->
 			</nav>
 		</div>
 	</header>

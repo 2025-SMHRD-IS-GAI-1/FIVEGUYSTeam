@@ -2,8 +2,8 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%
-    // 컨텍스트 경로 (배포 경로가 바뀌어도 링크가 안 깨지게)
-    String ctx = request.getContextPath();
+// 컨텍스트 경로 (배포 경로가 바뀌어도 링크가 안 깨지게)
+String ctx = request.getContextPath();
 %>
 <!DOCTYPE html>
 <html lang="ko">
@@ -53,6 +53,15 @@
 							name="pw" type="password" class="input" placeholder="비밀번호"
 							required />
 					</div>
+
+					<!-- 로그인실패 메시지(빨간 글씨) -->
+					<c:if test="${not empty errorMsg}">
+						<p class="error-msg">
+							<c:out value="${errorMsg}" />
+						</p>
+					</c:if>
+
+
 
 					<!-- 자동 로그인 / 비밀번호 찾기 -->
 					<div class="row-between">
