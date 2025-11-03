@@ -22,7 +22,7 @@
 			: Java에서 전달받은 매개변수를 채울 떄, 사용하는 mybatis만의 방식
  -->
  	<insert id="join" parameterType="com.pro.model.MemberVO">
- 		INSERT INTO MEM_BER(ID,PW,NAME,EMAIL) VALUES(#{id}, #{pw}, #{name}, #{email})
+ 		INSERT INTO T_MEMBER(ID,PW,NAME,EMAIL) VALUES(#{id}, #{pw}, #{name}, #{email})
  		
  	</insert>
  	
