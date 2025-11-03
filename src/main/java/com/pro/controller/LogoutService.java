@@ -1,10 +1,10 @@
-package com.smhrd.controller;
+package com.pro.controller;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.smhrd.frontcontroller.Command;
+import com.pro.frontcontroller.Command;
 
 public class LogoutService implements Command {
 
