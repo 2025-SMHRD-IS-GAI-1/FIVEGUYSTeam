@@ -1,0 +1,51 @@
+@charset "UTF-8";
+/* 드롭존 */
+.dropzone {
+	width: 100%; /* 가로 꽉 채움 */
+	height: 520px; /* 높이 크게 (원하면 480~560까지 ↑) */
+	border: 3px dashed var(--border);
+	border-radius: 16px;
+	background: #fafbff;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	transition: .2s;
+	position:relative;
+	overflow:hidden;
+}
+
+.dropzone.is-over {
+	border-color: var(--primary);
+	background: #f5f7ff;
+	box-shadow: 0 0 0 4px var(--ring)
+}
+
+.dropzone input[type="file"] {
+	position: absolute;
+	left: 0; top:0;
+	width : 100%; height: 100%;
+	opacity: 0;
+	cursor: pointer;
+}
+
+.drop-hint {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 4px;
+	color: var(--sub)
+}
+
+@media ( min-width : 1280px) {
+	.dropzone {
+		height: 600px;
+	}
+}
+
+.drop-hint .icon {
+	font-size: 30px
+}
+
+.drop-hint strong {
+	font-size: 16px;
+}
