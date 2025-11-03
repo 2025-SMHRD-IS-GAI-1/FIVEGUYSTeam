@@ -29,7 +29,7 @@ String ctx = request.getContextPath();
 			<!-- 왼쪽 : 로고 & 캡션 -->
 			<div class="left">
 				<img class="logo"
-					src="${pageContext.request.contextPath}/img/팀로고.png"
+					src="<%=ctx %>/img/팀로고.png"
 					alt="FIVE GUYS Logo" />
 				<div class="caption">다국어 메뉴판 번역 서비스</div>
 			</div>
@@ -67,7 +67,7 @@ String ctx = request.getContextPath();
 					<div class="row-between">
 						<label class="checkbox"> <input type="checkbox"
 							name="remember" value="Y" /> <span>자동 로그인</span>
-						</label> <a class="link" href="<%=ctx%>/find-password.jsp">비밀번호 찾기</a>
+						</label> <a class="link" href="<%=ctx%>/pw_find.jsp">비밀번호 찾기</a>
 					</div>
 
 					<!-- 로그인 버튼 -->
