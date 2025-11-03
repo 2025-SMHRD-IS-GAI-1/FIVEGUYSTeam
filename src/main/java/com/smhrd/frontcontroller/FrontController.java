@@ -9,77 +9,77 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.smhrd.frontcontroller.Command; // ✅ 빠졌던 import 추가
+
 import com.smhrd.controller.JoinService;
 import com.smhrd.controller.LoginService;
 import com.smhrd.controller.LogoutService;
 import com.smhrd.controller.SelectAllService;
 
-//모든 요청이 .do라고 하는 확장자를 가지고 있다면
-
-//다 가져올 수 있는 URL Mapping 
+// ⬇️ 마이페이지 관련 추가
+import com.smhrd.controller.MypageService;
+import com.smhrd.controller.ChangePasswordService;
+import com.smhrd.controller.ChangeEmailService;
+import com.smhrd.controller.DeleteAccountService;
+//import com.smhrd.controller.FavoriteToggleService; // 구현 안 했으면 주석 처리
 
 @WebServlet("*.do")
 public class FrontController extends HttpServlet {
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	protected void service(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+    @Override
+    protected void service(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
 
-		// FrontController : 단 한개의 Servlet을 사용하여,
-		// 모든 요청과 응답을 처리하는 패턴!
+        // 공통 인코딩
+        request.setCharacterEncoding("UTF-8");
 
-		// 1. FrontController에 들어온 요청이 어떤 요청인지 파악!
+        String uri = request.getRequestURI();
+        String path = request.getContextPath();
+        String finalUri = uri.substring(path.length() + 1); // e.g. ChangePassword.do
+        System.out.println("[FC] uri=" + uri + " / ctx=" + path + " / finalUri=" + finalUri);
 
-		// 실행되는 uri 주소 가져오기
-		String uri = request.getRequestURI(); // 주소값 뽑아오는거
-		System.out.println("쏭쏭 체크>>" + uri);
-		// /ExMessageSystem_FrontCon/Login.do
+        String moveUrl;
+        Command com = null;
 
-		// 프로젝트 경로 가져오기
-		String path = request.getContextPath(); // 맵핑값 뽑아오는거
-		System.out.println("패스 체크>>" + path);
+        // 기존 라우팅
+        if ("Join.do".equals(finalUri)) {
+            com = new JoinService();
+        } else if ("Login.do".equals(finalUri)) {
+            com = new LoginService();
+        } else if ("Logout.do".equals(finalUri)) {
+            com = new LogoutService();
+        } else if ("SelectAll.do".equals(finalUri)) {
+            com = new SelectAllService();
 
-		// uri 경로에서 path에 대한 경로 삭제!
-		// /ExMessageSystem_FrontCon + /
+        // ⬇️ 추가 라우팅 : 마이페이지 세트
+        } else if ("Mypage.do".equals(finalUri)) {
+            com = new MypageService();
+        } else if ("ChangePassword.do".equals(finalUri)) {
+            com = new ChangePasswordService();
+        } else if ("ChangeEmail.do".equals(finalUri)) {
+            com = new ChangeEmailService();
+        } else if ("DeleteAccount.do".equals(finalUri)) {
+            com = new DeleteAccountService();
+      //  } else if ("FavoriteToggle.do".equals(finalUri)) { // 구현 안 했으면 주석
+      //      com = new FavoriteToggleService();
+        }
 
-		// → /Login.do
-		// /ExMessageSystem_FrontCon
-		String finalUri = uri.substring(path.length() + 1);
-		System.out.println("최종" + finalUri);
+        // ⬇️ 방어: 분기 실패 시 404 처리 (main.jsp로 튀는 현상 방지)
+        if (com == null) {
+            System.out.println("[FC] NO ROUTE for " + finalUri);
+            response.sendError(HttpServletResponse.SC_NOT_FOUND);
+            return;
+        }
 
-		// 중복되는 코드들을 한번에 처리
-		// 요청 객체에 대한 인코딩 작업!
-		request.setCharacterEncoding("UTF-8");
+        moveUrl = com.execute(request, response);
+        System.out.println("[FC] moveUrl=" + moveUrl);
 
-		String moveUrl = "";
-		Command com = null;
-		if (finalUri.equals("Join.do")) {
-			// 해당 기능을 수행하기 위한 클래스로 접근!
-			com = new JoinService();
-		} else if (finalUri.equals("Login.do")) {
-			com = new LoginService();
-		} else if (finalUri.equals("Logout.do")) {
-			com = new LogoutService();
-		} else if (finalUri.equals("SelectAll.do")) {
-			com = new SelectAllService();
-		}
-		
-		moveUrl = com.execute(request, response);
-		
-		
-		// 중복되는 코드 2번째
-		// 페이지 경로를 이동
-		if (moveUrl.contains("redirect:/")) {
-			// moveUrl → redirect:/ 잘라줘야 이동할 경로가 제대로 나온다!
-			response.sendRedirect(moveUrl.substring(10));
-
-		} else {
-
-			// 1. join_success.jsp → forward 방식 이동
-			RequestDispatcher rd = request.getRequestDispatcher(moveUrl);
-			rd.forward(request, response);
-			// 2. redirect:/main.jsp → redirect방식 이동
-		}
-
-	}
+        if (moveUrl != null && moveUrl.contains("redirect:/")) {
+            response.sendRedirect(moveUrl.substring(10));
+        } else {
+            RequestDispatcher rd = request.getRequestDispatcher(moveUrl);
+            rd.forward(request, response);
+        }
+    }
 }
