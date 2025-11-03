@@ -1,8 +1,9 @@
-package com.smhrd.controller;
+package com.pro.controller;
 
 import javax.servlet.http.*;
-import com.smhrd.frontcontroller.Command;
-import com.smhrd.model.MemberDAO;
+
+import com.pro.frontcontroller.Command;
+import com.pro.model.MemberDAO;
 
 public class ChangeEmailService implements Command {
   @Override

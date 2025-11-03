@@ -1,4 +1,4 @@
-package com.smhrd.controller;
+package com.pro.controller;
 
 import java.util.List;
 
@@ -6,9 +6,9 @@ import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.smhrd.frontcontroller.Command;
-import com.smhrd.model.MemberDAO;
-import com.smhrd.model.MemberVO;
+import com.pro.frontcontroller.Command;
+import com.pro.model.MemberDAO;
+import com.pro.model.MemberVO;
 
 public class SelectAllService implements Command {
 
