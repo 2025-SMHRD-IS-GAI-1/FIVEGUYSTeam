@@ -41,7 +41,13 @@ public class MemberDAO {
 		
 		return vo;
 	}
-	public int changeemail(MemberVO mvo) {
+
+  public int changeemail(MemberVO mvo) {
+	
+	SqlSession sqlSession = factory.openSession(true);
+	
+	int row = sqlSession.update("update", mvo);
+
 	
 		SqlSession sqlSession = factory.openSession(true);
 		
