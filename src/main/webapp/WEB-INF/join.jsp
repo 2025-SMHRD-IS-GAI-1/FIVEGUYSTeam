@@ -38,7 +38,7 @@ String ctx = request.getContextPath();
 						<!-- 아이디 -->
 						<div class="form-row">
 							<label for="userid" class="link">아이디</label> <input id="userid"
-								name="id" type="text" class="input" placeholder="ID 또는 이메일"
+								name="id" type="text" class="input" placeholder="ID를 입력하세요."
 								required />
 						</div>
 
@@ -96,14 +96,22 @@ String ctx = request.getContextPath();
 			<div class="footer" style="margin-top: 16px;">
 				© 2025 FIVE GUYS. All rights reserved.
 				<div class="legal">
-					<a class="link" href="<%=ctx%>/policy/terms.jsp">이용약관</a> <a
-						class="link" href="<%=ctx%>/policy/privacy.jsp">개인정보</a> <a
-						class="link" href="<%=ctx%>/policy/help.jsp">문의</a>
+					<a class="link" href="#" id="openTermsLink">이용약관</a>
+					<a class="link" href="<%=ctx%>/policy/privacy.jsp">개인정보</a>
+					<a class="link" href="<%=ctx%>/policy/help.jsp">문의</a>
 				</div>
 			</div>
 		</div>
 	</div>
-
+	<!-- 이용약관은 모든 div의 제일 아래에 넣고 스타일로 감춘 후 클릭하면 노출되도록 한다. -->
+	<div id="termsModal" class="modal-overlay">
+		<div class="modal-content">
+			<span class="close-btn">&times;</span>
+			<h2>이용약관</h2>
+	        <div id="rules_text"></div>
+    	</div>
+	</div><!--  이용약관 끝 -->
+	<script src="assets/js/terms.js" ></script> <!-- 20251104 cyonn -->
 
 </body>
 </html>

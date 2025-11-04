@@ -30,8 +30,23 @@ public class MemberDAO {
 		
 		return vo;
 	}
+<<<<<<< HEAD
 
 	public int changeemail(MemberVO mvo) {
+=======
+	
+	public MemberVO find(MemberVO mvo) { // 20251104 cyonn 추가
+		
+		SqlSession sqlSession = factory.openSession(true);
+		
+		MemberVO vo = sqlSession.selectOne("find", mvo);
+		
+		sqlSession.close();
+		
+		return vo;
+	}
+  public int changeemail(MemberVO mvo) {
+>>>>>>> 65f809291debd4450b5eb026b39fde2007fc6fe5
 	
 	SqlSession sqlSession = factory.openSession(true);
 	
@@ -51,5 +66,6 @@ public class MemberDAO {
 		sqlSession.close();
 		
 		return row;
+
 	}
 }

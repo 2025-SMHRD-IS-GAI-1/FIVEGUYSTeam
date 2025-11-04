@@ -28,7 +28,11 @@ public class FrontController extends HttpServlet {
 	public void init(ServletConfig config) throws ServletException {
 		map.put("join.do", new JoinService());
 		map.put("login.do", new LoginService());
+<<<<<<< HEAD
 
+=======
+		map.put("CheckEmail.do", new ChangeEmail());
+>>>>>>> 65f809291debd4450b5eb026b39fde2007fc6fe5
 		map.put("ChangeEmail.do", new ChangeEmail());
 		map.put("DeleteAccount.do", new DeleteAccount());
 		map.put("logout.do", new LogoutService());
@@ -40,7 +44,7 @@ public class FrontController extends HttpServlet {
 		String moveurl = "";
 		String uri = request.getRequestURI();
 		System.out.println(uri);
-		
+
 		String path = request.getContextPath();
 
 		System.out.println(path);
@@ -61,8 +65,8 @@ public class FrontController extends HttpServlet {
 			moveurl = com.excute(request, response);
 //		new CheckEmailService().execute(request, response);
 		}
-		
-			System.out.println(moveurl);
+
+		System.out.println(moveurl);
 
 //			중복되는 코드 2번째
 //			페이지 경로를 이동 
