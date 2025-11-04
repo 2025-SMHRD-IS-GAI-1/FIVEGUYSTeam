@@ -39,6 +39,11 @@
 		<!-- 20251104 cyonn 추가 -->
 	</select>
 
+	<select id="adminFind" resultType="com.pro.model.MemberVO">
+		SELECT *
+		FROM T_MEMBER WHERE ID !='admin'
+	</select>
+
 
 	<delete id="delete" parameterType="String">
 		DELETE FROM T_MEMBER WHERE

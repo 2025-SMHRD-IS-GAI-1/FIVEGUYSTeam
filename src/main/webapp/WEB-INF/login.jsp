@@ -44,7 +44,7 @@ String ctx = request.getContextPath();
 				<form method="post" onsubmit="return false;" autocomplete="on">
 					<div class="form-row">
 						<label for="idOrEmail">아이디</label> <input class="input" id="id"
-							name="id" type="text" placeholder="ID 또는 이메일" required />
+							name="id" type="text" placeholder="ID" required />
 					</div>
 
 					<div class="form-row">

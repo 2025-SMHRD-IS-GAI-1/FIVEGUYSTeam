@@ -1,5 +1,7 @@
 package com.pro.model;
 
+import java.util.List;
+
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 
@@ -62,5 +64,16 @@ public class MemberDAO {
 		
 		return row;
 
+	}
+	
+	public List<MemberVO> findAdmin() { 
+		
+		SqlSession sqlSession = factory.openSession(true);
+		
+		List<MemberVO> list = sqlSession.selectList("findAdmin");
+		
+		sqlSession.close();
+		
+		return list;
 	}
 }

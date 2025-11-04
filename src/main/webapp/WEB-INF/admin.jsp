@@ -37,22 +37,24 @@ String ctx = request.getContextPath();
 					<!-- 필요하면 버튼 하나 두기 -->
 					<!-- <button class="btn-primary">새로고침</button> -->
 				</div>
-
-				<div class="search-box">
-					<input type="text" id="searchInput" placeholder="이름 또는 이메일로 검색">
-					<button class="btn-primary" type="button">검색</button>
-				</div>
-
+				<form action="admin.do" method="post">
+					<div class="search-box">
+						<input type="text" id="searchInput" placeholder="이름 또는 이메일로 검색">
+						<button class="btn-primary" type="submit" value="search">검색</button>
+						<button class="btn-primary" id="all_find" type="submit"
+							value="searchAll">회원전체검색</button>
+					</div>
+				</form>
 				<div class="table-wrap">
 					<table id="memberTable">
 						<thead>
 							<tr>
 								<th>#</th>
+								<th>아이디</th>
 								<th>이름</th>
 								<th>이메일</th>
 								<th>권한</th>
-								<th>가입일</th>
-								<th>관리</th>
+								<th>가입날짜</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -80,11 +82,44 @@ String ctx = request.getContextPath();
 								</tr>
 							</c:forEach>
 
-							<c:if test="${empty memberList}">
-								<tr>
-									<td colspan="6">등록된 회원이 없습니다.</td>
-								</tr>
-							</c:if>
+							<c:choose>
+
+
+								<c:when test="${not empty list}">
+									<c:forEach var="m" items="${list}" varStatus="st">
+										<tr>
+											<td>${st.index + 1}</td>
+											<td>${m.id}</td>
+											<td>${m.name}</td>
+											<td>${m.email}</td>
+											<td>${m.joinDT}</td>
+											<td>${m.adminYN}</td>
+										</tr>
+									</c:forEach>
+								</c:when>
+
+
+								<c:when test="${not empty memberList}">
+									<c:forEach var="m" items="${memberList}" varStatus="st">
+										<tr>
+											<td>${st.index + 1}</td>
+											<td>${m.name}</td>
+											<td>${m.email}</td>
+											<td>${m.role}</td>
+											<td>${m.joinDate}</td>
+											<td></td>
+										</tr>
+									</c:forEach>
+								</c:when>
+
+
+								<c:otherwise>
+									<tr>
+										<td colspan="6">등록된 회원이 없습니다.</td>
+									</tr>
+								</c:otherwise>
+
+							</c:choose>
 						</tbody>
 					</table>
 				</div>

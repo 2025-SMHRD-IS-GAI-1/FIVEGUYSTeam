@@ -18,8 +18,6 @@ public class DeleteAccount implements Command {
 		MemberVO vo =(MemberVO)session.getAttribute("info");
 		String id =vo.getId();
 		MemberVO mvo = new MemberVO();
-		mvo.setId(id);
-		mvo.setPw(pw);
 		
 		
 		String reversePW = new StringBuilder(pw).reverse().toString();
