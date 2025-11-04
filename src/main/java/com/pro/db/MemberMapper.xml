@@ -46,8 +46,8 @@
 	</update>
  	
 
-	<select id="adminFind" resultType="com.pro.model.MemberVO">
-		SELECT *
+	<select id="findAdmin" resultType="com.pro.model.MemberVO">
+		SELECT ID, NAME, EMAIL, ADMIN YN, JOIN DT
 		FROM T_MEMBER WHERE ID !='admin'
 	</select>
 

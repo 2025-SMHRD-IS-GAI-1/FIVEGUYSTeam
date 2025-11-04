@@ -37,7 +37,7 @@ String ctx = request.getContextPath();
 					<!-- 필요하면 버튼 하나 두기 -->
 					<!-- <button class="btn-primary">새로고침</button> -->
 				</div>
-				<form action="admin.do" method="post">
+				<form action="SelectAll.do" method="post">
 					<div class="search-box">
 						<input type="text" id="searchInput" placeholder="이름 또는 이메일로 검색">
 						<button class="btn-primary" type="submit" value="search">검색</button>
