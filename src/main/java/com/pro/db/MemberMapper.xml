@@ -47,8 +47,8 @@
  	
 
 	<select id="findAdmin" resultType="com.pro.model.MemberVO">
-		SELECT ID, NAME, EMAIL, ADMIN YN, JOIN DT
-		FROM T_MEMBER WHERE ID !='admin'
+		SELECT ID, NAME, EMAIL, ADMIN_YN, JOIN_DT
+		FROM T_MEMBER WHERE ADMIN_YN !='A'
 	</select>
 
 

@@ -103,11 +103,11 @@ String ctx = request.getContextPath();
 									<c:forEach var="m" items="${memberList}" varStatus="st">
 										<tr>
 											<td>${st.index + 1}</td>
+											<td>${m.id}</td>
 											<td>${m.name}</td>
 											<td>${m.email}</td>
-											<td>${m.role}</td>
-											<td>${m.joinDate}</td>
-											<td></td>
+											<td>${m.joinDT}</td>
+											<td>${m.adminYN}</td>
 										</tr>
 									</c:forEach>
 								</c:when>

@@ -16,23 +16,24 @@ public class SelectAllService implements Command {
 	public String excute(HttpServletRequest request, HttpServletResponse response) {
 
 		// 1. DAO 생성하기 
-		request.setAttribute(null, response);
+		
+		
 		
 		MemberDAO dao = new MemberDAO();
-		MemberVO vo = new MemberVO();
+		
 		
 		
 		// 2. dao.selectAll 메소드 실행
 		// SQL문) SELECT EMAIL, TEL , ADDRESS FROM WEB_MEMBER
 		// 		WHERE EMAIL != 'admin'
-		List<MemberVO> list = (List<MemberVO>) dao.findAdmin();
+		List<MemberVO> list = dao.findAdmin();
 		System.out.println("송송체크 >>" + list.size());
 		// 3. 받아온 결과값을 request 영역에 저장
 		request.setAttribute("list", list);
 		
 		
 		
-		return "redirect:/Goadmin.do";
+		return "admin.jsp";
 	}
 
 }
