@@ -10,15 +10,15 @@
   <meta charset="UTF-8">
   <title>가입 완료</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="assets/css/join_success.css">
+  <link rel="stylesheet" href="assets/css/join_del.css">
 </head>
 <body>
   <div class="center">
     <div class="card">
-      <h1 class="title">환영합니다!</h1>
-      <p class="desc"><b><%=name%>님</b>, 회원가입을 축하합니다.</p>
-      <p class="desc">메시지시스템의 새로운 이메일은 입니다.</p>
-      <a class="btn" href="<%=ctx%>/Goresult.do">시작하기</a>
+      <h1 class="title">탈퇴가 완료되었습니다.</h1>
+      <p class="desc"><b><%=name%>님</b>, 이용해주셔서 감사합니다.</p>
+      <p class="desc">앞으로 더 좋은 모습으로 만나뵐 수 있도록 계속 노력하겠습니다.</p>
+      <a class="btn" href="<%=ctx%>/login.jsp">홈</a>
     </div>
   </div>
 </body>

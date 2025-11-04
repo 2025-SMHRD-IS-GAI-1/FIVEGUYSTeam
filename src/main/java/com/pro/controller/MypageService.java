@@ -26,7 +26,7 @@ public class MypageService implements Command {
     }
 
     @Override
-    public String execute(HttpServletRequest request, HttpServletResponse response) {
+    public String excute(HttpServletRequest request, HttpServletResponse response) {
         String email = getLoginEmail(request);
         if (email == null) return "redirect:/login.jsp";
 

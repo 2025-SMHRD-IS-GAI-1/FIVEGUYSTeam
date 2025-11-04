@@ -7,6 +7,7 @@
     <display-name>MyWebApp</display-name>
     
     
+    
     <resource-ref>
         <description>MyWebApp</description>
         <res-ref-name>mail/myMailSession</res-ref-name>
