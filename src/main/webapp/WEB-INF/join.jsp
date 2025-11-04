@@ -38,7 +38,7 @@ String ctx = request.getContextPath();
 						<!-- 아이디 -->
 						<div class="form-row">
 							<label for="userid" class="link">아이디</label> <input id="userid"
-								name="id" type="text" class="input" placeholder="ID 또는 이메일"
+								name="id" type="text" class="input" placeholder="ID를 입력하세요."
 								required />
 						</div>
 
