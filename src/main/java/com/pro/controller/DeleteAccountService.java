@@ -7,7 +7,7 @@ import com.pro.model.MemberDAO;
 
 public class DeleteAccountService implements Command {
   @Override
-  public String execute(HttpServletRequest req, HttpServletResponse resp) {
+  public String excute(HttpServletRequest request, HttpServletResponse response) {
     HttpSession session = req.getSession(false);
     String email = (session==null)? null : (String) session.getAttribute("LOGIN_EMAIL");
     if (email == null) return "redirect:/login.jsp";

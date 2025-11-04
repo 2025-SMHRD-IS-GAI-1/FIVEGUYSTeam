@@ -14,8 +14,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.pro.controller.CheckEmailService;
+import com.pro.controller.ChangeEmail;
+import com.pro.controller.DeleteAccount;
 import com.pro.controller.JoinService;
 import com.pro.controller.LoginService;
+import com.pro.controller.LogoutService;
 
 @WebServlet("*.do")
 public class FrontController extends HttpServlet {
@@ -27,7 +30,9 @@ public class FrontController extends HttpServlet {
 		map.put("join.do", new JoinService());
 		map.put("login.do", new LoginService());
 		map.put("CheckEmail.do", new CheckEmailService());
-		
+		map.put("ChangeEmail.do", new ChangeEmail());
+		map.put("DeleteAccount.do", new DeleteAccount());
+		map.put("logout.do", new LogoutService());
 	}
 
 	protected void service(HttpServletRequest request, HttpServletResponse response)

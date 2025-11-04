@@ -40,5 +40,27 @@ public class MemberDAO {
 		sqlSession.close();
 		
 		return vo;
+
+  public int changeemail(MemberVO mvo) {
+	
+	SqlSession sqlSession = factory.openSession(true);
+	
+	int row = sqlSession.update("update", mvo);
+	
+	sqlSession.close();
+	
+	return row;
+	}
+	
+	public int DeleteAccount(MemberVO mvo) {
+		
+		SqlSession sqlSession = factory.openSession(true);
+		
+		int row = sqlSession.delete("delete", mvo);
+		
+		sqlSession.close();
+		
+		return row;
+
 	}
 }

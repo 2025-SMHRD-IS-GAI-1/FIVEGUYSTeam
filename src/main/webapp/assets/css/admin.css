@@ -1,0 +1,249 @@
+@charset "UTF-8";
+
+:root {
+	--bg: #edf0f7;
+	--card: #ffffff;
+	--text: #1f2937;
+	--sub: #6b7280;
+	--primary: #6366f1;
+	--primary-d: #4f46e5;
+	--border: #e5e7eb;
+}
+
+* {
+	box-sizing: border-box;
+}
+
+body {
+	margin: 0;
+	background: var(--bg);
+	font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+		"Segoe UI", Arial;
+}
+
+/* 상단 바 */
+.topbar {
+	height: 56px;
+	background: #fff;
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	padding: 0 28px;
+	border-bottom: 1px solid rgba(99, 102, 241, .08);
+}
+
+.topbar .logo {
+	width: 32px;
+	height: 32px;
+	border-radius: 8px;
+	object-fit: contain;
+}
+
+.topbar .title {
+	font-weight: 600;
+}
+
+/* 가운데 카드 */
+.wrap {
+	max-width: 1100px;
+	margin: 26px auto;
+	padding: 0 16px;
+}
+
+.card {
+	background: var(--card);
+	border-radius: 20px;
+	box-shadow: 0 18px 40px rgba(15, 23, 42, .08);
+	display: grid;
+	grid-template-columns: 1.05fr 1.6fr; /* 왼쪽 이미지/설명, 오른쪽 테이블 */
+	min-height: 520px;
+	overflow: hidden;
+}
+
+/* 왼쪽 영역 - 네가 보여준 로그인 왼쪽처럼 */
+.left-panel {
+	background: #fff;
+	padding: 40px 40px 20px 40px;
+	border-right: 1px solid #f1f1f1;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	gap: 16px;
+}
+
+.left-panel img {
+	width: 230px;
+	max-width: 100%;
+	object-fit: contain;
+}
+
+.left-panel .caption {
+	font-size: 14px;
+	color: var(--sub);
+}
+
+/* 오른쪽 내용영역 */
+.right-panel {
+	padding: 36px 38px;
+	display: flex;
+	flex-direction: column;
+}
+
+.right-header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-bottom: 20px;
+}
+
+.right-header h2 {
+	margin: 0;
+	font-size: 18px;
+}
+
+.right-header p {
+	margin: 4px 0 0;
+	color: var(--sub);
+	font-size: 13px;
+}
+
+/* 검색창 */
+.search-box {
+	margin-bottom: 14px;
+	display: flex;
+	gap: 8px;
+}
+
+.search-box input {
+	padding: 8px 12px;
+	border: 1px solid #d1d5db;
+	border-radius: 10px;
+	flex: 1;
+	background: #f3f4f6;
+}
+
+.btn-primary {
+	background: var(--primary);
+	color: #fff;
+	border: none;
+	border-radius: 10px;
+	padding: 8px 16px;
+	cursor: pointer;
+}
+
+.btn-primary:hover {
+	background: var(--primary-d);
+}
+
+/* 테이블을 카드 안에 맞게 */
+.table-wrap {
+	background: #fff;
+	border: 1px solid #edf0f7;
+	border-radius: 14px;
+	overflow: hidden;
+}
+
+table {
+	width: 100%;
+	border-collapse: collapse;
+}
+
+thead {
+	background: #f3f4f6;
+}
+
+th, td {
+	padding: 10px 12px;
+	border-bottom: 1px solid #edf0f7;
+	font-size: 14px;
+	text-align: left;
+}
+
+tr:hover {
+	background: #f9fafb;
+}
+
+/* 권한 뱃지 */
+.role {
+	display: inline-block;
+	min-width: 34px;
+	text-align: center;
+	padding: 3px 6px;
+	border-radius: 999px;
+	font-size: 12px;
+	color: #fff;
+}
+
+.role.A {
+	background: #f97316;
+}
+
+.role.M {
+	background: #6366f1;
+}
+
+/* 풋터 */
+.footer {
+	margin-top: 18px;
+	text-align: center;
+	color: #94a3b8;
+	font-size: 12px;
+}
+
+/*버튼 디자인 추가*/
+.btn-sm {
+	display: inline-block;
+	padding: 4px 10px;
+	border-radius: 8px;
+	background: #6366f1;
+	color: #fff;
+	font-size: 12px;
+	text-decoration: none;
+	margin-right: 4px;
+}
+
+.btn-sm:hover {
+	background: #4f46e5;
+}
+
+.btn-sm.danger {
+	background: #ef4444;
+}
+
+.btn-sm.danger:hover {
+	background: #dc2626;
+}
+
+
+/*회원정보 수정창 css*/
+.actions {
+	margin-top: 16px;
+	text-align: right; /* 오른쪽으로 밀기 */
+}
+
+.main-action-btn {
+	display: inline-block;
+	background: #6366f1;
+	color: #fff;
+	padding: 10px 20px;
+	border-radius: 12px;
+	text-decoration: none;
+	font-weight: 500;
+	font-size: 14px;
+}
+
+.main-action-btn:hover {
+	background: #4f46e5;
+}
+
+/* 반응형 */
+@media ( max-width : 980px) {
+	.card {
+		grid-template-columns: 1fr;
+	}
+	.left-panel {
+		border-right: none;
+		border-bottom: 1px solid #f1f1f1;
+	}
+}
