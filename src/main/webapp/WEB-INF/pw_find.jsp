@@ -11,31 +11,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>비밀번호 찾기 - FIVE GUYS</title>
 <link rel="stylesheet" href="assets/css/pw_find.css">
-<script>
-let num1;
-let num2;
-
-window.onload=function(){
-	num1 = 0;
-	num2 = 0;	
-}
-
-function calc_check(){
-	let checkanswer = document.getElementById("checkanswer");
-	if(checkanswer.value!="")
-		if(!isNaN(checkanswer.value))
-			if(parseInt(checkanswer.value) == num1 + num2){
-				let send = document.getElementById("send");
-				send.innerText = "임시 비밀번호 보내기";
-				send.disabled = false;
-			}else{
-				let send = document.getElementById("send");
-				send.innerText = "임시 비밀번호 보내기(비활성)";
-				send.disabled = true;
-			}
-				
-}
-</script>
+<script src="assets/js/pw_find.js"></script>
 </head>
 <body>
 	<div class="wrap">
@@ -69,7 +45,7 @@ function calc_check(){
 			</c:if>
 
 			<!-- 폼 -->
-			<form method="post" action="<%=ctx%>/findPassword.do" id="findForm"
+			<form method="post" action="<%=ctx%>/FindPassword.do" id="findForm"
 				autocomplete="on">
 				<div class="grid">
 					<div class="form-row">
@@ -98,117 +74,11 @@ function calc_check(){
 				
 				<div class="row">
 					<button id="send" type="submit" class="btn btn-primary">임시 비밀번호 보내기(비활성)</button>
-					<a class="btn btn-ghost" href="<%=ctx%>/login.jsp">돌아가기</a>
+					<a class="btn btn-ghost" href="<%=ctx%>/Gologin.do">돌아가기</a>
 				</div>
 				
 				<script>
-					let uid = document.getElementById("uid");
-					let uemail = document.getElementById("uemail");
-					let send = document.getElementById("send");
 					
-					uid.addEventListener("input", ()=>{
-						let ue = uemail.value;
-						if(uemail.value==null)ue="dummy";
-						fetch("CheckEmail.do?id="+uid.value+"&email="+ue)
-						.then(function(res){
-							//console.log(res);
-							return res.json();
-							
-						})
-						.then(function(data){
-							console.log(data);
-							let check = document.getElementById("humancheck");
-							if(document.getElementById("pid")!=null)
-								check.removeChild(document.getElementById("pid"));
-							let p = document.createElement("p");
-							p.setAttribute("id", "pid");
-							//if(data.email !=null){
-							if(data.checkok == "ok"){
-								//console.log("ok");
-								p.innerText = "문제의 정답을 입력시 비밀번호 보내기 버튼이 활성화됩니다.";
-								p.style.color = "#00ff00";
-								num1 = Math.floor(Math.random()*10);
-								num2 = Math.floor(Math.random()*10);
-								
-								let checkquestion = document.getElementById("checkquestion");
-								let checkanswer = document.getElementById("checkanswer");
-								checkquestion.innerText = "";
-								checkanswer.value = "";
-								checkquestion.style.visibility = "visible";
-								checkanswer.style.visibility = "visible";
-								checkquestion.innerText = "" + num1 + "+" + num2 + " = ?";
-								//send.innerText = "임시 비밀번호 보내기";
-								//send.disabled = false;
-							}else{
-								//console.log("not ok");
-								p.innerText = "해당하는 email을 찾을 수 없습니다.";
-								p.style.color = "#ff0000";
-								send.innerText = "임시 비밀번호 보내기(비활성)";
-								send.disabled = true;
-								checkquestion.innerText = "";
-								checkanswer.value = "";
-								checkquestion.style.visibility = "hidden";
-								checkanswer.style.visibility = "hidden";
-							}
-							
-							check.appendChild(p);
-						})
-						.catch(function(err){
-							console.error(err);
-						});
-						
-					});
-					
-					uemail.addEventListener("input", ()=>{
-						fetch("CheckEmail.do?id="+uid.value+"&email="+uemail.value)
-						.then(function(res){
-							//console.log(res);
-							return res.json();
-							
-						})
-						.then(function(data){
-							console.log(data);
-							let check = document.getElementById("humancheck");
-							if(document.getElementById("pid")!=null)
-								check.removeChild(document.getElementById("pid"));
-							let p = document.createElement("p");
-							p.setAttribute("id", "pid");
-							//if(data.email !=null){
-							if(data.checkok == "ok"){
-								//console.log("ok");
-								p.innerText = "문제의 정답을 입력시 비밀번호 보내기 버튼이 활성화됩니다.";
-								p.style.color = "#00ff00";
-								num1 = Math.floor(Math.random()*10);
-								num2 = Math.floor(Math.random()*10);
-								
-								let checkquestion = document.getElementById("checkquestion");
-								let checkanswer = document.getElementById("checkanswer");
-								checkquestion.innerText = "";
-								checkanswer.value = "";
-								checkquestion.style.visibility = "visible";
-								checkanswer.style.visibility = "visible";
-								checkquestion.innerText = "" + num1 + "+" + num2 + " = ?";
-								//send.innerText = "임시 비밀번호 보내기";
-								//send.disabled = false;
-							}else{
-								//console.log("not ok");
-								p.innerText = "해당하는 email을 찾을 수 없습니다.";
-								p.style.color = "#ff0000";
-								send.innerText = "임시 비밀번호 보내기(비활성)";
-								send.disabled = true;
-								checkquestion.innerText = "";
-								checkanswer.value = "";
-								checkquestion.style.visibility = "hidden";
-								checkanswer.style.visibility = "hidden";
-							}
-							
-							check.appendChild(p);
-						})
-						.catch(function(err){
-							console.error(err);
-						});
-						
-					});
 				</script>
 			</form>
 

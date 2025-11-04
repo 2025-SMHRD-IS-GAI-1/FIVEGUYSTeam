@@ -41,15 +41,32 @@ public class MemberDAO {
 		
 		return vo;
 	}
+
   public int changeemail(MemberVO mvo) {
 	
 	SqlSession sqlSession = factory.openSession(true);
 	
 	int row = sqlSession.update("update", mvo);
+
 	
-	sqlSession.close();
+		SqlSession sqlSession = factory.openSession(true);
+		
+		int row = sqlSession.update("update", mvo);
+		
+		sqlSession.close();
+		
+		return row;
+	}
 	
-	return row;
+	public int changePw(MemberVO mvo) {
+		
+		SqlSession sqlSession = factory.openSession(true);
+		
+		int row = sqlSession.update("update2", mvo);
+		
+		sqlSession.close();
+		
+		return row;
 	}
 	
 	public int DeleteAccount(MemberVO mvo) {

@@ -29,15 +29,22 @@
 		EMAIL=#{email} WHERE ID=#{id}
 	</update>
 
-	<!-- * \#{} : JDBC기준 -> ?인자를 대신해서 사용하는 방식 : Java에서 전달받은 매개변수를 채울 떄, 사용하는 
-		mybatis만의 방식 -->
-
-	<select id="find" parameterType="com.pro.model.MemberVO"
-		resultType="com.pro.model.MemberVO">
-		SELECT *
-		FROM T_MEMBER WHERE ID=#{id} and EMAIL=#{email}
-		<!-- 20251104 cyonn 추가 -->
-	</select>
+	
+<!--
+	* \#{} : JDBC기준 -> ?인자를 대신해서 사용하는 방식
+			: Java에서 전달받은 매개변수를 채울 떄, 사용하는 mybatis만의 방식
+ -->
+ 	
+ 	<select id="find" parameterType="com.pro.model.MemberVO" resultType="com.pro.model.MemberVO">
+ 		SELECT *
+ 		FROM T_MEMBER WHERE ID=#{id} AND EMAIL=#{email}
+ 		<!--  20251104 cyonn 추가 -->
+ 	</select>
+ 	
+ 	<update id="update2" parameterType="com.pro.model.MemberVO">
+		UPDATE T_MEMBER SET PW=#{pw} WHERE ID=#{id} AND EMAIL=#{email}
+	</update>
+ 	
 
 
 	<delete id="delete" parameterType="String">
