@@ -28,6 +28,10 @@ function calc_check(){
 				let send = document.getElementById("send");
 				send.innerText = "임시 비밀번호 보내기";
 				send.disabled = false;
+			}else{
+				let send = document.getElementById("send");
+				send.innerText = "임시 비밀번호 보내기(비활성)";
+				send.disabled = true;
 			}
 				
 }
@@ -101,6 +105,59 @@ function calc_check(){
 					let uid = document.getElementById("uid");
 					let uemail = document.getElementById("uemail");
 					let send = document.getElementById("send");
+					
+					uid.addEventListener("input", ()=>{
+						let ue = uemail.value;
+						if(uemail.value==null)ue="dummy";
+						fetch("CheckEmail.do?id="+uid.value+"&email="+ue)
+						.then(function(res){
+							//console.log(res);
+							return res.json();
+							
+						})
+						.then(function(data){
+							console.log(data);
+							let check = document.getElementById("humancheck");
+							if(document.getElementById("pid")!=null)
+								check.removeChild(document.getElementById("pid"));
+							let p = document.createElement("p");
+							p.setAttribute("id", "pid");
+							//if(data.email !=null){
+							if(data.checkok == "ok"){
+								//console.log("ok");
+								p.innerText = "문제의 정답을 입력시 비밀번호 보내기 버튼이 활성화됩니다.";
+								p.style.color = "#00ff00";
+								num1 = Math.floor(Math.random()*10);
+								num2 = Math.floor(Math.random()*10);
+								
+								let checkquestion = document.getElementById("checkquestion");
+								let checkanswer = document.getElementById("checkanswer");
+								checkquestion.innerText = "";
+								checkanswer.value = "";
+								checkquestion.style.visibility = "visible";
+								checkanswer.style.visibility = "visible";
+								checkquestion.innerText = "" + num1 + "+" + num2 + " = ?";
+								//send.innerText = "임시 비밀번호 보내기";
+								//send.disabled = false;
+							}else{
+								//console.log("not ok");
+								p.innerText = "해당하는 email을 찾을 수 없습니다.";
+								p.style.color = "#ff0000";
+								send.innerText = "임시 비밀번호 보내기(비활성)";
+								send.disabled = true;
+								checkquestion.innerText = "";
+								checkanswer.value = "";
+								checkquestion.style.visibility = "hidden";
+								checkanswer.style.visibility = "hidden";
+							}
+							
+							check.appendChild(p);
+						})
+						.catch(function(err){
+							console.error(err);
+						});
+						
+					});
 					
 					uemail.addEventListener("input", ()=>{
 						fetch("CheckEmail.do?id="+uid.value+"&email="+uemail.value)

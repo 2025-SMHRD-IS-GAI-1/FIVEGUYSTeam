@@ -16,13 +16,16 @@ public class CheckEmailService implements Command{
 	@Override
 	public String excute(HttpServletRequest request, HttpServletResponse response) {
 		
+		String id = request.getParameter("id");
 		String email = request.getParameter("email");
 		String checkok = "notok";
 		MemberVO mvo2 = null;
 		if(email!=null) {
 			MemberDAO dao = new MemberDAO();
-			
-			mvo2 = dao.find(email);
+			MemberVO mvo = new MemberVO();
+			mvo.setId(id);
+			mvo.setEmail(email);
+			mvo2 = dao.find(mvo);
 
 			if(mvo2!=null) {
 				if(mvo2.getEmail().equals(email))
