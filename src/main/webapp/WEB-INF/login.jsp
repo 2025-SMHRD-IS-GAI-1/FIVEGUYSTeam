@@ -62,7 +62,7 @@ String ctx = request.getContextPath();
 					<div class="row-between">
 						<label class="checkbox"> <input type="checkbox"
 							name="autoLogin" value="Y" /> 자동 로그인
-						</label> <a class="link" href="${ctx}/findPw.do">비밀번호 찾기</a>
+						</label> <a class="link" href="${pageContext.request.contextPath}/Gopw_find.do">비밀번호 찾기</a>
 					</div>
 
 					<button class="btn btn-primary" type="submit" id="login" onclick="">로그인
