@@ -92,8 +92,8 @@ String ctx = request.getContextPath();
 											<td>${m.id}</td>
 											<td>${m.name}</td>
 											<td>${m.email}</td>
-											<td>${m.joinDT}</td>
-											<td>${m.adminYN}</td>
+											<td>${m.adminYn}</td>
+											<td>${m.joinDt}</td>
 										</tr>
 									</c:forEach>
 								</c:when>
@@ -106,8 +106,8 @@ String ctx = request.getContextPath();
 											<td>${m.id}</td>
 											<td>${m.name}</td>
 											<td>${m.email}</td>
-											<td>${m.joinDT}</td>
-											<td>${m.adminYN}</td>
+											<td>${m.adminYn}</td>
+											<td>${m.joinDt}</td>
 										</tr>
 									</c:forEach>
 								</c:when>
