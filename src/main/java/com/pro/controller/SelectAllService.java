@@ -13,7 +13,7 @@ import com.pro.model.MemberVO;
 public class SelectAllService implements Command {
 
 	@Override
-	public String execute(HttpServletRequest request, HttpServletResponse response) {
+	public String excute(HttpServletRequest request, HttpServletResponse response) {
 
 		// 1. DAO 생성하기 
 		MemberDAO dao = new MemberDAO();

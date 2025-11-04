@@ -11,7 +11,7 @@ import com.pro.model.MemberVO;
 public class ChangePasswordService implements Command {
 
     @Override
-    public String execute(HttpServletRequest request, HttpServletResponse response) {
+    public String excute(HttpServletRequest request, HttpServletResponse response) {
         // 1) 로그인 사용자 확인
         HttpSession session = request.getSession(false);
         String email = null;

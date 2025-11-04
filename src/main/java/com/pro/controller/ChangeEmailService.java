@@ -7,7 +7,7 @@ import com.pro.model.MemberDAO;
 
 public class ChangeEmailService implements Command {
   @Override
-  public String execute(HttpServletRequest request, HttpServletResponse response) {
+  public String excute(HttpServletRequest request, HttpServletResponse response) {
     HttpSession session = request.getSession(false);
     String oldEmail = (session==null)? null : (String) session.getAttribute("LOGIN_EMAIL");
     if (oldEmail == null) return "redirect:/login.jsp";

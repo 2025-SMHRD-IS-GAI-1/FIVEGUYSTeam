@@ -9,7 +9,7 @@ import com.pro.frontcontroller.Command;
 public class LogoutService implements Command {
 
 	@Override
-	public String execute(HttpServletRequest request, HttpServletResponse response) {
+	public String excute(HttpServletRequest request, HttpServletResponse response) {
 		// 1. session 꺼내오기
 		HttpSession session = request.getSession();
 		// 2. session 데이터 전부 삭제하기
