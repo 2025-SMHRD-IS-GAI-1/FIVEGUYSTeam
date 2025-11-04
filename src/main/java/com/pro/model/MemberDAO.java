@@ -40,7 +40,7 @@ public class MemberDAO {
 		sqlSession.close();
 		
 		return vo;
-
+	}
   public int changeemail(MemberVO mvo) {
 	
 	SqlSession sqlSession = factory.openSession(true);
