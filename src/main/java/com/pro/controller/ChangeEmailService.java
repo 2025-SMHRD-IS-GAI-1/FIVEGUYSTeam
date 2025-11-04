@@ -7,13 +7,13 @@ import com.pro.model.MemberDAO;
 
 public class ChangeEmailService implements Command {
   @Override
-  public String execute(HttpServletRequest req, HttpServletResponse resp) {
-    HttpSession session = req.getSession(false);
+  public String execute(HttpServletRequest request, HttpServletResponse response) {
+    HttpSession session = request.getSession(false);
     String oldEmail = (session==null)? null : (String) session.getAttribute("LOGIN_EMAIL");
     if (oldEmail == null) return "redirect:/login.jsp";
 
-    String newEmail = req.getParameter("newEmail");
-    String pw       = req.getParameter("pw");
+    String newEmail = request.getParameter("newEmail");
+    String pw       = request.getParameter("pw");
 
     MemberDAO dao = new MemberDAO();
 

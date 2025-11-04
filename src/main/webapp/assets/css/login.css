@@ -53,7 +53,7 @@ body {
 	border: 1px solid var(--border);
 	border-radius: 14px;
 	box-shadow: 0 6px 20px rgba(0, 0, 0, .06);
-	overflow: hidden
+	overflow: hidden;
 }
 
 .left {
@@ -222,3 +222,64 @@ h2 {
 		border-bottom: 1px solid var(--border)
 	}
 }
+
+
+
+/* 이하 약관용 로직 20251103 cyonn*/
+
+/* 1. 모달 배경 (어둡게 처리) */
+.modal-overlay {
+	display: none; /* 평소에는 숨김 */
+	position: fixed; /* 화면 전체에 고정 */
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0, 0, 0, 0.5); /* 반투명 검은색 */
+	z-index: 1000; /* 다른 요소들 위에 표시 */
+	/* 모달창을 중앙에 배치하기 위한 Flexbox */
+	/* display: none; */ /* 맨 위에 이미 있으므로 중복 제거 */
+	justify-content: center;
+	align-items: center;
+}
+
+/* 2. 모달창 본체 */
+.modal-content {
+	background-color: #fff;
+	padding: 20px;
+	border-radius: 8px;
+	width: 90%;
+	max-width: 400px; /* 모달의 최대 너비 */
+	box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+	position: relative;
+    
+}
+
+/* 3. 닫기 버튼 */
+.close-btn {
+	position: absolute;
+	top: 10px;
+	right: 15px;
+	font-size: 24px;
+	font-weight: bold;
+	color: #888;
+	cursor: pointer;
+}
+
+.close-btn:hover {
+	color: #000;
+}
+
+/* 4. 약관 내용이 스크롤되는 영역 */
+/* [수정 3] 선택자를 .terms-container 에서 #rules_text 로 변경합니다. */
+#termsModal #rules_text {
+	height: 400px; /* 스크롤 영역의 높이를 고정합니다. (모달창 전체 높이가 아님) */
+	overflow-y: auto; /* 내용이 넘칠 경우 세로 스크롤바 생성 (!important 필요 없음) */
+	border: 1px solid #ddd;
+	padding: 10px;
+	margin-top: 15px;
+	background-color: #f9f9f9;
+	line-height: 1.6;
+}
+
+
