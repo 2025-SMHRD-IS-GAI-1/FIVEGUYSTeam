@@ -82,7 +82,7 @@ String ctx = request.getContextPath();
 				<div class="footer">
 					© 2025 FIVE GUYS. All rights reserved.
 					<div class="legal">
-						<a class="link" href="${ctx}/terms.do">이용약관</a> <a class="link"
+						<a class="link" href="#" id="openTermsLink">이용약관</a> <a class="link"
 							href="${ctx}/privacy.do">개인정보</a> <a class="link"
 							href="${ctx}/contact.do">문의</a>
 					</div>
@@ -90,7 +90,15 @@ String ctx = request.getContextPath();
 			</div>
 		</div>
 	</div>
-
+	<!-- 이용약관은 모든 div의 제일 아래에 넣고 스타일로 감춘 후 클릭하면 노출되도록 한다. -->
+	<div id="termsModal" class="modal-overlay">
+		<div class="modal-content">
+			<span class="close-btn">&times;</span>
+			<h2>이용약관</h2>
+	        <div id="rules_text"></div>
+    	</div>
+	</div><!--  이용약관 끝 -->
+	<script src="assets/js/terms.js" ></script> <!-- 20251103 cyonn -->
 
 	<script>
       let id = document.getElementById("id");
