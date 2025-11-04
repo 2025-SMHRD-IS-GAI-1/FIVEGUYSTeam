@@ -2,33 +2,32 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<!-- namespace : 해당하는 파일을 구분할 수 있는 고유의 이름을 정해주는 작업  
-	해당하는 공간에는, mapper파일을 사용하게 될 
-	DAO의 full name을 기술하는 것을 원칙으로 함
--->
+<!-- namespace : 해당하는 파일을 구분할 수 있는 고유의 이름을 정해주는 작업 해당하는 공간에는, mapper파일을 사용하게 
+	될 DAO의 full name을 기술하는 것을 원칙으로 함 -->
 <mapper namespace="com.pro.model.MemberDAO">
-<!-- SQL구문들을 기술할 수 있는 공간 -->
+	<!-- SQL구문들을 기술할 수 있는 공간 -->
 
-<!-- 
-	어떤 SQL구문을 사용하느냐에 따라서, 태그를 바꾸면서 사용하자
-	: insert, delete, update, select 
-	* 각 태그들의 공통 속성값 
-	(1) id : 해당하는 sql구문을 구분할 수 있는 고유 값 *중복 불가*
-	(2) resultType : 반환된 결과 값을 Java에서 표현할 수 있는 형태로 자료형을 지정
-		>> 기본으로 제공되는 자료형 생략가능하다. (+String, ArrayList등등)
-	(3) parameterType : 매개변수로 받아온 자료형을 지정 
+	<!-- 어떤 SQL구문을 사용하느냐에 따라서, 태그를 바꾸면서 사용하자 : insert, delete, update, select 
+		* 각 태그들의 공통 속성값 (1) id : 해당하는 sql구문을 구분할 수 있는 고유 값 *중복 불가* (2) resultType 
+		: 반환된 결과 값을 Java에서 표현할 수 있는 형태로 자료형을 지정 >> 기본으로 제공되는 자료형 생략가능하다. (+String, 
+		ArrayList등등) (3) parameterType : 매개변수로 받아온 자료형을 지정 * \#{} : JDBC기준 -> ?인자를 
+		대신해서 사용하는 방식 : Java에서 전달받은 매개변수를 채울 떄, 사용하는 mybatis만의 방식 -->
+	<insert id="join" parameterType="com.pro.model.MemberVO">
+		INSERT INTO T_MEMBER(ID,PW,NAME,EMAIL) VALUES(#{id}, #{pw}, #{name},
+		#{email})
+	</insert>
+
+	<select id="login" parameterType="com.pro.model.MemberVO"
+		resultType="com.pro.model.MemberVO">
+		SELECT *
+		FROM T_MEMBER WHERE ID=#{id} and PW=#{pw}
+	</select>
+
+	<update id="update" parameterType="com.pro.model.MemberVO">
+		UPDATE T_MEMBER SET EMAIL=#{email} WHERE ID=#{id}
+	</update>
 	
-	* \#{} : JDBC기준 -> ?인자를 대신해서 사용하는 방식
-			: Java에서 전달받은 매개변수를 채울 떄, 사용하는 mybatis만의 방식
- -->
- 	<insert id="join" parameterType="com.pro.model.MemberVO">
- 		INSERT INTO T_MEMBER(ID,PW,NAME,EMAIL) VALUES(#{id}, #{pw}, #{name}, #{email})
- 		
- 	</insert>
- 	
- 	<select id="login" parameterType="com.pro.model.MemberVO" resultType="com.pro.model.MemberVO">
- 		SELECT *
- 		FROM T_MEMBER WHERE ID=#{id} and PW=#{pw}
- 	</select>
- 
+	<delete id="delete" parameterType="String">
+		DELETE FROM T_MEMBER WHERE PW=#{pw}
+	</delete>
 </mapper>
