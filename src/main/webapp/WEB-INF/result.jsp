@@ -28,8 +28,8 @@ String ctx = request.getContextPath();
 				<span>FIVE GUYS · Menu Translator</span>
 			</div>
 			<nav class="mini-nav">
-				<a href="<%=ctx%>/home.jsp">홈</a> <a class="primary-outline"
-					href="<%=ctx%>/join.jsp">마이페이지</a>       <!-- 경로 바꿔줘야함!!  -->
+				 <a class="primary-outline"
+					href="<%=ctx%>/Gomypage.do">마이페이지</a>       <!-- 경로 바꿔줘야함!!  -->
 			</nav>
 		</div>
 	</header>

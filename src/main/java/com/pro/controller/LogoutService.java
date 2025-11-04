@@ -19,7 +19,7 @@ public class LogoutService implements Command {
 		// request.getSession().invalidate();
 		// 개발자들용 코드 !!
 
-		return "redirect:/main.jsp";
+		return "redirect:/Gologin.do";
 
 	}
 

@@ -17,8 +17,8 @@
     <img src="${ctx}/img/팀로고.png" alt="FIVE GUYS" />
     <div class="t">FIVE GUYS - Menu Translator</div>
     <div class="spacer"></div>
-    <a class="link" href="${ctx}/index.jsp">홈</a>
-    <a class="link" href="${ctx}/Logout.do">로그아웃</a>
+    <a class="link" href="${ctx}/Goresult.do">홈</a>
+    <a class="link" href="${ctx}/logout.do">로그아웃</a>
   </div>
 
   <!-- 메인 카드 -->
@@ -63,8 +63,9 @@
       <div class="box">
         <h3>회원 탈퇴</h3>
         <form method="post" action="${ctx}/DeleteAccount.do" class="form"
-              onsubmit="return confirm('정말 탈퇴하시겠습니까? 이 작업은 되돌릴 수 없습니다.');" autocomplete="off">
-          <div class="row"><label>비밀번호</label><input name="pw" type="password" required/></div>
+              onsubmit="return confirm('정말 탈퇴하시겠습니까? 이 작업은 되돌릴 수 없습니다.');" autocomplete="off"
+              id="delbtn">
+          <div class="row"><label>비밀번호</label><input name="pw" type="password" id="delpw" required/></div>
           <button class="btn outline">탈퇴하기</button>
           <c:if test="${param.delErr=='1'}"><div class="err">비밀번호가 올바르지 않거나 탈퇴에 실패했습니다.</div></c:if>
         </form>
@@ -149,4 +150,5 @@
   </div>
 </div>
 </body>
+	
 </html>
