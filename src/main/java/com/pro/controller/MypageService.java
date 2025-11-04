@@ -31,7 +31,6 @@ public class MypageService implements Command {
         if (email == null) return "redirect:/login.jsp";
 
         MemberDAO dao = new MemberDAO();
-
         // POST → 프로필 수정
         if ("POST".equalsIgnoreCase(request.getMethod())) {
             String tel = request.getParameter("tel");

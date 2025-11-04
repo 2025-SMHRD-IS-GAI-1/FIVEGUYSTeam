@@ -1,5 +1,7 @@
 package com.pro.model;
 
+import java.util.List;
+
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 
@@ -45,16 +47,30 @@ public class MemberDAO {
 		
 		return vo;
 	}
+
   public int changeemail(MemberVO mvo) {
 >>>>>>> 65f809291debd4450b5eb026b39fde2007fc6fe5
 	
-	SqlSession sqlSession = factory.openSession(true);
+
 	
-	int row = sqlSession.update("update", mvo);
+		SqlSession sqlSession = factory.openSession(true);
+		
+		int row = sqlSession.update("update", mvo);
+		
+		sqlSession.close();
+		
+		return row;
+	}
 	
-	sqlSession.close();
-	
-	return row;
+	public int changePw(MemberVO mvo) {
+		
+		SqlSession sqlSession = factory.openSession(true);
+		
+		int row = sqlSession.update("update2", mvo);
+		
+		sqlSession.close();
+		
+		return row;
 	}
 	
 	public int DeleteAccount(MemberVO mvo) {
@@ -67,5 +83,16 @@ public class MemberDAO {
 		
 		return row;
 
+	}
+	
+	public List<MemberVO> findAdmin() { 
+		
+		SqlSession sqlSession = factory.openSession(true);
+		
+		List<MemberVO> list = sqlSession.selectList("findAdmin");
+		
+		sqlSession.close();
+		
+		return list;
 	}
 }

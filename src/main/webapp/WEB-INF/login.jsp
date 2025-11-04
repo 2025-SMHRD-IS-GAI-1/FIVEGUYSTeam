@@ -44,7 +44,7 @@ String ctx = request.getContextPath();
 				<form method="post" onsubmit="return false;" autocomplete="on">
 					<div class="form-row">
 						<label for="idOrEmail">아이디</label> <input class="input" id="id"
-							name="id" type="text" placeholder="ID 또는 이메일" required />
+							name="id" type="text" placeholder="ID" required />
 					</div>
 
 					<div class="form-row">
@@ -62,7 +62,7 @@ String ctx = request.getContextPath();
 					<div class="row-between">
 						<label class="checkbox"> <input type="checkbox"
 							name="autoLogin" value="Y" /> 자동 로그인
-						</label> <a class="link" href="${ctx}/findPw.do">비밀번호 찾기</a>
+						</label> <a class="link" href="${pageContext.request.contextPath}/Gopw_find.do">비밀번호 찾기</a>
 					</div>
 
 					<button class="btn btn-primary" type="submit" id="login" onclick="">로그인
