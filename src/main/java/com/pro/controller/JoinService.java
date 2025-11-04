@@ -14,13 +14,8 @@ public class JoinService implements Command {
 
 	@Override
 	public String excute(HttpServletRequest request, HttpServletResponse response) {
-		String moveurl = "redirect:/Gomain.do";
-		try {
-			request.setCharacterEncoding("UTF-8");
-		} catch (UnsupportedEncodingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		String moveurl = "redirect:/Gologin.do";
+
 //		프론트에서 입력한 id, pw값 받아오기 
 		String id = request.getParameter("id");
 		String pw = request.getParameter("pw");
@@ -44,7 +39,7 @@ public class JoinService implements Command {
 		if(row>0) {
 			request.setAttribute("id",id);
 			request.setAttribute("pw", pw);
-			moveurl= "join_success.jsp";
+			moveurl= "join_success.do";
 		}
 		return moveurl;
 	}
