@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Context>
+
+    <Resource
+        name="mail/myMailSession"
+        auth="Container"
+        type="javax.mail.Session" mail.smtp.host="smtp.gmail.com"
+        mail.smtp.port="587"
+        mail.smtp.auth="true"
+        mail.smtp.starttls.enable="true"
+        mail.transport.protocol="smtp"
+        
+        mail.user="smhrdfiveguys2025@gmail.com"
+        password="hmwbceeobanskksz"
+        
+        mail.debug="true"
+    />
+    <!--   -->
+</Context>

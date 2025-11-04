@@ -1,85 +1,51 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page contentType="text/html; charset=UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%
-  String ctx = request.getContextPath(); // 컨텍스트 경로
-%>
+<c:set var="ctx" value="${pageContext.request.contextPath}" />
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>비밀번호 찾기 - FIVE GUYS</title>
-<link rel="stylesheet" href="assets/css/pw_find.css">
+  <meta charset="UTF-8">
+  <title>비밀번호 찾기</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <!-- 기존 로그인 스타일 재사용 -->
+  <link rel="stylesheet" href="${ctx}/assets/css/login.css" />
 </head>
 <body>
-	<div class="wrap">
-		<!-- 상단 브랜드 -->
-		<div class="brand">
-			<img src="${pageContext.request.contextPath}/img/팀로고.png" alt="FIVE GUYS" />
-			<div class="t">FIVE GUYS - Menu Translator</div>
-			<a class="link small" href="<%=ctx%>/login.jsp"
-				style="margin-left: auto;">홈</a>
-		</div>
+  <div class="wrap">
+    <div class="brand">
+      <img src="${ctx}/img/팀로고.png" alt="FIVE GUYS" />
+      <div class="t">FIVE GUYS - Menu Translator</div>
+      <div style="margin-left:auto">
+        <a class="link" href="${ctx}/login.jsp">로그인</a>
+        <a class="link" href="${ctx}/index.jsp">홈</a>
+      </div>
+    </div>
 
-		<!-- 카드 -->
-		<div class="card">
-			<h2>비밀번호 찾기</h2>
+    <div class="card">
+      <div class="left">
+        <img class="logo" src="${ctx}/img/팀로고.png" alt="FIVE GUYS Logo" />
+        <div class="caption">비밀번호 찾기</div>
+      </div>
+      <div class="right">
+        <h2>아이디와 가입 이메일을 입력하세요</h2>
+        <form method="post" action="${ctx}/findPassword.do" autocomplete="off">
+          <div class="form-row">
+            <label class="link">아이디</label>
+            <input name="id" type="text" class="input" placeholder="ID" required />
+          </div>
+          <div class="form-row">
+            <label class="link">이메일</label>
+            <input name="email" type="email" class="input" placeholder="email@example.com" required />
+          </div>
+          <button type="submit" class="btn btn-primary">임시 비밀번호 받기</button>
 
-			<!-- 안내문 / 결과메시지 -->
-			<p class="desc">
-				가입하신 <b>아이디 & 이메일</b>을 입력하면, 임시 비밀번호(또는 재설정 링크)를 보내드려요.
-			</p>
-
-			<!-- 서버에서 보낸 결과 메시지 -->
-			<c:if test="${not empty errorMsg}">
-				<p class="msg error">
-					<c:out value="${errorMsg}" />
-				</p>
-			</c:if>
-			<c:if test="${not empty infoMsg}">
-				<p class="msg success">
-					<c:out value="${infoMsg}" />
-				</p>
-			</c:if>
-
-			<!-- 폼 -->
-			<form method="post" action="<%=ctx%>/findPassword.do" id="findForm"
-				autocomplete="on">
-				<div class="grid">
-					<div class="form-row">
-						<label for="uid" class="label">아이디</label> <input id="uid"
-							name="id" type="text" class="input" placeholder="ID (선택)" />
-					</div>
-
-					<div class="form-row">
-						<label for="uemail" class="label">이메일</label> <input id="uemail"
-							name="email" type="email" class="input"
-							placeholder="email@example.com (선택)" />
-					</div>
-				</div>
-
-				<p class="hint">
-					아이디와 이메일 <b>둘다</b> 입력해야 됩니다.
-				</p>
-
-				<div class="row">
-					<button type="submit" class="btn btn-primary">임시 비밀번호 보내기</button>
-					<a class="btn btn-ghost" href="<%=ctx%>/login.jsp">돌아가기</a>
-				</div>
-			</form>
-
-			<footer class="footer">
-				© 2025 FIVE GUYS. All rights reserved.
-				<div class="legal">
-					<a class="link" href="<%=ctx%>/policy/terms.jsp">이용약관</a> <a
-						class="link" href="<%=ctx%>/policy/privacy.jsp">개인정보</a> <a
-						class="link" href="<%=ctx%>/policy/help.jsp">문의</a>
-				</div>
-			</footer>
-		</div>
-	</div>
-
-
+          <c:if test="${param.err=='1'}">
+            <div class="or"></div>
+            <div class="legal" style="color:#ef4444">일치하는 회원 정보를 찾을 수 없습니다.</div>
+          </c:if>
+        </form>
+      </div>
+    </div>
+  </div>
 </body>
 </html>
