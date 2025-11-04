@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.pro.controller.CheckEmailService;
 import com.pro.controller.JoinService;
 import com.pro.controller.LoginService;
 
@@ -25,6 +26,8 @@ public class FrontController extends HttpServlet {
 	public void init(ServletConfig config) throws ServletException {
 		map.put("join.do", new JoinService());
 		map.put("login.do", new LoginService());
+		map.put("CheckEmail.do", new CheckEmailService());
+		
 	}
 
 	protected void service(HttpServletRequest request, HttpServletResponse response)

@@ -30,4 +30,15 @@ public class MemberDAO {
 		
 		return vo;
 	}
+	
+	public MemberVO find(String email) { // 20251104 cyonn 추가
+		
+		SqlSession sqlSession = factory.openSession(true);
+		
+		MemberVO vo = sqlSession.selectOne("find", email);
+		
+		sqlSession.close();
+		
+		return vo;
+	}
 }

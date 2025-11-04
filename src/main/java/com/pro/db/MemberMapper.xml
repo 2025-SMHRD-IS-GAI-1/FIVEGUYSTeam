@@ -31,4 +31,10 @@
  		FROM T_MEMBER WHERE ID=#{id} and PW=#{pw}
  	</select>
  
+ 	<select id="find" resultType="com.pro.model.MemberVO">
+ 		SELECT *
+ 		FROM T_MEMBER WHERE EMAIL=#{email}
+ 		<!--  20251104 cyonn 추가 -->
+ 	</select>
+ 	
 </mapper>

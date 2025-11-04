@@ -35,8 +35,8 @@ public class CheckEmailService implements Command{
 		
 		
 		String result = "{\"checkok\":\""+checkok+"\"}";
-		Gson gson = new Gson();
-		String result2 = gson.toJson(mvo2);
+		//Gson gson = new Gson();
+		//String result2 = gson.toJson(mvo2);
 		//System.out.println(result);
 		return "fetch:/"+result;
 	}
