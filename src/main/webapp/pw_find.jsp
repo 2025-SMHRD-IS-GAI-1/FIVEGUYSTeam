@@ -58,11 +58,52 @@
 							placeholder="email@example.com (선택)" />
 					</div>
 				</div>
-
+				<script>
+					let uid = document.getElementById("uid");
+					let uemail = document.getElementById("uemail");
+					
+					uemail.addEventListener("input", ()=>{
+						fetch("CheckEmail.do?email="+email.value)
+						.then(function(res){
+							//console.log(res);
+							return res.json();
+							
+						})
+						.then(function(data){
+							console.log(data);
+							let check = document.getElementById("check");
+							if(document.getElementById("pid")!=null)
+								check.removeChild(document.getElementById("pid"));
+							let p = document.createElement("p");
+							p.setAttribute("id", "pid");
+							//if(data.email !=null){
+							if(data.checkok == "ok"){
+								//console.log("ok");
+								p.innerText = "email을 정확하게 입력하셨습니다.";
+								p.style.color = "#00ff00";
+								send.disabled = false;
+							}else{
+								//console.log("not ok");
+								p.innerText = "해당하는 email을 찾을 수 없습니다.";
+								p.style.color = "#ff0000";
+								send.disabled = true;
+							}
+							
+							check.appendChild(p);
+						})
+						.catch(function(err){
+							console.error(err);
+						});
+						
+					});
+				</script>
 				<p class="hint">
 					아이디와 이메일 <b>둘다</b> 입력해야 됩니다.
 				</p>
-
+				<br>
+				<p class="hint">
+					자동생성 방지를 위한 확인절차입니다.
+				</p>
 				<div class="row">
 					<button type="submit" class="btn btn-primary">임시 비밀번호 보내기</button>
 					<a class="btn btn-ghost" href="<%=ctx%>/login.jsp">돌아가기</a>
