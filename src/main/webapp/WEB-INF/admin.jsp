@@ -71,6 +71,8 @@ String ctx = request.getContextPath();
 
 				</div>
 
+				<form action="SelectAll.do" method="post">
+
 
 
 				<!-- 검색용 폼 -->
@@ -84,17 +86,9 @@ String ctx = request.getContextPath();
 				<!-- 전체조회용 폼 -->
 				<form action="SelectAll.do" method="post">
 					<div class="search-box">
-						<button button class="btn-primary" type="submit">회원전체검색</button>
+						<button class="btn-primary" id="all_find" type="submit" value="searchAll">회원전체검색</button>
 					</div>
 				</form>
-
-
-
-
-
-
-
-
 
 				<div class="table-wrap">
 
@@ -267,6 +261,7 @@ String ctx = request.getContextPath();
 </body>
 <script>
 		let searchBtn = document.getElementById("searchBtn");
+		let url = 
 	</script>
 
 </html>
