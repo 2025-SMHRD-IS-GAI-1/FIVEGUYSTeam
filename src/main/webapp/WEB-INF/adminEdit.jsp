@@ -32,7 +32,7 @@
       <button type="submit">수정 저장하기</button>
     </form>
     <div class="back-link">
-      <a href="<%=ctx%>/adminMemberList.do">← 목록으로 돌아가기</a>
+      <a href="<%=ctx%>/Goadmin.do">← 목록으로 돌아가기</a>
     </div>
   </div>
 </body>
