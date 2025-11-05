@@ -30,7 +30,7 @@ if(session.getAttribute("userupdate")!=null){
 %>
 		<script>alert("업데이트 성공");</script>
 <%
-		session.setAttribute("userupdate", null);
+		session.setAttribute("userupdate", "notok");
 	}
 }
 %>
@@ -126,7 +126,7 @@ if(session.getAttribute("userupdate")!=null){
 						</thead>
 
 						<tbody>
-
+ 
 							<c:forEach var="member" items="${memberList}" varStatus="st">
 
 								<tr>
@@ -156,9 +156,9 @@ if(session.getAttribute("userupdate")!=null){
 									<td>${member.joinDate}</td>
 
 									<td>
-										<!-- 수정 --> <a
+										 <a
 										href="${pageContext.request.contextPath}/memberEdit.do?id=${member.id}"
-										class="btn-sm">수정</a> <!-- 삭제 --> <a
+										class="btn-sm">수정</a>  <a
 										href="${pageContext.request.contextPath}/memberDelete.do?id=${member.id}"
 										class="btn-sm danger" onclick="return confirm('정말 삭제할까요?');">삭제</a>
 
@@ -171,7 +171,7 @@ if(session.getAttribute("userupdate")!=null){
 
 
 							<c:choose>
-
+ 
 
 
 
