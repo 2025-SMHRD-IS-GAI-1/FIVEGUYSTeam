@@ -66,4 +66,12 @@
 			WHERE ID=#{id}
 		<!-- 20251105 cyonn  -->
 	</update>
+	
+	<select id="search" resultType="com.pro.model.MemberVO">
+	SELECT
+	ID, NAME, EMAIL, ADMIN_YN AS adminYN, JOIN_DT AS joinDT
+	FROM T_MEMBER
+	WHERE NAME LIKE '%' || #{value} || '%'
+	OR ID LIKE '%' || #{value} || '%'
+	</select>
 </mapper>

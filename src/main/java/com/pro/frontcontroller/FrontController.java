@@ -21,6 +21,7 @@ import com.pro.controller.FindPasswordService;
 import com.pro.controller.JoinService;
 import com.pro.controller.LoginService;
 import com.pro.controller.LogoutService;
+import com.pro.controller.SearchSurvice;
 import com.pro.controller.SelectAllService;
 import com.pro.controller.UpdateUserService;
 
@@ -42,7 +43,7 @@ public class FrontController extends HttpServlet {
 		map.put("SelectAll.do", new SelectAllService());
 		map.put("ChangePw.do", new ChangePw());
 		map.put("UpdateUser.do", new UpdateUserService());
-
+		map.put("Search.do", new SearchSurvice());
 	}
 
 	protected void service(HttpServletRequest request, HttpServletResponse response)
