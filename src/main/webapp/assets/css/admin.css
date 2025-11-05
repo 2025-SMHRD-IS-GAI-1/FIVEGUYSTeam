@@ -146,7 +146,6 @@ body {
 
 table {
 	width: 100%;
-	min-width: 1200px;
 	border-collapse: collapse;
 }
 
@@ -215,7 +214,6 @@ tr:hover {
 .btn-sm.danger:hover {
 	background: #dc2626;
 }
-
 
 /*회원정보 수정창 css*/
 .actions {

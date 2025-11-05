@@ -90,4 +90,17 @@ public class MemberDAO {
 		
 		return list;
 	}
+	
+public List<MemberVO> findAdmin2(String keyword) { 
+		
+		SqlSession sqlSession = factory.openSession(true);
+		
+		List<MemberVO> list = sqlSession.selectList("findAdmin2", keyword);
+		
+		sqlSession.close();
+		
+		return list;
+	}
+	
+	
 }

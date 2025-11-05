@@ -16,13 +16,7 @@ public class SelectAllService implements Command {
 	public String excute(HttpServletRequest request, HttpServletResponse response) {
 
 		// 1. DAO 생성하기 
-		
-		
-		
 		MemberDAO dao = new MemberDAO();
-		
-		
-		
 		// 2. dao.selectAll 메소드 실행
 		// SQL문) SELECT EMAIL, TEL , ADDRESS FROM WEB_MEMBER
 		// 		WHERE EMAIL != 'admin'
