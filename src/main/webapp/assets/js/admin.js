@@ -21,4 +21,5 @@ searchInput.addEventListener('keyup', function() {
 		}
 	});
 });
+
 */
