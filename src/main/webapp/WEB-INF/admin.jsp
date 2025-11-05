@@ -23,18 +23,18 @@ String ctx = request.getContextPath();
 </head>
 
 <body>
-	<%
-	if (session.getAttribute("userupdate") != null) {
-		if (((String) session.getAttribute("userupdate")).equals("ok")) {
-	%>
-	<script>
-		alert("업데이트 성공");
-	</script>
-	<%
-	session.setAttribute("userupdate", "notok");
+
+<%
+
+if(session.getAttribute("userupdate")!=null){
+	if(   ( (String)session.getAttribute("userupdate") ).equals("ok")      ){
+%>
+		<script>alert("업데이트 성공");</script>
+<%
+		session.setAttribute("userupdate", "notok");
 	}
-	}
-	%>
+}
+%>
 	<!-- 상단바 -->
 	<div class="topbar">
 		<div class="topbar-inner">
@@ -131,7 +131,7 @@ String ctx = request.getContextPath();
 						</thead>
 
 						<tbody>
-
+ 
 							<c:forEach var="member" items="${memberList}" varStatus="st">
 
 								<tr>
@@ -161,9 +161,9 @@ String ctx = request.getContextPath();
 									<td>${member.joinDate}</td>
 
 									<td>
-										<!-- 수정 --> <a
+										 <a
 										href="${pageContext.request.contextPath}/memberEdit.do?id=${member.id}"
-										class="btn-sm">수정</a> <!-- 삭제 --> <a
+										class="btn-sm">수정</a>  <a
 										href="${pageContext.request.contextPath}/memberDelete.do?id=${member.id}"
 										class="btn-sm danger" onclick="return confirm('정말 삭제할까요?');">삭제</a>
 
@@ -176,7 +176,7 @@ String ctx = request.getContextPath();
 
 
 							<c:choose>
-
+ 
 
 
 
@@ -354,7 +354,7 @@ searchBtn.addEventListener("click", () => {
             
             data.forEach((m, idx) => {
                 tbody.innerHTML += `
-                <tr>
+                <tr onclick="openEditor('\${m.id}', '\${m.name}', '\${m.email}', '\${m.adminYN}')">
                 	 <td>\${idx + 1}</td>
                     <td>\${m.id}</td>
                     <td>\${m.name}</td>
