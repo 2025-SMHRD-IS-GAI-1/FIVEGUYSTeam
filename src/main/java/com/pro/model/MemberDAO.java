@@ -123,5 +123,15 @@ public int updateUser(MemberVO mvo) {
 	return row;
 }
 	
+public List<MemberVO> search(String value) {
+	
+	SqlSession sqlSession = factory.openSession(true);
+	
+	List<MemberVO> list = sqlSession.selectList("search", value);
+	
+	return list;
+}
+	
+
 	
 }
