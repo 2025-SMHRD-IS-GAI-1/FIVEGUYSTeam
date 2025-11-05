@@ -55,12 +55,12 @@ body {
 	border-radius: 20px;
 	box-shadow: 0 18px 40px rgba(15, 23, 42, .08);
 	display: grid;
-	grid-template-columns: 1.05fr 1.6fr; /* 왼쪽 이미지/설명, 오른쪽 테이블 */
+	grid-template-columns: 1.05fr 1.6fr;
 	min-height: 520px;
 	overflow: hidden;
 }
 
-/* 왼쪽 영역 - 네가 보여준 로그인 왼쪽처럼 */
+/* 왼쪽 영역 */
 .left-panel {
 	background: #fff;
 	padding: 40px 40px 20px 40px;
@@ -83,17 +83,14 @@ body {
 	color: var(--sub);
 }
 
-/* 오른쪽 내용영역 */
+/* 오른쪽 내용 */
 .right-panel {
 	padding: 36px 38px;
-	display: flex;
-	flex-direction: column;
+	/* block으로 두고 내부 form만 가로로 컨트롤할 거임 */
+	display: block;
 }
 
 .right-header {
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
 	margin-bottom: 20px;
 }
 
@@ -108,21 +105,51 @@ body {
 	font-size: 13px;
 }
 
-/* 검색창 */
+/* ====== 여기부터 검색영역 정리 ====== */
+
+/* 오른쪽 패널 안에 있는 form 두 개를 한 줄에 */
+.right-panel form {
+	display: inline-flex;
+	align-items: center;
+	gap: 8px;
+	margin-bottom: 8px;
+	vertical-align: middle;
+}
+
+/* 첫 번째 form(검색창 있는 애)은 폭을 좀 줄여서
+   오른쪽에 두 번째 form(회원전체검색)이 들어갈 자리 확보 */
+.right-panel form:first-of-type {
+	width: calc(100% - 140px); /* 오른쪽 버튼 들어갈 공간 140px 남겨둠 */
+}
+
+/* 첫 번째 폼 안에 있는 search-box는 그 안에서 다시 flex */
 .search-box {
-	margin-bottom: 14px;
 	display: flex;
 	gap: 8px;
+	align-items: center;
+	width: 100%;
 }
 
 .search-box input {
 	padding: 8px 12px;
 	border: 1px solid #d1d5db;
 	border-radius: 10px;
-	flex: 1;
+	flex: 1 1 auto;
+	min-width: 0;
 	background: #f3f4f6;
 }
 
+.search-box .btn-primary {
+	flex: 0 0 auto;
+	white-space: nowrap;
+}
+
+/* 두 번째 form(회원전체검색) 버튼은 원래 크기로 */
+.right-panel form:nth-of-type(2) .btn-primary {
+	white-space: nowrap;
+}
+
+/* 버튼 공통 */
 .btn-primary {
 	background: var(--primary);
 	color: #fff;
@@ -136,12 +163,13 @@ body {
 	background: var(--primary-d);
 }
 
-/* 테이블을 카드 안에 맞게 */
+/* 테이블 박스 */
 .table-wrap {
 	background: #fff;
 	border: 1px solid #edf0f7;
 	border-radius: 14px;
 	overflow: hidden;
+	margin-top: 12px;
 }
 
 table {
@@ -183,42 +211,10 @@ tr:hover {
 	background: #6366f1;
 }
 
-/* 풋터 */
-.footer {
-	margin-top: 18px;
-	text-align: center;
-	color: #94a3b8;
-	font-size: 12px;
-}
-
-/*버튼 디자인 추가*/
-.btn-sm {
-	display: inline-block;
-	padding: 4px 10px;
-	border-radius: 8px;
-	background: #6366f1;
-	color: #fff;
-	font-size: 12px;
-	text-decoration: none;
-	margin-right: 4px;
-}
-
-.btn-sm:hover {
-	background: #4f46e5;
-}
-
-.btn-sm.danger {
-	background: #ef4444;
-}
-
-.btn-sm.danger:hover {
-	background: #dc2626;
-}
-
-/*회원정보 수정창 css*/
+/* 수정 페이지 열기 버튼 */
 .actions {
 	margin-top: 16px;
-	text-align: right; /* 오른쪽으로 밀기 */
+	text-align: right;
 }
 
 .main-action-btn {
@@ -236,7 +232,15 @@ tr:hover {
 	background: #4f46e5;
 }
 
-/* 반응형 */
+/* footer */
+.footer {
+	margin-top: 18px;
+	text-align: center;
+	color: #94a3b8;
+	font-size: 12px;
+}
+
+/* 반응형 - 화면 좁아지면 다시 세로로 */
 @media ( max-width : 980px) {
 	.card {
 		grid-template-columns: 1fr;
@@ -244,5 +248,11 @@ tr:hover {
 	.left-panel {
 		border-right: none;
 		border-bottom: 1px solid #f1f1f1;
+	}
+	.right-panel form:first-of-type {
+		width: 100%;
+	}
+	.right-panel form {
+		display: block;
 	}
 }

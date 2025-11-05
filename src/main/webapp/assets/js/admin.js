@@ -1,6 +1,6 @@
 
 
-/*<!-- 3. JS: 이름/이메일 간단 검색   수정해야함 !! -->*/
+/*<!-- 3. JS: 이름/이메일 간단 검색   수정해야함 !! -->
 
 const searchInput = document.getElementById('searchInput');
 const rows = document.querySelectorAll('#memberTable tbody tr');
@@ -21,3 +21,4 @@ searchInput.addEventListener('keyup', function() {
 		}
 	});
 });
+*/
