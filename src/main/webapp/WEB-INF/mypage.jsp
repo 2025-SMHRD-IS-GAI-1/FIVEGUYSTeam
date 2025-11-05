@@ -49,14 +49,14 @@
       <!-- 비밀번호 변경 -->
       <div class="box">
         <h3>비밀번호 변경</h3>
-        
+        <form method="post" class="form" autocomplete="off" onsubmit="return false;">
           <div class="row"><label>현재 비번</label><input name="curPw" id="curPw" type="password" required/></div>
           <div class="row"><label>새 비번</label><input name="newPw" id="newPw" type="password" minlength="8" required/></div>
-          <div class="row"><label>확인</label><input name="newPw2" id="newPw2" "type="password" minlength="8" required/></div>
-          <button class="btn outline">비밀번호 변경</button>
+          <div class="row"><label>확인</label><input name="newPw2" id="newPw2" type="password" minlength="8" required/></div>
+          <button class="btn outline"  id="Pwbtn">비밀번호 변경</button>
           <c:if test="${param.pwok=='1'}"><div class="ok">비밀번호가 변경되었습니다.</div></c:if>
           <c:if test="${param.pwerr=='1'}"><div class="err">비밀번호 변경에 실패했습니다. 입력값을 확인하세요.</div></c:if>
-        
+        </form> 
       </div>
 
       <!-- 회원 탈퇴 -->
@@ -154,9 +154,12 @@
 	let curPw = document.getElementById("curPw");
 	let newPw  = document.getElementById("newPw");
 	let newPw2 = document.getElementById("newPw2");
+	let Pwbtn = document.getElementById("Pwbtn");
+	
 	let url = "ChangePw.do";
-	login.addEventListener("click", () => {
+	Pwbtn.addEventListener("click", () => {
 		fetch(url + "?curPw=" + curPw.value + "&newPw=" + newPw.value + "&newPw2=" + newPw2.value)
+			
 			.then(function(res) {
 				// console.log("받아온 데이터 >> ", res);
 				return res.json();
@@ -164,7 +167,9 @@
 			.then(function(result) {
 				if (result.result == "false") {
 					alert("다시 확인해주세요");
-				} else {
+				}else if(result.result =="false2"){
+					alert("기존비번안맞음요");
+				}else {
 					alert("비밀번호가 변경되었습니다!");
 					location.href = "Gologin.do";
 				}

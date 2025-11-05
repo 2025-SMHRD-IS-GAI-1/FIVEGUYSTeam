@@ -25,6 +25,7 @@ import com.pro.controller.SelectAllService;
 import com.pro.controller.SelectSearchService;
 import com.pro.controller.UpdateUserService;
 
+
 @WebServlet("*.do")
 public class FrontController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -43,6 +44,7 @@ public class FrontController extends HttpServlet {
 		map.put("ChangePw.do", new ChangePw());
 		map.put("SelectSearch.do", new SelectSearchService());
 		map.put("UpdateUser.do", new UpdateUserService());
+
 	}
 
 	protected void service(HttpServletRequest request, HttpServletResponse response)

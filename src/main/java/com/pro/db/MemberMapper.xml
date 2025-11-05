@@ -58,7 +58,7 @@
 	</delete>
 
 	<update id="changePw">
-		UPDATE T_MEMBER SET PW=#{pw} WHERE ID=#{id} AND PW=#{changepw}
+		UPDATE T_MEMBER SET PW=#{pw} WHERE ID=#{id}
 	</update>
 	
 	<update id="changeUserInfo" parameterType="com.pro.model.MemberVO">

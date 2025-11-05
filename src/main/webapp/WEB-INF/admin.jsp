@@ -82,6 +82,8 @@ if(session.getAttribute("userupdate")!=null){
 
 				</div>
 
+				<form action="SelectAll.do" method="post">
+
 
 
 				<!-- 검색용 폼 -->
@@ -93,19 +95,11 @@ if(session.getAttribute("userupdate")!=null){
 				</form>
 
 				<!-- 전체조회용 폼 -->
-				<form action="SelectAll.do" method="get">
+				<form action="SelectAll.do" method="post">
 					<div class="search-box">
-						<button button class="btn-primary" type="submit">회원전체검색</button>
+						<button class="btn-primary" id="all_find" type="submit" value="searchAll">회원전체검색</button>
 					</div>
 				</form>
-
-
-
-
-
-
-
-
 
 				<div class="table-wrap">
 
@@ -262,7 +256,8 @@ if(session.getAttribute("userupdate")!=null){
 
 				<div class="actions">
 
-					<a href="GoadminEdit.do" class="main-action-btn">회원 정보 수정 페이지 열기</a>
+					<a href="GoadminEdit.do" class="main-action-btn">회원 정보 수정 페이지
+						열기</a>
 
 				</div>
 
@@ -339,4 +334,9 @@ function openEditor(userid, name, email, adminyn){
 </script>
 	<!-- 20251105 cyonn -->
 </body>
+<script>
+		let searchBtn = document.getElementById("searchBtn");
+		let url = 
+	</script>
+
 </html>
