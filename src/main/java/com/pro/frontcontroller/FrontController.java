@@ -21,6 +21,7 @@ import com.pro.controller.JoinService;
 import com.pro.controller.LoginService;
 import com.pro.controller.LogoutService;
 import com.pro.controller.SelectAllService;
+import com.pro.controller.SelectSearchService;
 
 @WebServlet("*.do")
 public class FrontController extends HttpServlet {
@@ -31,13 +32,13 @@ public class FrontController extends HttpServlet {
 	public void init(ServletConfig config) throws ServletException {
 		map.put("join.do", new JoinService());
 		map.put("login.do", new LoginService());
-		map.put("CheckEmail.do", new ChangeEmail());
+		map.put("CheckEmail.do", new CheckEmail());
 		map.put("ChangeEmail.do", new ChangeEmail());
 		map.put("DeleteAccount.do", new DeleteAccount());
 		map.put("logout.do", new LogoutService());
 		map.put("FindPassword.do", new FindPasswordService());
 		map.put("SelectAll.do", new SelectAllService());
-
+		map.put("SelectSearch.do", new SelectSearchService());
 	}
 
 	protected void service(HttpServletRequest request, HttpServletResponse response)

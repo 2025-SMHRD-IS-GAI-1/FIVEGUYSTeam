@@ -10,7 +10,7 @@ import com.pro.frontcontroller.Command;
 import com.pro.model.MemberDAO;
 import com.pro.model.MemberVO;
 
-public class SelectAllService implements Command {
+public class SelectSearchService implements Command {
 
 	@Override
 	public String excute(HttpServletRequest request, HttpServletResponse response) {

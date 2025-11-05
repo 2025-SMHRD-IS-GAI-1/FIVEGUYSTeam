@@ -110,17 +110,25 @@ body {
 
 /* 검색창 */
 .search-box {
-	margin-bottom: 14px;
+	margin-bottom: 10px;
 	display: flex;
 	gap: 8px;
+	align-items: center; /* 세로 가운데 정렬 */
+	flex-wrap: nowrap; /* 줄 바꿈하지 마! */
 }
 
 .search-box input {
 	padding: 8px 12px;
 	border: 1px solid #d1d5db;
 	border-radius: 10px;
-	flex: 1;
+	flex: 1 1 auto; /* 너는 넓게 쓰되… */
+	min-width: 0; /* 옆에 버튼 있으면 좀 줄어들어 */
 	background: #f3f4f6;
+}
+
+.search-box .btn-primary {
+	white-space: nowrap; /* 버튼 글자는 줄 바꾸지 마 */
+	flex: 0 0 auto; /* 버튼은 크기 유지해 */
 }
 
 .btn-primary {
@@ -215,7 +223,6 @@ tr:hover {
 	background: #dc2626;
 }
 
-
 /*회원정보 수정창 css*/
 .actions {
 	margin-top: 16px;
@@ -237,6 +244,17 @@ tr:hover {
 	background: #4f46e5;
 }
 
+.right-panel form {
+	display: inline-flex; /* form을 가로박스처럼 */
+	align-items: center; /* 높이 맞추기 */
+	gap: 8px; /* 사이 간격 */
+	margin-right: 8px; /* 두 폼 사이 간격 */
+}
+
+/* 안에 있던 기존 search-box는 그대로 flex라서 한 줄 유지됨 */
+.right-panel .search-box {
+	margin-bottom: 0; /* 아래 여백 빼줘야 줄 안 튀어나옴 */
+}
 /* 반응형 */
 @media ( max-width : 980px) {
 	.card {
