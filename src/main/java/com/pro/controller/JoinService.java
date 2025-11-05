@@ -39,7 +39,7 @@ public class JoinService implements Command {
 		if(row>0) {
 			request.setAttribute("id",id);
 			request.setAttribute("pw", pw);
-			moveurl= "join_success.do";
+			moveurl= "join_success.jsp";
 		}
 		return moveurl;
 	}
