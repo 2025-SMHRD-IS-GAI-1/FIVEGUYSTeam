@@ -73,18 +73,21 @@ String ctx = request.getContextPath();
 
 				<form action="SelectAll.do" method="post">
 
+
+
+				<!-- 검색용 폼 -->
+				<form action="searchMember.do" method="post">
 					<div class="search-box">
-
-						<input type="text" id="searchInput" placeholder="이름 또는 이메일로 검색">
-
-						<button class="btn-primary" type="submit" value="search"
-							id="searchBtn">검색</button>
-
-						<button class="btn-primary" id="all_find" type="submit"
-							value="searchAll">회원전체검색</button>
-
+						<input type="text" name="keyword" placeholder="이름 또는 이메일로 검색">
+						<button class="btn-primary" type="submit">검색</button>
 					</div>
+				</form>
 
+				<!-- 전체조회용 폼 -->
+				<form action="SelectAll.do" method="post">
+					<div class="search-box">
+						<button class="btn-primary" id="all_find" type="submit" value="searchAll">회원전체검색</button>
+					</div>
 				</form>
 
 				<div class="table-wrap">
@@ -242,7 +245,8 @@ String ctx = request.getContextPath();
 
 				<div class="actions">
 
-					<a href="GoadminEdit.do" class="main-action-btn">회원 정보 수정 페이지 열기</a>
+					<a href="GoadminEdit.do" class="main-action-btn">회원 정보 수정 페이지
+						열기</a>
 
 				</div>
 
@@ -255,7 +259,7 @@ String ctx = request.getContextPath();
 	</div>
 
 </body>
-	<script>
+<script>
 		let searchBtn = document.getElementById("searchBtn");
 		let url = 
 	</script>
