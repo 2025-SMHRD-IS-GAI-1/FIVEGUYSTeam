@@ -242,7 +242,7 @@ String ctx = request.getContextPath();
 
 				<div class="actions">
 
-					<a href="adminEdit.do" class="main-action-btn">회원 정보 수정 페이지 열기</a>
+					<a href="GoadminEdit.do" class="main-action-btn">회원 정보 수정 페이지 열기</a>
 
 				</div>
 
