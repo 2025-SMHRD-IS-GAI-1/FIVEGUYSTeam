@@ -82,7 +82,7 @@ String ctx = request.getContextPath();
 				</form>
 
 				<!-- 전체조회용 폼 -->
-				<form action="selectAll.do" method="get">
+				<form action="SelectAll.do" method="post">
 					<div class="search-box">
 						<button button class="btn-primary" type="submit">회원전체검색</button>
 					</div>
@@ -251,7 +251,8 @@ String ctx = request.getContextPath();
 
 				<div class="actions">
 
-					<a href="GoadminEdit.do" class="main-action-btn">회원 정보 수정 페이지 열기</a>
+					<a href="GoadminEdit.do" class="main-action-btn">회원 정보 수정 페이지
+						열기</a>
 
 				</div>
 
