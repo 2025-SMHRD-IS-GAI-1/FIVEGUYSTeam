@@ -56,7 +56,7 @@
           <button class="btn outline"  id="Pwbtn">비밀번호 변경</button>
           <c:if test="${param.pwok=='1'}"><div class="ok">비밀번호가 변경되었습니다.</div></c:if>
           <c:if test="${param.pwerr=='1'}"><div class="err">비밀번호 변경에 실패했습니다. 입력값을 확인하세요.</div></c:if>
-        </form> 
+        </form>
       </div>
 
       <!-- 회원 탈퇴 -->
@@ -165,20 +165,21 @@
 				return res.json();
 			})
 			.then(function(result) {
-				if (result.result == "false") {
-					alert("다시 확인해주세요");
-				}else if(result.result =="false2"){
-					alert("기존비번안맞음요");
-				}else {
-					alert("비밀번호가 변경되었습니다!");
-					location.href = "Gologin.do";
-				}
+	            if (result.result == "false") {
+	               alert("다시 확인해주세요");
+	            }else if(result.result =="false2"){
+	               alert("기존비번안맞음요");
+	            }else {
+	               alert("비밀번호가 변경되었습니다!");
+	               location.href = "Gologin.do";
+	            }
 
-			})
-			.catch(function(err) {
-				console.error(err);
-			})
-	})
+	         })
+	         .catch(function(err) {
+	            console.error(err);
+	         })
+	   })
+
 
 	</script>
 </html>
