@@ -71,21 +71,30 @@ String ctx = request.getContextPath();
 
 				</div>
 
-				<form action="SelectAll.do" method="post">
 
+
+				<!-- 검색용 폼 -->
+				<form action="searchMember.do" method="post">
 					<div class="search-box">
-
-						<input type="text" id="searchInput" placeholder="이름 또는 이메일로 검색">
-
-						<button class="btn-primary" type="submit" value="search"
-							id="searchBtn">검색</button>
-
-						<button class="btn-primary" id="all_find" type="submit"
-							value="searchAll">회원전체검색</button>
-
+						<input type="text" name="keyword" placeholder="이름 또는 이메일로 검색">
+						<button class="btn-primary" type="submit">검색</button>
 					</div>
-
 				</form>
+
+				<!-- 전체조회용 폼 -->
+				<form action="selectAll.do" method="get">
+					<div class="search-box">
+						<button button class="btn-primary" type="submit">회원전체검색</button>
+					</div>
+				</form>
+
+
+
+
+
+
+
+
 
 				<div class="table-wrap">
 

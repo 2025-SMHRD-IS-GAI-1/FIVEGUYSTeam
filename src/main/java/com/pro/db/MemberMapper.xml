@@ -56,7 +56,7 @@
 		DELETE FROM T_MEMBER WHERE
 		PW=#{pw}
 	</delete>
-	
+
 	<update id="changePw">
 		UPDATE T_MEMBER SET PW=#{pw} WHERE ID=#{id} AND PW=#{changepw}
 	</update>
