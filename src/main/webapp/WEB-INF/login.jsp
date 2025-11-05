@@ -11,7 +11,7 @@ String ctx = request.getContextPath();
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>FIVE GUYS - Menu Translator</title>
 <link rel="stylesheet" href="assets/css/login.css"/>
-<link href="assets/js/login.js"/>
+<script src="<%=ctx%>/assets/js/login.js"></script>
 </head>
 <body>
 	<div class="wrap">
@@ -42,7 +42,7 @@ String ctx = request.getContextPath();
 						${msg}</div>
 				</c:if>
 
-				<form method="post" onsubmit="return false;" autocomplete="on">
+				<form method="post" action="<%=ctx%>/login.do" autocomplete="on">
 					<div class="form-row">
 						<label for="idOrEmail">아이디</label> <input class="input" id="id"
 							name="id" type="text" placeholder="ID" required />
