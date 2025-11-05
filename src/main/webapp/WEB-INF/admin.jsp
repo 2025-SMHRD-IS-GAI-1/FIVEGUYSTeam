@@ -95,9 +95,9 @@ String ctx = request.getContextPath();
 
 					<div class="search-box">
 
-						<input type="text" id="searchInput" placeholder="이름 또는 이메일로 검색">
+						<input type="text" id="searchInput" placeholder="ID 또는 이름으로 검색">
 
-						<button type="button" type="submit" value="search" id="searchBtn">검색</button>
+						<button class="btn-primary" type="button" type="submit" value="search" id="searchBtn">검색</button>
 
 						<button class="btn-primary" id="all_find" type="submit"
 							value="searchAll">회원전체검색</button>
