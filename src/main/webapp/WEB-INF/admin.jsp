@@ -71,193 +71,187 @@ String ctx = request.getContextPath();
 
 				</div>
 
-
-
-				<!-- 검색용 폼 -->
-				<form action="searchMember.do" method="post">
-					<div class="search-box">
-						<input type="text" name="keyword" placeholder="이름 또는 이메일로 검색">
-						<button class="btn-primary" type="submit">검색</button>
-					</div>
-				</form>
-
-				<!-- 전체조회용 폼 -->
 				<form action="SelectAll.do" method="post">
-					<div class="search-box">
-						<button button class="btn-primary" type="submit">회원전체검색</button>
-					</div>
-				</form>
 
 
 
+					<!-- 검색용 폼 -->
+					<form action="searchMember.do" method="post">
+						<div class="search-box">
+							<input type="text" name="keyword" placeholder="이름 또는 이메일로 검색">
+							<button class="btn-primary" type="submit">검색</button>
+						</div>
+					</form>
 
+					<!-- 전체조회용 폼 -->
+					<form action="SelectAll.do" method="post">
+						<div class="search-box">
+							<button class="btn-primary" id="all_find" type="submit"
+								value="searchAll">회원전체검색</button>
+						</div>
+					</form>
 
+					<div class="table-wrap">
 
+						<table id="memberTable">
 
-
-
-				<div class="table-wrap">
-
-					<table id="memberTable">
-
-						<thead>
-
-							<tr>
-
-								<th>#</th>
-
-								<th>아이디</th>
-
-								<th>이름</th>
-
-								<th>이메일</th>
-
-								<th>권한</th>
-
-								<th>가입날짜</th>
-
-							</tr>
-
-						</thead>
-
-						<tbody>
-
-							<c:forEach var="member" items="${memberList}" varStatus="st">
+							<thead>
 
 								<tr>
 
-									<td>${st.index + 1}</td>
+									<th>#</th>
 
-									<td>${member.name}</td>
+									<th>아이디</th>
 
-									<td>${member.email}</td>
+									<th>이름</th>
 
-									<td><c:choose>
+									<th>이메일</th>
 
-											<c:when test="${member.role eq 'A'}">
+									<th>권한</th>
 
-												<span class="role A">A</span>
-
-											</c:when>
-
-											<c:otherwise>
-
-												<span class="role M">M</span>
-
-											</c:otherwise>
-
-										</c:choose></td>
-
-									<td>${member.joinDate}</td>
-
-									<td>
-										<!-- 수정 --> <a
-										href="${pageContext.request.contextPath}/memberEdit.do?id=${member.id}"
-										class="btn-sm">수정</a> <!-- 삭제 --> <a
-										href="${pageContext.request.contextPath}/memberDelete.do?id=${member.id}"
-										class="btn-sm danger" onclick="return confirm('정말 삭제할까요?');">삭제</a>
-
-									</td>
+									<th>가입날짜</th>
 
 								</tr>
 
-							</c:forEach>
+							</thead>
 
+							<tbody>
 
-
-							<c:choose>
-
-
-
-
-
-								<c:when test="${not empty list}">
-
-									<c:forEach var="m" items="${list}" varStatus="st">
-
-										<tr>
-
-											<td>${st.index + 1}</td>
-
-											<td>${m.id}</td>
-
-											<td>${m.name}</td>
-
-											<td>${m.email}</td>
-
-											<td>${m.adminYN}</td>
-
-											<td>${m.joinDT}</td>
-
-
-										</tr>
-
-									</c:forEach>
-
-								</c:when>
-
-
-
-
-
-								<c:when test="${not empty memberList}">
-
-									<c:forEach var="m" items="${memberList}" varStatus="st">
-
-										<tr>
-
-											<td>${st.index + 1}</td>
-
-											<td>${m.id}</td>
-
-											<td>${m.name}</td>
-
-											<td>${m.email}</td>
-
-											<td>${m.adminYN}</td>
-
-											<td>${m.joinDT}</td>
-
-
-										</tr>
-
-									</c:forEach>
-
-								</c:when>
-
-
-
-
-
-								<c:otherwise>
+								<c:forEach var="member" items="${memberList}" varStatus="st">
 
 									<tr>
 
-										<td colspan="6">등록된 회원이 없습니다.</td>
+										<td>${st.index + 1}</td>
+
+										<td>${member.name}</td>
+
+										<td>${member.email}</td>
+
+										<td><c:choose>
+
+												<c:when test="${member.role eq 'A'}">
+
+													<span class="role A">A</span>
+
+												</c:when>
+
+												<c:otherwise>
+
+													<span class="role M">M</span>
+
+												</c:otherwise>
+
+											</c:choose></td>
+
+										<td>${member.joinDate}</td>
+
+										<td>
+											<!-- 수정 --> <a
+											href="${pageContext.request.contextPath}/memberEdit.do?id=${member.id}"
+											class="btn-sm">수정</a> <!-- 삭제 --> <a
+											href="${pageContext.request.contextPath}/memberDelete.do?id=${member.id}"
+											class="btn-sm danger" onclick="return confirm('정말 삭제할까요?');">삭제</a>
+
+										</td>
 
 									</tr>
 
-								</c:otherwise>
+								</c:forEach>
 
 
 
-							</c:choose>
+								<c:choose>
 
-						</tbody>
 
-					</table>
 
-				</div>
 
-				<div class="actions">
 
-					<a href="GoadminEdit.do" class="main-action-btn">회원 정보 수정 페이지
-						열기</a>
+									<c:when test="${not empty list}">
 
-				</div>
+										<c:forEach var="m" items="${list}" varStatus="st">
 
-				<div class="footer">© 2025 FIVE GUYS. All rights reserved.</div>
+											<tr>
 
+												<td>${st.index + 1}</td>
+
+												<td>${m.id}</td>
+
+												<td>${m.name}</td>
+
+												<td>${m.email}</td>
+
+												<td>${m.adminYN}</td>
+
+												<td>${m.joinDT}</td>
+
+
+											</tr>
+
+										</c:forEach>
+
+									</c:when>
+
+
+
+
+
+									<c:when test="${not empty memberList}">
+
+										<c:forEach var="m" items="${memberList}" varStatus="st">
+
+											<tr>
+
+												<td>${st.index + 1}</td>
+
+												<td>${m.id}</td>
+
+												<td>${m.name}</td>
+
+												<td>${m.email}</td>
+
+												<td>${m.adminYN}</td>
+
+												<td>${m.joinDT}</td>
+
+
+											</tr>
+
+										</c:forEach>
+
+									</c:when>
+
+
+
+
+
+									<c:otherwise>
+
+										<tr>
+
+											<td colspan="6">등록된 회원이 없습니다.</td>
+
+										</tr>
+
+									</c:otherwise>
+
+
+
+								</c:choose>
+
+							</tbody>
+
+						</table>
+
+					</div>
+
+					<div class="actions">
+
+						<a href="GoadminEdit.do" class="main-action-btn">회원 정보 수정 페이지
+							열기</a>
+
+					</div>
+
+					<div class="footer">© 2025 FIVE GUYS. All rights reserved.</div>
 			</div>
 
 		</div>
@@ -267,6 +261,7 @@ String ctx = request.getContextPath();
 </body>
 <script>
 		let searchBtn = document.getElementById("searchBtn");
+		let url = 
 	</script>
 
 </html>
