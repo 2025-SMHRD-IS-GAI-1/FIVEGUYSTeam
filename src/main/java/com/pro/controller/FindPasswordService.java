@@ -33,7 +33,7 @@ public class FindPasswordService implements Command {
          try {
             request.setCharacterEncoding("UTF-8");
          } catch (UnsupportedEncodingException e) {
-            // TODO Auto-generated catch block
+            
             e.printStackTrace();
          }
          response.setCharacterEncoding("UTF-8");
