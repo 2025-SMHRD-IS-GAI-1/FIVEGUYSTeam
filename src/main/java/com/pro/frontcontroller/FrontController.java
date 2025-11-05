@@ -20,6 +20,7 @@ import com.pro.controller.FindPasswordService;
 import com.pro.controller.JoinService;
 import com.pro.controller.LoginService;
 import com.pro.controller.LogoutService;
+import com.pro.controller.SelectAllService;
 
 @WebServlet("*.do")
 public class FrontController extends HttpServlet {
@@ -35,6 +36,7 @@ public class FrontController extends HttpServlet {
 		map.put("DeleteAccount.do", new DeleteAccount());
 		map.put("logout.do", new LogoutService());
 		map.put("FindPassword.do", new FindPasswordService());
+		map.put("SelectAll.do", new SelectAllService());
 		
 	}
 

@@ -1,11 +1,22 @@
- // <!-- (선택) Enter 키로 로그인 -->
-  
-    (function(){
-      const form = document.querySelector('form');
-      form.addEventListener('keydown', function(e){
-        if(e.key === 'Enter') {
-          // 버튼 포커스가 링크 위일 때는 기본 동작 유지
-        }
-      });
-    })();
- 
+let id = document.getElementById("id");
+let pw = document.getElementById("pw");
+let login = document.getElementById("login");
+let url = "login.do";
+login.addEventListener("click", () => {
+	fetch(url + "?id=" + id.value + "&pw=" + pw.value)
+		.then(function(res) {
+			// console.log("받아온 데이터 >> ", res);
+			return res.json();
+		})
+		.then(function(result) {
+			if (result.result == "false") {
+				alert("다시 확인해주세요");
+			} else {
+				location.href = "Goresult.do";
+			}
+
+		})
+		.catch(function(err) {
+			console.error(err);
+		})
+})

@@ -11,6 +11,7 @@ String ctx = request.getContextPath();
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>FIVE GUYS - Menu Translator</title>
 <link rel="stylesheet" href="assets/css/login.css"/>
+<link href="assets/js/login.js"/>
 </head>
 <body>
 	<div class="wrap">
@@ -44,7 +45,7 @@ String ctx = request.getContextPath();
 				<form method="post" onsubmit="return false;" autocomplete="on">
 					<div class="form-row">
 						<label for="idOrEmail">아이디</label> <input class="input" id="id"
-							name="id" type="text" placeholder="ID 또는 이메일" required />
+							name="id" type="text" placeholder="ID" required />
 					</div>
 
 					<div class="form-row">
@@ -100,30 +101,7 @@ String ctx = request.getContextPath();
 	</div><!--  이용약관 끝 -->
 	<script src="assets/js/terms.js" ></script> <!-- 20251103 cyonn -->
 
-	<script>
-      let id = document.getElementById("id");
-      let pw = document.getElementById("pw");
-      let login = document.getElementById("login");
-      let url = "login.do";
-      login.addEventListener("click",()=>{
-               fetch(url+"?id="+id.value+"&pw="+pw.value)
-                .then(function(res){
-                    // console.log("받아온 데이터 >> ", res);
-                    return res.json();
-                })
-                .then(function(result){
-                   if(result.result == "false"){
-                      alert("다시 확인해주세요");
-                   }else {
-                      location.href = "Goresult.do";
-                   }
-
-                })
-                .catch(function(err){
-                    console.error(err);
-                })   
-        })
-   </script>
+	
 </body>
 
 
