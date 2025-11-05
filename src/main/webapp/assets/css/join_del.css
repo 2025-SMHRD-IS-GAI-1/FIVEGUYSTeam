@@ -1,0 +1,105 @@
+/* ===== 톤과 기본값 ===== */
+:root {
+	--bg: #27314a; /* 다크 네이비 (너무 어둡지 않게) */
+	--text: #ffffff;
+	--muted: #cfd6e5; /* 흐린 보조 텍스트 */
+	--card: rgba(255, 255, 255, .02); /* 아주 옅은 카드 배경 */
+	--border: rgba(255, 255, 255, .14);
+	--accent: #ffffff; /* 버튼/링크 색(화이트) */
+}
+
+* {
+	box-sizing: border-box;
+}
+
+html, body {
+	height: 100%;
+}
+
+body {
+	margin: 0;
+	background: var(--bg);
+	color: var(--text);
+	font-family: ui-sans-serif, system-ui, Segoe UI, Apple SD Gothic Neo,
+		Roboto, AppleGothic, sans-serif;
+}
+
+/* ===== 전체를 가운데 정렬 ===== */
+.center {
+	min-height: 100vh;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 28px;
+}
+
+/* ===== 내용 카드 ===== */
+.card {
+	width: 100%;
+	max-width: 720px;
+	text-align: center;
+	padding: 44px 32px;
+	background: var(--card);
+	border: 1px solid var(--border);
+	border-radius: 16px;
+	box-shadow: 0 12px 38px rgba(0, 0, 0, .25);
+}
+
+/* 제목 / 본문 */
+.title {
+	font-size: 48px;
+	font-weight: 900;
+	letter-spacing: -.3px;
+	margin: 0 0 16px;
+}
+
+.desc {
+	margin: 0 auto 8px;
+	line-height: 1.8;
+	color: var(--muted);
+	font-size: 18px;
+}
+
+/* a 기본 스타일 제거 (보라색 링크 방지) */
+a {
+	color: inherit;
+	text-decoration: none;
+}
+
+/* 버튼 */
+.btn {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	height: 48px;
+	padding: 0 26px;
+	margin-top: 20px;
+	border-radius: 12px;
+	border: 1.5px solid var(--accent);
+	color: var(--accent);
+	font-weight: 800;
+	transition: all .15s ease;
+	will-change: transform, background-color, color;
+}
+
+.btn:hover {
+	background: var(--accent);
+	color: #111827;
+}
+
+.btn:active {
+	transform: translateY(1px);
+}
+
+/* 작은 화면 최적화 */
+@media ( max-width : 480px) {
+	.title {
+		font-size: 36px;
+	}
+	.desc {
+		font-size: 16px;
+	}
+	.card {
+		padding: 32px 20px;
+	}
+}
