@@ -49,14 +49,14 @@
       <!-- 비밀번호 변경 -->
       <div class="box">
         <h3>비밀번호 변경</h3>
-        <form method="post" class="form" autocomplete="off">
+        
           <div class="row"><label>현재 비번</label><input name="curPw" id="curPw" type="password" required/></div>
           <div class="row"><label>새 비번</label><input name="newPw" id="newPw" type="password" minlength="8" required/></div>
-          <div class="row"><label>확인</label><input name="newPw2" id="newPw2" "type="password" minlength="8" required/></div>
+          <div class="row"><label>확인</label><input name="newPw2" id="newPw2" type="password" minlength="8" required/></div>
           <button class="btn outline" id="Pwbtn">비밀번호 변경</button>
           <c:if test="${param.pwok=='1'}"><div class="ok">비밀번호가 변경되었습니다.</div></c:if>
           <c:if test="${param.pwerr=='1'}"><div class="err">비밀번호 변경에 실패했습니다. 입력값을 확인하세요.</div></c:if>
-        </form> 
+        
       </div>
 
       <!-- 회원 탈퇴 -->
@@ -164,20 +164,21 @@
 				return res.json();
 			})
 			.then(function(result) {
-				if (result.result == "false") {
-					alert("다시 확인해주세요");
-				}else if(result.result =="false2"){
-					alert("기존비번안맞음요");
-				}else {
-					alert("비밀번호가 변경되었습니다!");
-					location.href = "Gologin.do";
-				}
+	            if (result.result == "false") {
+	               alert("다시 확인해주세요");
+	            }else if(result.result =="false2"){
+	               alert("기존비번안맞음요");
+	            }else {
+	               alert("비밀번호가 변경되었습니다!");
+	               location.href = "Gologin.do";
+	            }
 
-			})
-			.catch(function(err) {
-				console.error(err);
-			})
-	})
+	         })
+	         .catch(function(err) {
+	            console.error(err);
+	         })
+	   })
+
 
 	</script>
 </html>
