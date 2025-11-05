@@ -63,7 +63,8 @@ public class MemberDAO {
 
 		sqlSession.close();
 
-		return row;
+		return row; 
+
 	}
 
 	public int DeleteAccount(MemberVO mvo) {
@@ -99,6 +100,18 @@ public List<MemberVO> findAdmin2(String keyword) {
 		
 		return list;
 	}
+
+public int changePw2(MemberVO mvo) {
+		
+	SqlSession sqlSession = factory.openSession(true);
+	
+	int row = sqlSession.update("changePw",mvo);
+	
+	sqlSession.close();
+	
+	return row;
+	
+}
 	
 	
 }
