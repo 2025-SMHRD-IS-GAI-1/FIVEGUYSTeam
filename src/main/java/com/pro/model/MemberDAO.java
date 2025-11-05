@@ -112,6 +112,16 @@ public int changePw2(MemberVO mvo) {
 	return row;
 	
 }
+
+public int updateUser(MemberVO mvo) {
+	SqlSession sqlSession = factory.openSession(true);
+	
+	int row = sqlSession.update("changeUserInfo",mvo);
+	
+	sqlSession.close();
+	
+	return row;
+}
 	
 	
 }

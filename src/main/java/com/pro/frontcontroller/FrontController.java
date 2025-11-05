@@ -23,6 +23,8 @@ import com.pro.controller.LoginService;
 import com.pro.controller.LogoutService;
 import com.pro.controller.SelectAllService;
 import com.pro.controller.SelectSearchService;
+import com.pro.controller.UpdateUserService;
+
 
 @WebServlet("*.do")
 public class FrontController extends HttpServlet {
@@ -41,6 +43,7 @@ public class FrontController extends HttpServlet {
 		map.put("SelectAll.do", new SelectAllService());
 		map.put("ChangePw.do", new ChangePw());
 		map.put("SelectSearch.do", new SelectSearchService());
+		map.put("UpdateUser.do", new UpdateUserService());
 
 	}
 

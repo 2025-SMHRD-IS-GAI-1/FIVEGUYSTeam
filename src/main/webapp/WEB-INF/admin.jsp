@@ -4,8 +4,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <%
-String ctx = request.getContextPath();
-%>
+	String ctx = request.getContextPath();
+%>	
+	
 
 <!DOCTYPE html>
 
@@ -22,7 +23,17 @@ String ctx = request.getContextPath();
 </head>
 
 <body>
+<%
 
+if(session.getAttribute("userupdate")!=null){
+	if(   ( (String)session.getAttribute("userupdate") ).equals("ok")      ){
+%>
+		<script>alert("업데이트 성공");</script>
+<%
+		session.setAttribute("userupdate", null);
+	}
+}
+%>
 	<!-- 상단바 -->
 
 	<div class="topbar">
@@ -71,6 +82,8 @@ String ctx = request.getContextPath();
 
 				</div>
 
+				<form action="SelectAll.do" method="post">
+
 
 
 				<!-- 검색용 폼 -->
@@ -82,19 +95,11 @@ String ctx = request.getContextPath();
 				</form>
 
 				<!-- 전체조회용 폼 -->
-				<form action="selectAll.do" method="get">
+				<form action="SelectAll.do" method="post">
 					<div class="search-box">
-						<button button class="btn-primary" type="submit">회원전체검색</button>
+						<button class="btn-primary" id="all_find" type="submit" value="searchAll">회원전체검색</button>
 					</div>
 				</form>
-
-
-
-
-
-
-
-
 
 				<div class="table-wrap">
 
@@ -175,7 +180,7 @@ String ctx = request.getContextPath();
 
 									<c:forEach var="m" items="${list}" varStatus="st">
 
-										<tr>
+										<tr onclick="openEditor('${m.id}', '${m.name}', '${m.email}', '${m.adminYN}')">
 
 											<td>${st.index + 1}</td>
 
@@ -252,7 +257,8 @@ String ctx = request.getContextPath();
 
 				<div class="actions">
 
-					<a href="GoadminEdit.do" class="main-action-btn">회원 정보 수정 페이지 열기</a>
+					<a href="GoadminEdit.do" class="main-action-btn">회원 정보 수정 페이지
+						열기</a>
 
 				</div>
 
@@ -264,9 +270,74 @@ String ctx = request.getContextPath();
 
 	</div>
 
-</body>
+<!-- 이용약관용으로 만들었던 모달창을 정보수정용으로 스타일만 사용 -->
+<div id="termsModal" class="modal-overlay">
+		<div class="modal-content">
+			<span class="close-btn">&times;</span>
+			<form action="UpdateUser.do" method="post">
+			<table>
+			<tr>
+			<td>아이디</td><td><input type="text" id="dummyid" disabled="disabled"/><input type="text" id="edit_id" name="edit_id" style="visibility:hidden"/></td>
+			</tr>
+			<tr>
+			<td>이름</td><td><input type="text" id="edit_name" name="edit_name"/></td>
+			</tr>
+			<tr>
+			<td>이메일</td><td><input type="text" id="edit_email" name="edit_email"/></td>
+			</tr>
+			<tr>
+			<td>권한</td><td><select id="edit_adminyn" name="edit_adminyn">
+			<option value="M">일반유저</option>
+			<option value="A">관리자</option>
+			</select>
+			</td>
+			</tr>
+			<tr>
+			<td colspan=2><input type="submit" value="정보수정"/></td>
+			</tr>
+			</table>
+			</form>
+	        
+    	</div>
+	</div>
 	<script>
+
+// 1. 필요한 HTML 요소들을 찾습니다.
+const closeBtn = document.querySelector(".close-btn");
+const modal = document.getElementById("termsModal");
+
+
+
+// 2. 'X' 닫기 버튼을 클릭했을 때의 동작
+closeBtn.onclick = function() {
+    modal.style.display = "none"; // 모달을 다시 숨깁니다.
+}
+
+
+function openEditor(userid, name, email, adminyn){
+	
+	modal.style.display = "flex"; // 숨겨뒀던 모달 배경을 보여줍니다.
+	
+
+	let edit_id = document.getElementById("edit_id");
+	let dummyid = document.getElementById("dummyid");
+	let edit_name = document.getElementById("edit_name");
+	let edit_email = document.getElementById("edit_email");
+	let edit_adminyn = document.getElementById("edit_adminyn");
+	
+    edit_id.value = userid;
+    dummyid.value = userid;
+    edit_name.value = name;
+    edit_email.value = email;
+    edit_adminyn.value = adminyn;
+    
+}
+</script>
+	<!-- 20251105 cyonn -->
+</body>
+<script>
 		let searchBtn = document.getElementById("searchBtn");
+		let url = 
 	</script>
 
 </html>
