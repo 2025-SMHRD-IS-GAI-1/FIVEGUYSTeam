@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>메뉴판 데모</title>
+<style>
+#div{
+	position: absolute;
+	top: 158px; /* pageY1 */
+	left: 86px; /* pageX1 */
+	width: 80px; /* pageX2 - pageX1 */
+	height: 31px; /* pageY2 - pageY1 */
+	background: red;
+	opacity: 0.5;
+}
+</style>
+<script>
+let posX;
+let posY;
+let div;
+window.onload=function(){
+	posX = document.getElementById("posX");
+	posY = document.getElementById("posY");
+	div = document.getElementById("div");
+	
+	document.body.addEventListener("click", (e)=>{
+		posX.value = e.pageX; //86,  162
+		posY.value = e.pageY; //158, 189
+	});
+}
+</script>
+</head>
+<body>
+<canvas id="canv"  style="width:400px; height:400px; border: 1px solid #000;">
+<img src="img/menu0001.jpg" alt="메뉴판" style="width:400px; height:400px; border: 1px solid #000;"/>
+</canvas>
+<div id="div"></div>
+x좌표:<input type="text" id="posX"/><br>
+y좌표:<input type="text" id="posY"/>
+
+</body>
+</html>

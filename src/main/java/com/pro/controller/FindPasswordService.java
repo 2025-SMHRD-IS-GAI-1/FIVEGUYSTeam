@@ -47,6 +47,7 @@ public class FindPasswordService implements Command {
          SecureRandomString srs = new SecureRandomString();
          String newPassword = srs.makeString(16);
          
+         System.out.println("new password:"+newPassword);
          // 3. 생성된 비밀번호는 SHA-512 알고리즘으로 128비트로 암호화
          String reversePW = new StringBuilder(newPassword).reverse().toString();
          String hashedPW = PasswordUtils.hashPassword(reversePW+newPassword, id);

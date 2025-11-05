@@ -28,6 +28,7 @@ public class SelectAllService implements Command {
 		
 		
 		return "admin.jsp";
+
 	}
 
 }
