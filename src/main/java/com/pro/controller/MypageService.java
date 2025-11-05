@@ -35,14 +35,15 @@ public class MypageService implements Command {
         if ("POST".equalsIgnoreCase(request.getMethod())) {
             String tel = request.getParameter("tel");
             String address = request.getParameter("address");
-            MemberVO vo = new MemberVO(email, null, tel, address);
-            int row = dao.updateProfile(vo);
+//            MemberVO vo = new MemberVO(email, null, tel, address);
+//            int row = dao.updateProfile(vo);
+            	int row = 0;
             return "redirect:/Mypage.do?ok=" + (row>0?1:0);
         }
 
         // GET → 화면 데이터 세팅
-        MemberVO me = dao.selectByEmail(email);
-        request.setAttribute("me", me);
+//        MemberVO me = dao.selectByEmail(email);
+//        request.setAttribute("me", me);
         return "/WEB-INF/views/mypage.jsp";
     }
 }

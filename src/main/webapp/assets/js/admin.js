@@ -11,8 +11,8 @@ searchInput.addEventListener('keyup', function() {
 
 	rows.forEach(row => {
 		// 2번째 칸: 이름, 3번째 칸: 이메일
-		const name = row.cells[1]?.textContent.toLowerCase();
-		const email = row.cells[2]?.textContent.toLowerCase();
+		//const name = row.cells[1]?.textContent.toLowerCase();
+		//const email = row.cells[2]?.textContent.toLowerCase();
 
 		if (name.includes(keyword) || email.includes(keyword)) {
 			row.style.display = '';
