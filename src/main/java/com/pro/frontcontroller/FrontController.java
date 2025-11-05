@@ -34,7 +34,7 @@ public class FrontController extends HttpServlet {
 		map.put("ChangeEmail.do", new ChangeEmail());
 		map.put("DeleteAccount.do", new DeleteAccount());
 		map.put("logout.do", new LogoutService());
-		map.put("findPassword.do", new FindPasswordService());
+		map.put("FindPassword.do", new FindPasswordService());
 		
 	}
 
