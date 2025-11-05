@@ -74,7 +74,7 @@ String ctx = request.getContextPath();
                      onclick="location.href='Gojoin.do'">회원가입</button>
                </div>
 
-               <div class="or">또는1</div>
+               <div class="or">또는</div>
 
                <button class="btn btn-ghost" type="button"
                   onclick="location.href='Goguest.do'">게스트로 계속하기</button>
