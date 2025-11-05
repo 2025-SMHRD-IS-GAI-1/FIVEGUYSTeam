@@ -265,7 +265,7 @@ String ctx = request.getContextPath();
 	</div>
 
 </body>
-	<script>
+<script>
 		let searchBtn = document.getElementById("searchBtn");
 	</script>
 
