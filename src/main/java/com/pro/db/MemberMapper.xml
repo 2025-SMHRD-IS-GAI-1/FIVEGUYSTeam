@@ -56,4 +56,5 @@
 		DELETE FROM T_MEMBER WHERE
 		PW=#{pw}
 	</delete>
+
 </mapper>
