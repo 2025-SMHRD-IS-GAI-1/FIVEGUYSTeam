@@ -82,4 +82,6 @@
 		WHERE NAME LIKE '%' || #{value} || '%'
 		OR ID LIKE '%' || #{value} || '%'
 	</select>
+	
+	
 </mapper>

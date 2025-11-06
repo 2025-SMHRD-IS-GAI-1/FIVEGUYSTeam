@@ -32,6 +32,6 @@
  	그 개수만큼 mapper태그 추가해주기
     -->
     <mapper resource="com/pro/db/MemberMapper.xml"/> 
-    
+    <mapper resource="com/pro/db/MenuDataMapper.xml"/>
   </mappers>
 </configuration>
