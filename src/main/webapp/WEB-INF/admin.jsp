@@ -97,11 +97,7 @@ if(session.getAttribute("userupdate")!=null){
 
 						<input type="text" id="searchInput" placeholder="ID 또는 이름으로 검색">
 
-<<<<<<< HEAD
-						<button type="button" class="btn-primary" type="submit" value="search" id="searchBtn">검색</button>
-=======
 						<button class="btn-primary" type="button" type="submit" value="search" id="searchBtn">검색</button>
->>>>>>> 123f350bbd986370d2db57cd43104255f94a39df
 
 						<button class="btn-primary" id="all_find" type="submit"
 							value="searchAll">회원전체검색</button>
