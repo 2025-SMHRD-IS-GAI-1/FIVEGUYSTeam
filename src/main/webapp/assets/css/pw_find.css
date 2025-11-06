@@ -199,20 +199,29 @@ body {
 	border: 1px solid #bbf7d0;
 }
 
+/* ===== footer (login 페이지랑 통일) ===== */
 .footer {
-	margin-top: 16px;
-	text-align: center;
-	color: var(--sub);
-	font-size: 14px;
+    margin-top: 18px;
+    text-align: center;
+    color: var(--sub);
+    font-size: 12px;
 }
 
 .footer .legal {
-	display: flex;
-	gap: 12px;
-	justify-content: center;
-	margin-top: 6px;
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    margin-top: 8px;
 }
 
+.footer .legal a {
+    color: var(--sub);
+    text-decoration: none;
+}
+
+.footer .legal a:hover {
+    color: var(--text);
+}
 /* 모달 부분은 네가 쓰던 거 그대로 */
 .modal-overlay {
 	display: none;
