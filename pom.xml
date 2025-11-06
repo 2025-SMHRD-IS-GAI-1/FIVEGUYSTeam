@@ -51,6 +51,15 @@
 		</dependency>
 		<!-- ojdbc6 라이브러리 -->
 		<!-- https://mvnrepository.com/artifact/com.oracle.database.jdbc/ojdbc6 -->
+		
+		<dependency>
+	        <groupId>org.json</groupId>
+	        <artifactId>json</artifactId>
+	        <version>20240303</version>
+    	</dependency>
+		<!-- ocr처리 후 json화 된 데이터를 db에 넣기위한 전처리용 -->
+		
+		
 		<dependency>
 			<groupId>com.oracle.database.jdbc</groupId>
 			<artifactId>ojdbc6</artifactId>

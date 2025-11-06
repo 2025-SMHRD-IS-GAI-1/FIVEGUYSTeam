@@ -44,7 +44,7 @@ if(session.getAttribute("userupdate")!=null){
 				<div class="title">FIVE GUYS - Menu Translator (Admin)</div>
 			</div>
 			<div class="top-actions">
-				<a class="link" href="${pageContext.request.contextPath}/Gologin.do">홈</a>
+				<a href="${pageContext.request.contextPath}/logout.do" class="mini-nav">로그아웃</a>
 			</div>
 		</div>
 	</div>

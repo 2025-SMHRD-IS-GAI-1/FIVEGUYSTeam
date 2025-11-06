@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%
 String ctx = request.getContextPath();
 %>
@@ -15,11 +16,7 @@ String ctx = request.getContextPath();
 <link rel="stylesheet" href="assets/css/upload.css">
 </head>
 <body>
-	<!-- 상단 중앙 타이틀 -->
-	<section class="page-title">
-		<h1>메뉴판 사진만 올리면 바로 번역</h1>
-		<p>업로드 → 언어 선택 → 번역하기, 단 3단계로 끝!</p>
-	</section>
+	
 	<!-- 상단 미니 헤더 (두번째 이미지 톤 맞춤) -->
 	<header class="mini-header">
 		<div class="mini-inner">
@@ -28,8 +25,21 @@ String ctx = request.getContextPath();
 				<span>FIVE GUYS · Menu Translator</span>
 			</div>
 			<nav class="mini-nav">
-				 <a class="primary-outline"
-					href="<%=ctx%>/Gomypage.do">마이페이지</a>       <!-- 경로 바꿔줘야함!!  -->
+				 
+            <c:if test="${info==null }">
+               <a href = "<%=ctx%>/Gologin.do">홈</a>
+               <a href = "<%=ctx%>/Gojoin.do">회원가입</a>
+               
+               
+            </c:if>
+             <c:if test="${info!=null }">
+                 <c:if test="${info.adminYN != 'A'}">
+                  <a href="<%=ctx%>/Gomypage.do">마이페이지</a>
+                </c:if>
+              
+               <a href="logout.do">로그아웃</a>
+            </c:if> 
+                 <!-- 경로 바꿔줘야함!!  -->
 			</nav>
 		</div>
 	</header>
@@ -42,8 +52,11 @@ String ctx = request.getContextPath();
 		<section class="card-side">
 			<div class="card">
 				<h2 class="card-title">사진 업로드 & 언어 선택</h2>
-				<p class="card-desc">JPG, PNG, HEIC / 최대 10MB</p>
-
+				<p class="card-desc">JPG, PNG, HEIC</p>
+		<section class="page-title">
+			<h1>메뉴판 사진만 올리면 바로 번역</h1>
+			<p>업로드 → 언어 선택 → 번역하기, 단 3단계로 끝!</p>
+		</section>
 				<!-- 드롭존 -->
 				<form action="<%=ctx%>/translate.do" method="post"
 					enctype="multipart/form-data" class="form">
@@ -60,9 +73,12 @@ String ctx = request.getContextPath();
 					<!-- 언어 선택 -->
 					<label class="label" for="lang">번역할 언어</label> <select id="lang"
 						name="targetLang" class="select" required>
-						<option value="한글">한글</option>
-						<option value="영어" selected >English</option>
-						<option value="일본어">日本語</option>
+						<option value="Korean">한글</option>
+					    <option value="English" selected>English</option>
+					    <option value="Japanese">日本語</option>
+					    <option value="French">Français</option>
+					    <option value="中文普通話">中文普通話</option>
+					    <option value="中文广东话">中文广东话</option>
 					</select>
 
 					<!-- 체크/가이드 라인 -->
@@ -76,11 +92,6 @@ String ctx = request.getContextPath();
 				</form>
 			</div>
 
-			<!-- 푸터 라인 -->
-			<footer class="legal">
-				<span>© 2025 FIVE GUYS. All rights reserved.</span> <a href="#">이용약관</a>
-				<a href="#">개인정보</a> <a href="#">문의</a>
-			</footer>
 		</section>
 	</main>
 </body>

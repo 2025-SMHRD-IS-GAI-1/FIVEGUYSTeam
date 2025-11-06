@@ -17,8 +17,9 @@
 			<img src="${ctx}/img/팀로고.png" alt="FIVE GUYS" />
 			<div class="t">FIVE GUYS - Menu Translator</div>
 			<div class="spacer"></div>
-			<a class="link" href="${ctx}/Goresult.do">홈</a> <a class="link"
-				href="${ctx}/logout.do">로그아웃</a>
+			
+			<a href="${ctx}/Goresult.do" class="mini-nav">홈</a> 
+			<a href="${ctx}/logout.do" class="link">로그아웃</a>
 		</div>
 
 		<!-- 메인 카드 -->

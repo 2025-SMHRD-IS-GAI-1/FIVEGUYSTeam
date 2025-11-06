@@ -16,7 +16,7 @@ public class LoginService implements Command {
 		String moveurl = "fetch:/"+"{\"result\" : \"false\"}";
 		String id = request.getParameter("id");
 		String pw = request.getParameter("pw");
-	
+		HttpSession session = request.getSession();
 		MemberVO mvo = new MemberVO();
 		mvo.setId(id);
 		
@@ -29,8 +29,11 @@ public class LoginService implements Command {
 		MemberDAO dao = new MemberDAO();
 		MemberVO info = dao.login(mvo);
 		
-		if(info != null) {
-			HttpSession session = request.getSession();
+		if(info.getAdminYN().equals("A")) {
+			session.setAttribute("info", info);
+			moveurl = "fetch:/"+"{\"result\" : \"admin\"}";
+			System.out.println("나 관리자다");
+		}else if(info != null) {
 			session.setAttribute("info", info);
 			moveurl = "fetch:/"+"{\"result\" : \"true\"}";
 		}
