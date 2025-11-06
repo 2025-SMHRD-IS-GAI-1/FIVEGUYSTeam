@@ -19,7 +19,7 @@
 		<div class="brand">
 			<img src="${pageContext.request.contextPath}/img/팀로고.png" alt="FIVE GUYS" />
 			<div class="t">FIVE GUYS - Menu Translator</div>
-			<a class="link small" href="<%=ctx%>/Gologin.do"
+			<a class="mini-nav" href="<%=ctx%>/Gologin.do"
 				style="margin-left: auto;">홈</a>
 		</div>
 

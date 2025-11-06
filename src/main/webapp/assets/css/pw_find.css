@@ -14,7 +14,7 @@
 }
 
 * {
-	box-sizing: border-box
+	box-sizing: border-box;
 }
 
 body {
@@ -31,6 +31,7 @@ body {
 	padding: 0 16px;
 }
 
+/* ======= 상단 배너 통일 영역 ======= */
 .brand {
 	display: flex;
 	align-items: center;
@@ -48,15 +49,34 @@ body {
 	font-weight: 700;
 }
 
-.link {
-	color: var(--primary);
+/* 오른쪽으로 밀기 */
+.brand .spacer {
+	margin-left: auto;
+}
+
+/* 통일된 버튼 모양 (마이페이지, join, admin이랑 같게) */
+.mini-nav {
+	display: inline-flex;
+	align-items: center;
+	padding: 6px 14px;
+	background: #fff;
+	border: 1px solid var(--border);
+	border-radius: 12px;
 	text-decoration: none;
-}
-
-.link.small {
+	color: var(--text);
 	font-size: 14px;
+	line-height: 1;
+	margin-left: 6px;
 }
 
+.mini-nav:hover, .mini-nav.active {
+	border-color: var(--primary);
+	color: var(--primary);
+}
+
+/* ======= 여기까지가 상단 공통 ======= */
+
+/* 카드 영역 이하 원래 네 코드 */
 .card {
 	background: var(--card);
 	border: 1px solid var(--border);
@@ -193,38 +213,30 @@ body {
 	margin-top: 6px;
 }
 
-
-/* 이하 약관용 로직 20251104 cyonn*/
-
-/* 1. 모달 배경 (어둡게 처리) */
+/* 모달 부분은 네가 쓰던 거 그대로 */
 .modal-overlay {
-	display: none; /* 평소에는 숨김 */
-	position: fixed; /* 화면 전체에 고정 */
+	display: none;
+	position: fixed;
 	top: 0;
 	left: 0;
 	width: 100%;
 	height: 100%;
-	background-color: rgba(0, 0, 0, 0.5); /* 반투명 검은색 */
-	z-index: 1000; /* 다른 요소들 위에 표시 */
-	/* 모달창을 중앙에 배치하기 위한 Flexbox */
-	/* display: none; */ /* 맨 위에 이미 있으므로 중복 제거 */
+	background-color: rgba(0, 0, 0, 0.5);
+	z-index: 1000;
 	justify-content: center;
 	align-items: center;
 }
 
-/* 2. 모달창 본체 */
 .modal-content {
 	background-color: #fff;
 	padding: 20px;
 	border-radius: 8px;
 	width: 90%;
-	max-width: 400px; /* 모달의 최대 너비 */
+	max-width: 400px;
 	box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 	position: relative;
-    
 }
 
-/* 3. 닫기 버튼 */
 .close-btn {
 	position: absolute;
 	top: 10px;
@@ -239,10 +251,9 @@ body {
 	color: #000;
 }
 
-/* 4. 약관 내용이 스크롤되는 영역 */
 #termsModal #rules_text {
-	height: 400px; /* 스크롤 영역의 높이를 고정합니다. (모달창 전체 높이가 아님) */
-	overflow-y: auto; /* 내용이 넘칠 경우 세로 스크롤바 생성 (!important 필요 없음) */
+	height: 400px;
+	overflow-y: auto;
 	border: 1px solid #ddd;
 	padding: 10px;
 	margin-top: 15px;
