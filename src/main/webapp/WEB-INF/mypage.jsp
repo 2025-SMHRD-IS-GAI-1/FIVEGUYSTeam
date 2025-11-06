@@ -100,12 +100,14 @@
 								required />
 						</div>
 						<button class="btn outline">탈퇴하기</button>
-						<c:if test="${param.delErr=='1'}">
+						<c:if test="${delErr=='1'}">
 							<div class="err">비밀번호가 올바르지 않거나 탈퇴에 실패했습니다.</div>
 						</c:if>
 					</form>
 				</div>
 			</div>
+			
+		
 
 			<!-- 오른쪽: 내 활동 -->
 			<div class="right">

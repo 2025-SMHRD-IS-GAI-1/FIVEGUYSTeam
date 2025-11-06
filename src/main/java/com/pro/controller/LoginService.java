@@ -16,7 +16,7 @@ public class LoginService implements Command {
 		String moveurl = "fetch:/"+"{\"result\" : \"false\"}";
 		String id = request.getParameter("id");
 		String pw = request.getParameter("pw");
-		System.out.println("id는"+id);
+	
 		MemberVO mvo = new MemberVO();
 		mvo.setId(id);
 		
