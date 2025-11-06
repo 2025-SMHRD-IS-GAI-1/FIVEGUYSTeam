@@ -1,4 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%
   String ctx  = request.getContextPath();
   String name = (String)request.getAttribute("name");
@@ -18,7 +19,12 @@
       <h1 class="title">환영합니다!</h1>
       <p class="desc"><b><%=name%>님</b>, 회원가입을 축하합니다.</p>
       <p class="desc">메시지시스템의 새로운 이메일은 입니다.</p>
+      <c:if test="${info==null}">
+       <a class="btn" href="<%=ctx%>/Gologin.do">시작하기</a>
+      </c:if>
+      <c:if test="${info!=null}">
       <a class="btn" href="<%=ctx%>/Goresult.do">시작하기</a>
+      </c:if>
     </div>
   </div>
 </body>

@@ -101,6 +101,9 @@
 								required />
 						</div>
 						<button class="btn outline">탈퇴하기</button>
+						<!--    <c:if test ="${delErr == null }">
+							 <div class="err">비밀번호가 올바르지 않거나 탈퇴에 실패했습니다.</div>      -->
+						</c:if>
 						<c:if test="${delErr=='1'}">
 							<div class="err">비밀번호가 올바르지 않거나 탈퇴에 실패했습니다.</div>
 						</c:if>
@@ -197,16 +200,19 @@
 	</div>
 </body>
 <script>
-	let curPw = document.getElementById("curPw");
-	let newPw  = document.getElementById("newPw");
-	let newPw2 = document.getElementById("newPw2");
-	let Pwbtn = document.getElementById("Pwbtn");
 	
+	let Pwbtn = document.getElementById("Pwbtn");
 	let url = "ChangePw.do";
 	Pwbtn.addEventListener("click", () => {
-		fetch(url + "?curPw=" + curPw.value + "&newPw=" + newPw.value + "&newPw2=" + newPw2.value)
-			
-			.then(function(res) {
+		let curPw = document.getElementById("curPw").value;
+		let newPw  = document.getElementById("newPw").value;
+		let newPw2 = document.getElementById("newPw2").value;
+		fetch("ChangePw.do",{
+			method: "POST",
+			headers:{ "Content-Type": "application/x-www-form-urlencoded"},
+			body :new URLSearchParams({curPw,newPw,newPw2})
+		})
+		.then(function(res) {
 				// console.log("받아온 데이터 >> ", res);
 				return res.json();
 			})

@@ -21,7 +21,6 @@
 	<select id="login" parameterType="com.pro.model.MemberVO"
 		resultType="com.pro.model.MemberVO">
 		SELECT ID,
-		PW,
 		NAME,
 		EMAIL,
 		ADMIN_YN AS "adminYN",
@@ -81,5 +80,12 @@
 		FROM T_MEMBER
 		WHERE NAME LIKE '%' || #{value} || '%'
 		OR ID LIKE '%' || #{value} || '%'
+	</select>
+	
+	<select id="Selectpw" resultType="String">
+		SELECT PW
+		FROM T_MEMBER
+		WHERE ID=#{id}
+		
 	</select>
 </mapper>
