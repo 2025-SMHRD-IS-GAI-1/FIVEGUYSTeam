@@ -20,8 +20,6 @@ String ctx = request.getContextPath(); // 컨텍스트 경로
 			<img src="${pageContext.request.contextPath}/img/팀로고.png"
 				alt="FIVE GUYS" />
 			<div class="t">FIVE GUYS - Menu Translator</div>
-			<a class="mini-nav" href="<%=ctx%>/Gologin.do"
-				style="margin-left: auto;">홈</a>
 		</div>
 
 		<!-- 카드 -->

@@ -54,27 +54,8 @@ body {
 	margin-left: auto;
 }
 
-/* 통일된 버튼 모양 (마이페이지, join, admin이랑 같게) */
-.mini-nav {
-	display: inline-flex;
-	align-items: center;
-	padding: 6px 14px;
-	background: #fff;
-	border: 1px solid var(--border);
-	border-radius: 12px;
-	text-decoration: none;
-	color: var(--text);
-	font-size: 14px;
-	line-height: 1;
-	margin-left: 6px;
-}
 
-.mini-nav:hover, .mini-nav.active {
-	border-color: var(--primary);
-	color: var(--primary);
-}
 
-/* ======= 여기까지가 상단 공통 ======= */
 
 /* 카드 영역 이하 원래 네 코드 */
 .card {
