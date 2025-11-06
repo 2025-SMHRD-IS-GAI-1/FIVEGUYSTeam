@@ -19,7 +19,7 @@ public class CheckEmail implements Command{
 		MemberVO mvo = new MemberVO();
 		mvo.setId(id);
 		mvo.setEmail(email);
-		
+		 
 		MemberVO mvo2 = null;
 		if(email!=null) {
 			MemberDAO dao = new MemberDAO();

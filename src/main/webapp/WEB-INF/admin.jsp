@@ -335,23 +335,27 @@ if(session.getAttribute("userupdate")!=null){
 	<!-- 20251105 cyonn -->
 </body>
 <script>
-let searchBtn = document.getElementById("searchBtn");
+/* id값 받아오기  */
+let searchBtn = document.getElementById("searchBtn");  
 let searchInput = document.getElementById("searchInput");
 let url = "Search.do";
 searchBtn.addEventListener("click", () => {
 	fetch(url + "?value=" + searchInput.value)
 	 .then(res => res.json())
         .then(data => {
-        	
         	console.table(data);
             const tbody = document.querySelector("#memberTable tbody");
+            
+            /* tbody 영역을 싹 비우겠다 => 백지로 만듬 */
             tbody.innerHTML = "";
-			/* data가 없을때 출력  */
+			
+            /* data가 없을때 출력  */
             if (!data.length) {
             	  tbody.innerHTML = `<tr><td colspan="6">검색 결과가 없습니다.</td></tr>`;
             	  return;
             	}
             
+            /* 백지상태인 tbody영역을 포문으로 출력  */
             data.forEach((m, idx) => {
                 tbody.innerHTML += `
                 <tr onclick="openEditor('\${m.id}', '\${m.name}', '\${m.email}', '\${m.adminYN}')">

@@ -20,12 +20,14 @@ public class ChangePw implements Command {
 		String changepw = request.getParameter("newPw");
 //		새로운 비번 확인
 		String changepw2 = request.getParameter("newPw2");
+		
+//		로그인할때 들어 set한 세션 값 불러오기
 		HttpSession session = request.getSession();
 		MemberVO vo =(MemberVO) session.getAttribute("info");
 		String checkPw = vo.getPw();//db에서 가져온 암호화된 비번
 		
 		String cur_reverse = new StringBuilder(pw).reverse().toString();
-		String hashedPW = PasswordUtils.hashPassword(cur_reverse+pw, vo.getId());  
+		String hashedPW = PasswordUtils.hashPassword(cur_reverse+pw, vo.getId());   //
 		
 		//		현재비번 , 새비번, 새비번확인 제대로 입력했는지 확인
 		if(!hashedPW.equals(checkPw)) {
