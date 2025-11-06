@@ -19,7 +19,7 @@ String ctx = request.getContextPath();
 			<img src="${pageContext.request.contextPath}/img/팀로고.png">
 			<div class="t">FIVE GUYS - Menu Translator</div>
 			<div style="margin-left: auto; display: flex; gap: 8px;">
-				<a class="link" href="<%=ctx%>/Gologin.do">로그인</a> 
+			<a href="<%=ctx%>/Gologin.do" class="mini-nav">로그인</a> 
 			</div>
 		</div>
 

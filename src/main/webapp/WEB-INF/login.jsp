@@ -77,7 +77,7 @@ String ctx = request.getContextPath();
 					<div class="or">또는</div>
 
 					<button class="btn btn-ghost" type="button"
-						onclick="location.href='Goguest.do'">게스트로 계속하기</button>
+						onclick="location.href='Goresult.do'">게스트로 계속하기</button>
 				</form>
 
 				<div class="footer">
@@ -115,9 +115,14 @@ login.addEventListener("click", () => {
 			return res.json();
 		})
 		.then(function(result) {
-			if (result.result == "false") {
+			if(result.result =="admin"){
+				console.log("나관리자다");
+				location.href="Goadmin.do";
+			}
+			else if (result.result == "false") {
 				alert("다시 확인해주세요");
-			} else {
+			}
+			else {
 				location.href = "Goresult.do";
 			}
 

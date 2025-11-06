@@ -30,22 +30,50 @@ body {
 	padding: 0 16px
 }
 
+/* 버튼처럼 보이게 만드는 부분 */
+.mini-nav {
+    display: inline-flex;
+    align-items: center;
+    padding: 6px 14px;
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    text-decoration: none;
+    color: var(--text);
+    font-size: 14px;
+    line-height: 1;
+    margin-left: 6px;  /* 버튼 사이 간격 */
+}
+
+/* 마우스 올렸을 때 / 강조 */
+.mini-nav:hover,
+.mini-nav.active {
+    border-color: var(--primary);
+    color: var(--primary);
+}
+
+
+
 /* ========== 2. 헤더(브랜드) ========== */
 .brand {
-	display: flex;
-	align-items: center;
-	gap: 10px;
-	margin-bottom: 16px
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 16px;
 }
 
 .brand img {
-	width: 28px;
-	height: 28px;
-	border-radius: 6px
+    width: 28px;
+    height: 28px;
+    border-radius: 6px;
 }
 
 .brand .t {
-	font-weight: 700
+    font-weight: 700;
+}
+
+.brand .spacer {
+    margin-left: auto;
 }
 
 /* ========== 3. 카드 레이아웃 ========== */

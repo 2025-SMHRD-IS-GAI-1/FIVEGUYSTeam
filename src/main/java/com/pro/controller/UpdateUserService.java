@@ -26,7 +26,7 @@ public class UpdateUserService implements Command {
 		mvo.setId(id);
 		mvo.setName(name);
 		mvo.setEmail(email);
-		mvo.setAdminYN("M");
+		mvo.setAdminYN(adminyn);
 		
 		HttpSession session = request.getSession(false);
 		
