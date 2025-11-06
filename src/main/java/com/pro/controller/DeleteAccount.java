@@ -13,6 +13,7 @@ public class DeleteAccount implements Command {
 
 	@Override
 	public String excute(HttpServletRequest request, HttpServletResponse response) {
+		
 		String pw = request.getParameter("pw");
 		HttpSession session = request.getSession(false);
 		MemberVO vo =(MemberVO)session.getAttribute("info");
@@ -30,9 +31,19 @@ public class DeleteAccount implements Command {
 		int row =dao.DeleteAccount(mvo);
 //		String moveurl= "fetch:/"+"{\"result\" : \"false\"}";
 		String moveurl= null;
+		
+		// 삭제에 성공했을 때 
 		if(row>0) {
 //			moveurl="fetch:/"+"{\"result\" : \"true\"}";
-			moveurl="redirect:/Gologin.do";
+			session.invalidate();  // 세션 날리고
+			moveurl="redirect:/Gologin.do"; // sendredirect 방식으로 보내줌 
+		
+		// 삭제에 실패했을 때 
+		}else {
+			// 리퀘스트 객체에 delErr : 1 키밸류 형태로 셋
+			request.setAttribute("delErr", "1");
+			// Fc에서 forward방식으로 보냄
+			moveurl ="mypage.jsp";
 		}
 		return moveurl;
 	}

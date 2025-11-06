@@ -85,7 +85,7 @@ String ctx = request.getContextPath();
 							<button type="submit" class="btn btn-primary">회원가입 완료</button>
 						</div>
 						<div class="btn-right">
-							<a href="<%=ctx%>/login.jsp" class="btn btn-ghost"
+							<a href="<%=ctx%>/Gologin.do" class="btn btn-ghost"
 								style="display: inline-block; text-align: center;">돌아가기</a>
 						</div>
 					</div>
