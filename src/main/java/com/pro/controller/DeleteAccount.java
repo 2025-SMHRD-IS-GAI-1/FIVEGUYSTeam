@@ -43,7 +43,7 @@ public class DeleteAccount implements Command {
 			// 리퀘스트 객체에 delErr : 1 키밸류 형태로 셋
 			request.setAttribute("delErr", "1");
 			// Fc에서 forward방식으로 보냄
-			moveurl ="mypage.do";
+			moveurl ="mypage.jsp";
 		}
 		return moveurl;
 	}

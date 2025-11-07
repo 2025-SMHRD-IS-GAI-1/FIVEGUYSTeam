@@ -27,41 +27,19 @@
 			<!-- 왼쪽: 프로필/보안 -->
 			<div class="left">
 				<h2>프로필</h2>
-
+				
 				<!-- 현재 이메일 표시 -->
 				<div class="form">
 					<div class="row">
-						<label>현재 이메일</label>
-						<div>${me.email}</div>
+						<label>이메일 : </label>
+						<div>${sessionScope.info.name}</div>
+						<label>이름 : </label>
+						<div>${sessionScope.info.email}</div>
+						
 					</div>
 				</div>
 
-				<!-- 이메일 변경 -->
-				<div class="box">
-					<h3>이메일 변경</h3>
-					<form method="post" action="${ctx}/ChangeEmail.do" class="form"
-						autocomplete="off">
-						<div class="row">
-							<label>새 이메일</label><input name="newEmail" type="email" required />
-						</div>
-						<div class="row">
-							<label>비밀번호</label><input name="pw" type="password" required />
-						</div>
-						<button class="btn">이메일 변경</button>
-						<c:if test="${param.emailOk=='1'}">
-							<div class="ok">이메일이 변경되었습니다.</div>
-						</c:if>
-						<c:if test="${param.emailErr=='dup'}">
-							<div class="err">이미 사용 중인 이메일입니다.</div>
-						</c:if>
-						<c:if test="${param.emailErr=='pw'}">
-							<div class="err">비밀번호가 일치하지 않습니다.</div>
-						</c:if>
-						<c:if test="${param.emailErr=='fail'}">
-							<div class="err">변경에 실패했습니다. 잠시 후 다시 시도하세요.</div>
-						</c:if>
-					</form>
-				</div>
+				
 
 				
 

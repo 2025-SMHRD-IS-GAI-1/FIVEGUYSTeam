@@ -19,7 +19,10 @@ public class JoinService implements Command {
 //		프론트에서 입력한 id, pw값 받아오기 
 		String id = request.getParameter("id");
 		String pw = request.getParameter("pw");
-		
+		String pw2 = request.getParameter("pw2");
+		if(!pw.equals(pw2)) {
+			
+		}
 		// SHA-512 변형코드 적용 : [원pw + 역순pw]를 id를 salt대신 키로 사용하여 암호화
 		String reversePW = new StringBuilder(pw).reverse().toString();
 		String hashedPW = PasswordUtils.hashPassword(reversePW + pw, id);
@@ -46,9 +49,8 @@ public class JoinService implements Command {
 		int row = dao.join(mvo);
 
 		if (row > 0) {
-			request.setAttribute("id", id);
-			request.setAttribute("pw", pw);
-			moveurl = "redirect:/Gojoin_success.do";
+			request.setAttribute("name", name);
+			moveurl = "join_success.jsp";
 		}
 		return moveurl;
 	}

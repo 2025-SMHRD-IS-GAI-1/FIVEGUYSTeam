@@ -50,7 +50,6 @@ public class FrontController extends HttpServlet {
 		map.put("Search.do", new SearchSurvice());
 		map.put("SaveMenu.do", new SaveMenuDataService());
 	    map.put("check.do", new Checkid());
-
 	}
 
 	protected void service(HttpServletRequest request, HttpServletResponse response)

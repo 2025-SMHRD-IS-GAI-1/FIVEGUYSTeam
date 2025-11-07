@@ -17,8 +17,7 @@
   <div class="center">
     <div class="card">
       <h1 class="title">환영합니다!</h1>
-      <p class="desc"><b><%=name%>님</b>, 회원가입을 축하합니다.</p>
-      <p class="desc">메시지시스템의 새로운 이메일은 입니다.</p>
+      <p class="desc"><b><%= request.getAttribute("name") %></b>님 회원가입을 축하합니다.</p>
       <c:if test="${info==null}">
        <a class="btn" href="<%=ctx%>/Gologin.do">시작하기</a>
       </c:if>

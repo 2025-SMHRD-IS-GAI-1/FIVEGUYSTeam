@@ -14,12 +14,13 @@ public class Checkid implements Command {
 		String moveurl = "fetch:/"+"{\"result\" : \"false\"}";
 //		프론트에서 입력한 id, pw값 받아오기 
 		String id = request.getParameter("id");
-		String pw = request.getParameter("pw");
-		
+
 		boolean chk = dao.existsId(id);
 		if(chk) {
-			moveurl = "fetch:/"+"{\"result\" : \"true\"}";
+			return moveurl = "fetch:/"+"{\"result\" : \"true\"}";
 		}
+		
+	
 		return moveurl;
 	}
 
