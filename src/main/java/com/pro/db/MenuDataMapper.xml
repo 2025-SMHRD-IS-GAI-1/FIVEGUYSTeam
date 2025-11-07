@@ -30,5 +30,10 @@
                  #{color_bg}, #{color_txt})
     </insert>
 
-
+	<select id="getImages" parameterType="com.pro.model.MemberVO"
+							resultType="com.pro.menu.model.ImageVO">
+		SELECT * FROM T_IMAGE
+			WHERE ID=#{mvo.id}
+		<!-- 20251107 cyonn 생성  -->
+	</select>
 </mapper>

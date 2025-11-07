@@ -6,6 +6,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 
 import com.pro.db.MySqlSessionManager;
+import com.pro.menu.model.ImageVO;
 
 public class MemberDAO {
 
@@ -90,48 +91,49 @@ public class MemberDAO {
 		return list;
 	}
 	
-public List<MemberVO> findAdmin2(String keyword) { 
-		
+	public List<MemberVO> findAdmin2(String keyword) { 
+			
+			SqlSession sqlSession = factory.openSession(true);
+			
+			List<MemberVO> list = sqlSession.selectList("findAdmin2", keyword);
+			
+			sqlSession.close();
+			
+			return list;
+		}
+	
+	public int changePw2(MemberVO mvo) {
+			
 		SqlSession sqlSession = factory.openSession(true);
 		
-		List<MemberVO> list = sqlSession.selectList("findAdmin2", keyword);
+		int row = sqlSession.update("changePw",mvo);
 		
 		sqlSession.close();
 		
+		return row;
+		
+	}
+	
+	public int updateUser(MemberVO mvo) {
+		SqlSession sqlSession = factory.openSession(true);
+		
+		int row = sqlSession.update("changeUserInfo",mvo);
+		
+		sqlSession.close();
+		
+		return row;
+	}
+		
+	public List<MemberVO> search(String value) {
+		
+		SqlSession sqlSession = factory.openSession(true);
+		
+		List<MemberVO> list = sqlSession.selectList("search", value);
+		
+		sqlSession.close(); // 20251107 cyonn 추가
+		
 		return list;
 	}
-
-public int changePw2(MemberVO mvo) {
-		
-	SqlSession sqlSession = factory.openSession(true);
 	
-	int row = sqlSession.update("changePw",mvo);
-	
-	sqlSession.close();
-	
-	return row;
-	
-}
-
-public int updateUser(MemberVO mvo) {
-	SqlSession sqlSession = factory.openSession(true);
-	
-	int row = sqlSession.update("changeUserInfo",mvo);
-	
-	sqlSession.close();
-	
-	return row;
-}
-	
-public List<MemberVO> search(String value) {
-	
-	SqlSession sqlSession = factory.openSession(true);
-	
-	List<MemberVO> list = sqlSession.selectList("search", value);
-	
-	return list;
-}
-	
-
 	
 }

@@ -114,7 +114,6 @@
 			<div class="right">
 				<div class="panel">
 					<h2>내 활동</h2>
-
 					<!-- 내 사진 목록 -->
 					<h3 style="margin-top: 0">내 사진</h3>
 					<c:choose>
