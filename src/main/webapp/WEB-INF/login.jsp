@@ -10,8 +10,8 @@ String ctx = request.getContextPath();
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>FIVE GUYS - Menu Translator</title>
-<link rel="stylesheet" href="assets/css/login.css"/>
-<link href="assets/js/login.js"/>
+<link rel="stylesheet" href="assets/css/login.css" />
+<link href="assets/js/login.js" />
 </head>
 <body>
 	<div class="wrap">
@@ -63,7 +63,9 @@ String ctx = request.getContextPath();
 					<div class="row-between">
 						<label class="checkbox"> <input type="checkbox"
 							name="autoLogin" value="Y" /> 자동 로그인
-						</label> <a class="link" href="${pageContext.request.contextPath}/Gopw_find.do">비밀번호 찾기</a>
+						</label> <a class="link"
+							href="${pageContext.request.contextPath}/Gopw_find.do">비밀번호
+							찾기</a>
 					</div>
 
 					<button class="btn btn-primary" type="submit" id="login" onclick="">로그인
@@ -83,8 +85,8 @@ String ctx = request.getContextPath();
 				<div class="footer">
 					© 2025 FIVE GUYS. All rights reserved.
 					<div class="legal">
-						<a class="link" href="#" id="openTermsLink">이용약관</a> <a class="link"
-							href="${ctx}/privacy.do">개인정보</a> <a class="link"
+						<a class="link" href="#" id="openTermsLink">이용약관</a> <a
+							class="link" href="${ctx}/privacy.do">개인정보</a> <a class="link"
 							href="${ctx}/contact.do">문의</a>
 					</div>
 				</div>
@@ -96,20 +98,27 @@ String ctx = request.getContextPath();
 		<div class="modal-content">
 			<span class="close-btn">&times;</span>
 			<h2>이용약관</h2>
-	        <div id="rules_text"></div>
-    	</div>
-	</div><!--  이용약관 끝 -->
-	<script src="assets/js/terms.js" ></script> <!-- 20251103 cyonn -->
+			<div id="rules_text"></div>
+		</div>
+	</div>
+	<!--  이용약관 끝 -->
+	<script src="assets/js/terms.js"></script>
+	<!-- 20251103 cyonn -->
 
-	
+
 </body>
 <script>
-let id = document.getElementById("id");
-let pw = document.getElementById("pw");
+
 let login = document.getElementById("login");
 let url = "login.do";
 login.addEventListener("click", () => {
-	fetch(url + "?id=" + id.value + "&pw=" + pw.value)
+	let id = document.getElementById("id").value;
+	let pw = document.getElementById("pw").value;
+	fetch("login.do", {
+	    method: "POST",
+	    headers: { "Content-Type": "application/x-www-form-urlencoded" },
+	    body: new URLSearchParams({id,pw})
+    })
 		.then(function(res) {
 			// console.log("받아온 데이터 >> ", res);
 			return res.json();
@@ -130,7 +139,7 @@ login.addEventListener("click", () => {
 		.catch(function(err) {
 			console.error(err);
 		})
-})
+});
 
 </script>
 

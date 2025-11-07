@@ -27,86 +27,66 @@
 			<!-- 왼쪽: 프로필/보안 -->
 			<div class="left">
 				<h2>프로필</h2>
-
+				
 				<!-- 현재 이메일 표시 -->
 				<div class="form">
 					<div class="row">
-						<label>현재 이메일</label>
-						<div>${me.email}</div>
+						<label>이메일 : </label>
+						<div>${sessionScope.info.name}</div>
+						<label>이름 : </label>
+						<div>${sessionScope.info.email}</div>
+						
 					</div>
 				</div>
 
-				<!-- 이메일 변경 -->
-				<div class="box">
-					<h3>이메일 변경</h3>
-					<form method="post" action="${ctx}/ChangeEmail.do" class="form"
-						autocomplete="off">
-						<div class="row">
-							<label>새 이메일</label><input name="newEmail" type="email" required />
-						</div>
-						<div class="row">
-							<label>비밀번호</label><input name="pw" type="password" required />
-						</div>
-						<button class="btn">이메일 변경</button>
-						<c:if test="${param.emailOk=='1'}">
-							<div class="ok">이메일이 변경되었습니다.</div>
-						</c:if>
-						<c:if test="${param.emailErr=='dup'}">
-							<div class="err">이미 사용 중인 이메일입니다.</div>
-						</c:if>
-						<c:if test="${param.emailErr=='pw'}">
-							<div class="err">비밀번호가 일치하지 않습니다.</div>
-						</c:if>
-						<c:if test="${param.emailErr=='fail'}">
-							<div class="err">변경에 실패했습니다. 잠시 후 다시 시도하세요.</div>
-						</c:if>
-					</form>
-				</div>
+				
 
-				<!-- 비밀번호 변경 -->
-				<div class="box">
-					<h3>비밀번호 변경</h3>
-					<form method="post" class="form" autocomplete="off"
-						onsubmit="return false;">
-						<div class="row">
-							<label>현재 비번</label><input name="curPw" id="curPw"
-								type="password" required />
-						</div>
-						<div class="row">
-							<label>새 비번</label><input name="newPw" id="newPw" type="password"
-								minlength="8" required />
-						</div>
-						<div class="row">
-							<label>확인</label><input name="newPw2" id="newPw2" type="password"
-								minlength="8" required />
-						</div>
-						<button class="btn outline" id="Pwbtn">비밀번호 변경</button>
-						<c:if test="${param.pwok=='1'}">
-							<div class="ok">비밀번호가 변경되었습니다.</div>
-						</c:if>
-						<c:if test="${param.pwerr=='1'}">
-							<div class="err">비밀번호 변경에 실패했습니다. 입력값을 확인하세요.</div>
-						</c:if>
-						</form>
-				</div>
+				
 
-				<!-- 회원 탈퇴 -->
-				<div class="box">
-					<h3>회원 탈퇴</h3>
-					<form method="post" action="${ctx}/DeleteAccount.do" class="form"
-						onsubmit="return confirm('정말 탈퇴하시겠습니까? 이 작업은 되돌릴 수 없습니다.');"
-						autocomplete="off" id="delbtn">
-						<div class="row">
-							<label>비밀번호</label><input name="pw" type="password" id="delpw"
-								required />
-						</div>
-						<button class="btn outline">탈퇴하기</button>
-						<c:if test="${delErr=='1'}">
-							<div class="err">비밀번호가 올바르지 않거나 탈퇴에 실패했습니다.</div>
-						</c:if>
-					</form>
-				</div>
-			</div>
+				            <!-- 비밀번호 변경 -->
+            <div class="box">
+               <h3>비밀번호 변경</h3>
+               <form method="post" class="form" autocomplete="off"
+                  onsubmit="return false;">
+                  <div class="row">
+                     <label>현재 비번</label><input name="curPw" id="curPw"
+                        type="password" required />
+                  </div>
+                  <div class="row">
+                     <label>새 비번</label><input name="newPw" id="newPw" type="password"
+                        minlength="8" required />
+                  </div>
+                  <div class="row">
+                     <label>확인</label><input name="newPw2" id="newPw2" type="password"
+                        minlength="8" required />
+                  </div>
+                  <button class="btn outline" id="Pwbtn">비밀번호 변경</button>
+                  <c:if test="${param.pwok=='1'}">
+                     <div class="ok">비밀번호가 변경되었습니다.</div>
+                  </c:if>
+                  <c:if test="${param.pwerr=='1'}">
+                     <div class="err">비밀번호 변경에 실패했습니다. 입력값을 확인하세요.</div>
+                  </c:if>
+                  </form>
+            </div>
+
+            <!-- 회원 탈퇴 -->
+            <div class="box">
+               <h3>회원 탈퇴</h3>
+               <form method="post" action="${ctx}/DeleteAccount.do" class="form"
+                  onsubmit="return confirm('정말 탈퇴하시겠습니까? 이 작업은 되돌릴 수 없습니다.');"
+                  autocomplete="off" id="delbtn">
+                  <div class="row">
+                     <label>비밀번호</label><input name="pw" type="password" id="delpw"
+                        required />
+                  </div>
+                  <button class="btn outline">탈퇴하기</button>
+                  <c:if test="${delErr=='1'}">
+                     <div class="err">비밀번호가 올바르지 않거나 탈퇴에 실패했습니다.</div>
+                  </c:if>
+               </form>
+            </div>
+         </div>
 			
 		
 
@@ -196,16 +176,19 @@
 	</div>
 </body>
 <script>
-	let curPw = document.getElementById("curPw");
-	let newPw  = document.getElementById("newPw");
-	let newPw2 = document.getElementById("newPw2");
-	let Pwbtn = document.getElementById("Pwbtn");
 	
+	let Pwbtn = document.getElementById("Pwbtn");
 	let url = "ChangePw.do";
 	Pwbtn.addEventListener("click", () => {
-		fetch(url + "?curPw=" + curPw.value + "&newPw=" + newPw.value + "&newPw2=" + newPw2.value)
-			
-			.then(function(res) {
+		let curPw = document.getElementById("curPw").value;
+		let newPw  = document.getElementById("newPw").value;
+		let newPw2 = document.getElementById("newPw2").value;
+		fetch("ChangePw.do",{
+			method: "POST",
+			headers:{ "Content-Type": "application/x-www-form-urlencoded"},
+			body :new URLSearchParams({curPw,newPw,newPw2})
+		})
+		.then(function(res) {
 				// console.log("받아온 데이터 >> ", res);
 				return res.json();
 			})

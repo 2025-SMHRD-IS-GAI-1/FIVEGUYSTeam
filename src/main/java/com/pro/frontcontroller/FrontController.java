@@ -17,6 +17,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.pro.controller.ChangeEmail;
 import com.pro.controller.ChangePw;
 import com.pro.controller.CheckEmail;
+import com.pro.controller.Checkid;
 import com.pro.controller.DeleteAccount;
 import com.pro.controller.FindPasswordService;
 import com.pro.controller.JoinService;
@@ -48,10 +49,12 @@ public class FrontController extends HttpServlet {
 		map.put("UpdateUser.do", new UpdateUserService());
 		map.put("Search.do", new SearchSurvice());
 		map.put("SaveMenu.do", new SaveMenuDataService());
+	    map.put("check.do", new Checkid());
 	}
 
 	protected void service(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		request.setCharacterEncoding("UTF-8");
 		Command com = null;
 		String moveurl = "";
 		String uri = request.getRequestURI();
@@ -64,7 +67,7 @@ public class FrontController extends HttpServlet {
 		System.out.println(finaluri);
 // 		1. 요청 객체에 대한 인코딩 작업!
 //		중복되는 코드들을 한번에 처리
-		request.setCharacterEncoding("UTF-8");
+		
 
 //		우리가 정한 패턴 -> Go 파일명 .do		
 		if (finaluri.contains("Go")) {
