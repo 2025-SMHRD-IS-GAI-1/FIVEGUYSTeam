@@ -34,12 +34,17 @@ String ctx = request.getContextPath();
 						<div class="section-title">계정 정보</div>
 						<div class="section-title">기본 정보</div>
 
-						<!-- 아이디 -->
-						<div class="form-row">
+						<!-- 아이디 
+						<div class="form-row" id="check">
 							<label for="userid" class="link">아이디</label> <input id="userid"
 								name="id" type="text" class="input" placeholder="ID를 입력하세요."
 								required />
-						</div>
+						</div> -->
+					<div class="form-row">
+    				<label for="userid" class="link">아이디</label>
+    				<input id="userid" name="id" type="text" class="input" placeholder="ID를 입력하세요." required />
+    				<div id="check" class="hint" style="font-size:14px; margin-top:4px;"></div> <!-- ✅ 메시지 표시 위치 -->
+					</div>
 
 						<!-- 이름 -->
 						<div class="form-row">
@@ -63,11 +68,18 @@ String ctx = request.getContextPath();
 						</div>
 
 						<!-- 비밀번호 확인 -->
-						<div class="form-row">
+						<div class="form-row" >
 							<label for="pw2" class="link">비밀번호 확인</label> <input id="pw2"
 								name="pw2" type="password" class="input"
 								placeholder="Password 확인" minlength="8" required />
-						</div>
+							<button id="checkpw" type="button" >중복여부</button>	
+							<div id="pwMsg" class="hint" style="font-size:14px; margin-top:4px;"></div> <!-- ✅ 이거 있어야 함 -->
+						</div>	
+						
+						
+					
+								
+						
 
 						<!-- 선호 언어 -->
 						<div class="form-row">
@@ -82,7 +94,7 @@ String ctx = request.getContextPath();
 
 						<!-- 버튼: 좌/우 열에 배치 -->
 						<div class="btn-left">
-							<button type="submit" class="btn btn-primary">회원가입 완료</button>
+							<button type="submit" id="joinBtn"  class="btn btn-primary" disabled>회원가입 완료</button>
 						</div>
 						<div class="btn-right">
 							<a href="<%=ctx%>/Gologin.do" class="btn btn-ghost"
@@ -111,6 +123,97 @@ String ctx = request.getContextPath();
     	</div>
 	</div><!--  이용약관 끝 -->
 	<script src="assets/js/terms.js" ></script> <!-- 20251104 cyonn -->
+	<script>
+	  	let userid = document.getElementById("userid")
+	  	const check = document.getElementById("check")
+	  	let joinBtn = document.getElementById("joinBtn"); 
+	  	joinBtn.disabled = false;
+	  	let idOk = false;
+	  	let pwOk = false;
+	  	function updateBtn(){
+	  	  joinBtn.disabled = !(idOk && pwOk);  
+	  	}
 
+		userid.addEventListener("keyup",()=>{
+			 const id = userid.value.trim();
+
+			    if(!id){ 
+			        check.textContent = ""; 
+			        idOk = false;          
+			        updateBtn();
+			        return; 
+			    }
+
+			    fetch("check.do", {
+				    method: "POST",
+				    headers: { "Content-Type": "application/x-www-form-urlencoded" },
+				    body: new URLSearchParams({id})
+			    })
+			    .then(res => res.json())
+			    .then(result => {
+
+			        // ✅ 한 칸만 표시 (누적 X)
+			        if(result.result === "true"){
+			            check.textContent = "중복된 아이디입니다.";
+			            check.style.color = "red";
+			           	idOk= false;
+			        } else {
+			            check.textContent = "사용가능한 아이디입니다.";
+			            idOk= true;
+			            check.style.color = "green";
+			            idOk= true;
+			        }
+			        updateBtn();      
+			    })
+			    .catch(err => {
+			        console.error(err);
+			        check.textContent = "확인 중 오류 발생";
+			        check.style.color = "red";
+			        idOk = false;
+			        updateBtn();
+			    });
+			});
+			
+		const Pw = document.getElementById("pw");
+		const Pw2 = document.getElementById("pw2");
+		const checkpw = document.getElementById("checkpw")
+		const pwMsg   = document.getElementById("pwMsg"); 
+		function showPwMsg(text, color) {
+				  pwMsg.textContent = text;
+				  pwMsg.style.color = color;
+				}
+
+				checkpw.addEventListener("click", (e) => {
+				  // e.preventDefault(); // type="button" 사용하면 불필요
+				  const pw  = Pw.value.trim();
+				  const pw2 = Pw2.value.trim();
+
+				  if (pw.length < 8) {
+				    showPwMsg("비밀번호는 8자 이상이어야 합니다.", "red");
+				    // pwOk = false; updateBtn();
+				    pwOk = false;          
+				    updateBtn();
+				    return;
+				  }
+				  if (pw !== pw2) {
+				    showPwMsg("비밀번호가 일치하지 않습니다.", "red");
+				    // pwOk = false; updateBtn();
+				    pwOk = false;          
+   					 updateBtn();
+				    return;
+				  }
+				  showPwMsg("사용 가능한 비밀번호입니다.", "green");
+				  pwOk=true;
+				  updateBtn();
+				  // pwOk = true; updateBtn();
+				});
+		
+		 
+	</script>
+	
+	
+	
+	
+	
 </body>
 </html>

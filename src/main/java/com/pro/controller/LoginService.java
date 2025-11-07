@@ -16,29 +16,39 @@ public class LoginService implements Command {
 		String moveurl = "fetch:/"+"{\"result\" : \"false\"}";
 		String id = request.getParameter("id");
 		String pw = request.getParameter("pw");
-		HttpSession session = request.getSession();
+		
 		MemberVO mvo = new MemberVO();
 		mvo.setId(id);
-		
-		
+	
+	
 		// SHA-512 변형코드 적용 : [원pw + 역순pw]를 id를 salt대신 키로 사용하여 암호화
 		String reversePW = new StringBuilder(pw).reverse().toString();
 		String hashedPW = PasswordUtils.hashPassword(reversePW+pw, id);
 		mvo.setPw(hashedPW); // 20251103[cyonn]     pw -> hashedPW로 변경
 		
 		MemberDAO dao = new MemberDAO();
+		
+		HttpSession session = request.getSession();
+		
 		MemberVO info = dao.login(mvo);
 		
+		// 로그인 실패시 null 처리
+		if(info == null) {
+			return moveurl;
+		}
+		
+		// 관리자로 로그인 성공시
 		if(info.getAdminYN().equals("A")) {
 			session.setAttribute("info", info);
 			moveurl = "fetch:/"+"{\"result\" : \"admin\"}";
-			System.out.println("나 관리자다");
+		
+		// 사용자로 로그인 성공시 
 		}else if(info != null) {
 			session.setAttribute("info", info);
 			moveurl = "fetch:/"+"{\"result\" : \"true\"}";
 		}
 		
-		System.out.println("url은:"+moveurl);
+		
 		return moveurl;
 	}
 

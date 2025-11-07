@@ -107,13 +107,18 @@ String ctx = request.getContextPath();
 
 </body>
 <script>
-let id = document.getElementById("id");
-let pw = document.getElementById("pw");
+
 let login = document.getElementById("login");
 let url = "login.do";
 login.addEventListener("click", () => {
 
-	fetch(url + "?id=" + id.value + "&pw=" + pw.value)
+	let id = document.getElementById("id").value;
+	let pw = document.getElementById("pw").value;
+	fetch("login.do", {
+	    method: "POST",
+	    headers: { "Content-Type": "application/x-www-form-urlencoded" },
+	    body: new URLSearchParams({id,pw})
+    })
 		.then(function(res) {
 			// console.log("받아온 데이터 >> ", res);
 			return res.json();
@@ -130,11 +135,11 @@ login.addEventListener("click", () => {
 				location.href = "Goresult.do";
 			}
 
-      })
-      .catch(function(err) {
-         console.error(err);
-      })
-})
+		})
+		.catch(function(err) {
+			console.error(err);
+		})
+});
 
 </script>
 

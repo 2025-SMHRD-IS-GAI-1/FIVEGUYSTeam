@@ -14,18 +14,17 @@
 		대신해서 사용하는 방식 : Java에서 전달받은 매개변수를 채울 떄, 사용하는 mybatis만의 방식 -->
 	<insert id="join" parameterType="com.pro.model.MemberVO">
 		INSERT INTO
-		T_MEMBER(ID,PW,NAME,EMAIL) VALUES(#{id}, #{pw}, #{name},
-		#{email})
+		T_MEMBER(ID,PW,NAME,EMAIL) VALUES(#{id}, #{pw}, #{name},#{email})
 	</insert>
-
+	
 	<select id="login" parameterType="com.pro.model.MemberVO"
 		resultType="com.pro.model.MemberVO">
 		SELECT ID,
-		PW,
 		NAME,
 		EMAIL,
 		ADMIN_YN AS "adminYN",
-		JOIN_DT AS "joinDT"
+		JOIN_DT AS
+		"joinDT"
 		FROM T_MEMBER WHERE ID=#{id} and PW=#{pw}
 	</select>
 
@@ -54,7 +53,8 @@
 	<select id="findAdmin" resultType="com.pro.model.MemberVO">
 		SELECT ID, NAME, EMAIL,
 		ADMIN_YN AS adminYN, JOIN_DT AS joinDT
-		FROM T_MEMBER WHERE ADMIN_YN !='A'
+		FROM T_MEMBER WHERE ADMIN_YN
+		!='A'
 	</select>
 
 
@@ -77,9 +77,51 @@
 
 	<select id="search" resultType="com.pro.model.MemberVO">
 		SELECT
-		ID, NAME, EMAIL, ADMIN_YN AS adminYN, JOIN_DT AS joinDT
+		ID, NAME, EMAIL, ADMIN_YN
+		AS adminYN, JOIN_DT AS joinDT
 		FROM T_MEMBER
-		WHERE NAME LIKE '%' || #{value} || '%'
+		WHERE NAME LIKE '%' ||
+		#{value} || '%'
 		OR ID LIKE '%' || #{value} || '%'
 	</select>
+
+
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+
+	
+	
+
+	
+	
+	<select id="Selectpw" resultType="String">
+		SELECT PW
+		FROM T_MEMBER
+		WHERE
+		ID=#{id}
+	</select>
+	
+	<select id="checkid">
+		SELECT ID
+		FROM T_MEMBER
+	</select>
+	<select id="existsId" resultType="int">
+		SELECT COUNT(*)
+		FROM T_MEMBER
+		WHERE ID = #{id}
+	</select>
+
+	
+
+
+
 </mapper>
