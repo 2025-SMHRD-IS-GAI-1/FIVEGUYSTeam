@@ -72,7 +72,7 @@ String ctx = request.getContextPath();
 							<label for="pw2" class="link">비밀번호 확인</label> <input id="pw2"
 								name="pw2" type="password" class="input"
 								placeholder="Password 확인" minlength="8" required />
-							<button id="checkpw" type="button" class="btn-mini">중복여부</button>	
+							<button id="checkpw" type="button" class="btn-mini">일치여부</button>	
 							<div id="pwMsg" class="hint mini-hint"></div> 
 						</div>	
 						
