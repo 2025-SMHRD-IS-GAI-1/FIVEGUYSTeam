@@ -129,7 +129,37 @@ public List<MemberVO> search(String value) {
 	
 	List<MemberVO> list = sqlSession.selectList("search", value);
 	
+	sqlSession.close();
 	return list;
+}
+
+public String Selectpw(String id) {
+
+	SqlSession sqlSession = factory.openSession(true);
+	
+	String pw = sqlSession.selectOne("Selectpw", id);
+	
+	sqlSession.close();
+	
+	return pw;
+}
+
+public List<String> checkid() {
+	
+	SqlSession sqlSession = factory.openSession(true);
+	
+	List<String> list = sqlSession.selectList("checkid");
+	
+	sqlSession.close();
+	
+	return list;
+}
+public boolean existsId(String id) {
+    SqlSession sqlSession = factory.openSession(true);
+    
+    int count = sqlSession.selectOne("existsId",id);
+    
+    return count > 0;
 }
 	
 

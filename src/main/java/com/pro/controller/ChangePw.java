@@ -13,6 +13,7 @@ public class ChangePw implements Command {
 
 	@Override
 	public String excute(HttpServletRequest request, HttpServletResponse response) {
+		MemberDAO dao = new MemberDAO();
 		String moveurl =null;
 //		현재 비번
 		String pw = request.getParameter("curPw");
@@ -24,10 +25,14 @@ public class ChangePw implements Command {
 //		로그인할때 들어 set한 세션 값 불러오기
 		HttpSession session = request.getSession();
 		MemberVO vo =(MemberVO) session.getAttribute("info");
-		String checkPw = vo.getPw();//db에서 가져온 암호화된 비번
+//		String checkPw = vo.getPw();//  db에서 가져온 암호화된 비번 => 세션에 pw 저장하면 보안상 취약
+		
+		String id = vo.getId(); // 로그인시 세션에 들어간 id 
+		String checkPw= dao.Selectpw(id);  // db에서 가져온 비번 
+		
 		
 		String cur_reverse = new StringBuilder(pw).reverse().toString();
-		String hashedPW = PasswordUtils.hashPassword(cur_reverse+pw, vo.getId());   //
+		String hashedPW = PasswordUtils.hashPassword(cur_reverse+pw, vo.getId());   
 		
 		//		현재비번 , 새비번, 새비번확인 제대로 입력했는지 확인
 		if(!hashedPW.equals(checkPw)) {
@@ -39,13 +44,10 @@ public class ChangePw implements Command {
 		String reversePW2 = new StringBuilder(changepw).reverse().toString();
 		String hashedPW2 = PasswordUtils.hashPassword(reversePW2+changepw, vo.getId());
 		
-		String id = vo.getId();
 		MemberVO mvo = new MemberVO();
-		mvo.setPw(hashedPW2);
+		mvo.setPw(hashedPW2); 
 		mvo.setId(id);
 		//mvo.setChangepw(changepw);
-		
-		MemberDAO dao = new MemberDAO();
 		
 		int row = dao.changePw2(mvo);
 		if(row>0) {
