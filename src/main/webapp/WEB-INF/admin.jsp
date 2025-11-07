@@ -23,7 +23,9 @@ String ctx = request.getContextPath();
 </head>
 
 <body>
-
+<c:if test="${empty sessionScope.info}">
+			<script>location.href = "Gologin.do"</script>                     
+        </c:if>
 <%
 
 if(session.getAttribute("userupdate")!=null){

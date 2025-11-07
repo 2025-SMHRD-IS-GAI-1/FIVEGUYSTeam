@@ -12,6 +12,9 @@
 </head>
 <body>
 	<div class="wrap">
+		<c:if test="${empty sessionScope.info}">
+			<script>location.href = "Gologin.do"</script>                     
+        </c:if>
 		<!-- 상단 브랜드 바 -->
 		<div class="brand">
 			<img src="${ctx}/img/팀로고.png" alt="FIVE GUYS" />
