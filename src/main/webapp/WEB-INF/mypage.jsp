@@ -63,53 +63,52 @@
 					</form>
 				</div>
 
-				<!-- 비밀번호 변경 -->
-				<div class="box">
-					<h3>비밀번호 변경</h3>
-					<form method="post" class="form" autocomplete="off"
-						onsubmit="return false;">
-						<div class="row">
-							<label>현재 비번</label><input name="curPw" id="curPw"
-								type="password" required />
-						</div>
-						<div class="row">
-							<label>새 비번</label><input name="newPw" id="newPw" type="password"
-								minlength="8" required />
-						</div>
-						<div class="row">
-							<label>확인</label><input name="newPw2" id="newPw2" type="password"
-								minlength="8" required />
-						</div>
-						<button class="btn outline" id="Pwbtn">비밀번호 변경</button>
-						<c:if test="${param.pwok=='1'}">
-							<div class="ok">비밀번호가 변경되었습니다.</div>
-						</c:if>
-						<c:if test="${param.pwerr=='1'}">
-							<div class="err">비밀번호 변경에 실패했습니다. 입력값을 확인하세요.</div>
-						</c:if>
-						</form>
-				</div>
+				
 
-				<!-- 회원 탈퇴 -->
-				<div class="box">
-					<h3>회원 탈퇴</h3>
-					<form method="post" action="${ctx}/DeleteAccount.do" class="form"
-						onsubmit="return confirm('정말 탈퇴하시겠습니까? 이 작업은 되돌릴 수 없습니다.');"
-						autocomplete="off" id="delbtn">
-						<div class="row">
-							<label>비밀번호</label><input name="pw" type="password" id="delpw"
-								required />
-						</div>
-						<button class="btn outline">탈퇴하기</button>
-						<!--    <c:if test ="${delErr == null }">
-							 <div class="err">비밀번호가 올바르지 않거나 탈퇴에 실패했습니다.</div>      -->
-						</c:if>
-						<c:if test="${delErr=='1'}">
-							<div class="err">비밀번호가 올바르지 않거나 탈퇴에 실패했습니다.</div>
-						</c:if>
-					</form>
-				</div>
-			</div>
+				            <!-- 비밀번호 변경 -->
+            <div class="box">
+               <h3>비밀번호 변경</h3>
+               <form method="post" class="form" autocomplete="off"
+                  onsubmit="return false;">
+                  <div class="row">
+                     <label>현재 비번</label><input name="curPw" id="curPw"
+                        type="password" required />
+                  </div>
+                  <div class="row">
+                     <label>새 비번</label><input name="newPw" id="newPw" type="password"
+                        minlength="8" required />
+                  </div>
+                  <div class="row">
+                     <label>확인</label><input name="newPw2" id="newPw2" type="password"
+                        minlength="8" required />
+                  </div>
+                  <button class="btn outline" id="Pwbtn">비밀번호 변경</button>
+                  <c:if test="${param.pwok=='1'}">
+                     <div class="ok">비밀번호가 변경되었습니다.</div>
+                  </c:if>
+                  <c:if test="${param.pwerr=='1'}">
+                     <div class="err">비밀번호 변경에 실패했습니다. 입력값을 확인하세요.</div>
+                  </c:if>
+                  </form>
+            </div>
+
+            <!-- 회원 탈퇴 -->
+            <div class="box">
+               <h3>회원 탈퇴</h3>
+               <form method="post" action="${ctx}/DeleteAccount.do" class="form"
+                  onsubmit="return confirm('정말 탈퇴하시겠습니까? 이 작업은 되돌릴 수 없습니다.');"
+                  autocomplete="off" id="delbtn">
+                  <div class="row">
+                     <label>비밀번호</label><input name="pw" type="password" id="delpw"
+                        required />
+                  </div>
+                  <button class="btn outline">탈퇴하기</button>
+                  <c:if test="${delErr=='1'}">
+                     <div class="err">비밀번호가 올바르지 않거나 탈퇴에 실패했습니다.</div>
+                  </c:if>
+               </form>
+            </div>
+         </div>
 			
 		
 

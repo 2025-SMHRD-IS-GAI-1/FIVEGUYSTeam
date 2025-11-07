@@ -18,7 +18,7 @@
       <h1 class="title">탈퇴가 완료되었습니다.</h1>
       <p class="desc"><b><%=name%>님</b>, 이용해주셔서 감사합니다.</p>
       <p class="desc">앞으로 더 좋은 모습으로 만나뵐 수 있도록 계속 노력하겠습니다.</p>
-      <a class="btn" href="<%=ctx%>/login.jsp">홈</a>
+      <a class="btn" href="<%=ctx%>/Gologin.do">홈</a>
     </div>
   </div>
 </body>

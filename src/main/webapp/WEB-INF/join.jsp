@@ -34,12 +34,17 @@ String ctx = request.getContextPath();
 						<div class="section-title">계정 정보</div>
 						<div class="section-title">기본 정보</div>
 
-						<!-- 아이디 -->
-						<div class="form-row">
+						<!-- 아이디 
+						<div class="form-row" id="check">
 							<label for="userid" class="link">아이디</label> <input id="userid"
 								name="id" type="text" class="input" placeholder="ID를 입력하세요."
 								required />
-						</div>
+						</div> -->
+					<div class="form-row">
+    				<label for="userid" class="link">아이디</label>
+    				<input id="userid" name="id" type="text" class="input" placeholder="ID를 입력하세요." required />
+    				<div id="check" class="hint" style="font-size:14px; margin-top:4px;"></div> <!-- ✅ 메시지 표시 위치 -->
+					</div>
 
 						<!-- 이름 -->
 						<div class="form-row">
@@ -111,6 +116,35 @@ String ctx = request.getContextPath();
     	</div>
 	</div><!--  이용약관 끝 -->
 	<script src="assets/js/terms.js" ></script> <!-- 20251104 cyonn -->
+	<script>
+	  	let userid = document.getElementById("userid")
+		userid.addEventListener("keyup",()=>{
+			 const id = userid.value.trim();
 
+			    if(!id){ 
+			        check.textContent = ""; 
+			        return; 
+			    }
+
+			    fetch("check.do?id=" + encodeURIComponent(id))
+			    .then(res => res.json())
+			    .then(result => {
+
+			        // ✅ 한 칸만 표시 (누적 X)
+			        if(result.result === "true"){
+			            check.textContent = "중복된 아이디입니다.";
+			            check.style.color = "red";
+			        } else {
+			            check.textContent = "사용가능한 아이디입니다.";
+			            check.style.color = "green";
+			        }
+			    })
+			    .catch(err => {
+			        console.error(err);
+			        check.textContent = "확인 중 오류 발생";
+			        check.style.color = "red";
+			    });
+			});
+	</script>
 </body>
 </html>

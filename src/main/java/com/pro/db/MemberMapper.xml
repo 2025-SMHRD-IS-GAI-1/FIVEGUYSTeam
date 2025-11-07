@@ -24,7 +24,8 @@
 		NAME,
 		EMAIL,
 		ADMIN_YN AS "adminYN",
-		JOIN_DT AS "joinDT"
+		JOIN_DT AS
+		"joinDT"
 		FROM T_MEMBER WHERE ID=#{id} and PW=#{pw}
 	</select>
 
@@ -53,7 +54,8 @@
 	<select id="findAdmin" resultType="com.pro.model.MemberVO">
 		SELECT ID, NAME, EMAIL,
 		ADMIN_YN AS adminYN, JOIN_DT AS joinDT
-		FROM T_MEMBER WHERE ADMIN_YN !='A'
+		FROM T_MEMBER WHERE ADMIN_YN
+		!='A'
 	</select>
 
 
@@ -76,16 +78,28 @@
 
 	<select id="search" resultType="com.pro.model.MemberVO">
 		SELECT
-		ID, NAME, EMAIL, ADMIN_YN AS adminYN, JOIN_DT AS joinDT
+		ID, NAME, EMAIL, ADMIN_YN
+		AS adminYN, JOIN_DT AS joinDT
 		FROM T_MEMBER
-		WHERE NAME LIKE '%' || #{value} || '%'
+		WHERE NAME LIKE '%' ||
+		#{value} || '%'
 		OR ID LIKE '%' || #{value} || '%'
 	</select>
-	
+
 	<select id="Selectpw" resultType="String">
 		SELECT PW
 		FROM T_MEMBER
-		WHERE ID=#{id}
-		
+		WHERE
+		ID=#{id}
+	</select>
+	
+	<select id="checkid">
+		SELECT ID
+		FROM T_MEMBER
+	</select>
+	<select id="existsId" resultType="int">
+		SELECT COUNT(*)
+		FROM T_MEMBER
+		WHERE ID = #{id}
 	</select>
 </mapper>

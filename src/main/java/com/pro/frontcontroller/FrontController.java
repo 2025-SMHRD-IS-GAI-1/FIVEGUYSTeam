@@ -16,6 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.pro.controller.ChangeEmail;
 import com.pro.controller.ChangePw;
 import com.pro.controller.CheckEmail;
+import com.pro.controller.Checkid;
 import com.pro.controller.DeleteAccount;
 import com.pro.controller.FindPasswordService;
 import com.pro.controller.JoinService;
@@ -44,6 +45,7 @@ public class FrontController extends HttpServlet {
 		map.put("ChangePw.do", new ChangePw());
 		map.put("UpdateUser.do", new UpdateUserService());
 		map.put("Search.do", new SearchSurvice());
+		map.put("check.do", new Checkid());
 	}
 
 	protected void service(HttpServletRequest request, HttpServletResponse response)
