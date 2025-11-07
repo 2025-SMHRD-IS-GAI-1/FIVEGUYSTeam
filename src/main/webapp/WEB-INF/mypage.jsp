@@ -29,17 +29,15 @@
 				<h2>프로필</h2>
 				
 				<!-- 현재 이메일 표시 -->
-				<div class="form">
+				<div class="box">
 					<div class="row">
-						<label>이메일 : </label>
-						<div>${sessionScope.info.name}</div>
-						<label>이름 : </label>
-						<div>${sessionScope.info.email}</div>
-						
+						<label>이름 : <span>${sessionScope.info.name}</span></label>
+						<br>
+						<label>이메일 : <span>${sessionScope.info.email}</span></label>
 					</div>
 				</div>
-
 				
+					
 
 				
 
