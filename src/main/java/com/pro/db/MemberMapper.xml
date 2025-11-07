@@ -86,6 +86,24 @@
 		OR ID LIKE '%' || #{value} || '%'
 	</select>
 
+
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+
+	
+	
+
+	
+	
 	<select id="Selectpw" resultType="String">
 		SELECT PW
 		FROM T_MEMBER
@@ -102,4 +120,8 @@
 		FROM T_MEMBER
 		WHERE ID = #{id}
 	</select>
+	
+
+
+
 </mapper>

@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%
-  String ctx = request.getContextPath(); // 컨텍스트 경로
+String ctx = request.getContextPath(); // 컨텍스트 경로
 %>
 <!DOCTYPE html>
 <html lang="ko">
@@ -17,9 +17,10 @@
 	<div class="wrap">
 		<!-- 상단 브랜드 -->
 		<div class="brand">
-			<img src="${pageContext.request.contextPath}/img/팀로고.png" alt="FIVE GUYS" />
+			<img src="${pageContext.request.contextPath}/img/팀로고.png"
+				alt="FIVE GUYS" />
 			<div class="t">FIVE GUYS - Menu Translator</div>
-		
+
 		</div>
 
 		<!-- 카드 -->
@@ -49,58 +50,59 @@
 				<div class="grid">
 					<div class="form-row">
 						<label for="uid" class="label">아이디</label> <input id="uid"
-							name="id" type="text" class="input" placeholder="ID (선택)" required/>
+							name="id" type="text" class="input" placeholder="ID (선택)"
+							required />
 					</div>
 
 					<div class="form-row">
 						<label for="uemail" class="label">이메일</label> <input id="uemail"
 							name="email" type="email" class="input"
-							placeholder="email@example.com (선택)" required/>
+							placeholder="email@example.com (선택)" required />
 					</div>
 				</div>
-				
+
 				<p class="hint">
 					아이디와 이메일 <b>둘다</b> 입력해야 됩니다.
 				</p>
 				<br>
-				<p class="hint">
-					자동생성 방지를 위한 확인절차입니다.
-				</p>
+				<p class="hint">자동생성 방지를 위한 확인절차입니다.</p>
 				<div id="humancheck">
-				<div id="checkquestion" style="visibility:hidden;"></div>
-				<input id="checkanswer" style="visibility:hidden;" oninput="calc_check()" />
+					<div id="checkquestion" style="visibility: hidden;"></div>
+					<input id="checkanswer" style="visibility: hidden;"
+						oninput="calc_check()" />
 				</div>
-				
+
 				<div class="row">
-					<button id="send" type="submit" class="btn btn-primary">임시 비밀번호 보내기(비활성)</button>
+					<button id="send" type="submit" class="btn btn-primary">임시
+						비밀번호 보내기(비활성)</button>
 					<a class="btn btn-ghost" href="<%=ctx%>/Gologin.do">돌아가기</a>
 				</div>
-				
+
 				<script>
 					
 				</script>
 			</form>
 
-			<footer class="footer">
+			<!-- footer -->
+			<div class="footer">
 				© 2025 FIVE GUYS. All rights reserved.
 				<div class="legal">
-					<a class="link" href="#" id="openTermsLink">이용약관</a> <a
-						class="link" href="<%=ctx%>/policy/privacy.jsp">개인정보</a> <a
-						class="link" href="<%=ctx%>/policy/help.jsp">문의</a>
+					<a href="#"
+						onclick="document.getElementById('termsModal').style.display='flex';return false;">이용약관</a>
+					<a href="#">개인정보</a> <a href="#">문의</a>
 				</div>
-			</footer>
-		</div>
-	</div>
+			</div>
 
-	<!-- 이용약관은 모든 div의 제일 아래에 넣고 스타일로 감춘 후 클릭하면 노출되도록 한다. -->
-	<div id="termsModal" class="modal-overlay">
-		<div class="modal-content">
-			<span class="close-btn">&times;</span>
-			<h2>이용약관</h2>
-	        <div id="rules_text"></div>
-    	</div>
-	</div><!--  이용약관 끝 -->
-	<script src="assets/js/terms.js" ></script> <!-- 20251104 cyonn -->
-
+			<!-- 이용약관은 모든 div의 제일 아래에 넣고 스타일로 감춘 후 클릭하면 노출되도록 한다. -->
+			<div id="termsModal" class="modal-overlay">
+				<div class="modal-content">
+					<span class="close-btn">&times;</span>
+					<h2>이용약관</h2>
+					<div id="rules_text"></div>
+				</div>
+			</div>
+			<!--  이용약관 끝 -->
+			<script src="assets/js/terms.js"></script>
+			<!-- 20251104 cyonn -->
 </body>
 </html>

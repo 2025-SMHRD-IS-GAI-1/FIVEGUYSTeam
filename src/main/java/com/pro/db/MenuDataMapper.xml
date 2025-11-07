@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pro.db.MenuDataMapper">
+<insert id="insertImage" parameterType="com.pro.menu.model.ImageVO">
+        INSERT INTO T_IMAGE 
+            (IMG_ID, ID, IMG_NAME, IMG_FILE, UPLOAD_DT, IMG_CHECK) 
+        VALUES 
+            (#{imgId}, #{id}, #{imgName}, #{imgFile, jdbcType=BLOB}, #{uploadDt}, 'N')
+    </insert>
+	<!-- 
+    <insert id="insertTranslations" parameterType="java.util.List">
+        INSERT ALL
+        
+        <foreach collection="list" item="t">
+            INTO T_TRANSLATION 
+                (IMG_ID, X1, Y1, X2, Y2, MENU_NAME, TRANS_TEXT, MENU_DESC, COLOR_BG, COLOR_TXT) 
+            VALUES 
+                (#{t.imgId}, #{t.x1}, #{t.y1}, #{t.x2}, #{t.y2}, 
+                 #{t.menuName}, #{t.transText}, #{t.menuDesc}, 
+                 #{t.color_bg}, #{t.color_txt})
+        </foreach>
+        
+        SELECT * FROM DUAL
+    </insert>
+     -->
+    <insert id="insertTranslation" parameterType="com.pro.menu.model.TranslationVO">
+        INSERT INTO T_TRANSLATION(IMG_ID, X1, Y1, X2, Y2, MENU_NAME, TRANS_TEXT, MENU_DESC, COLOR_BG, COLOR_TXT) 
+            VALUES (#{imgId}, #{x1}, #{y1}, #{x2}, #{y2}, 
+                 #{menuName}, #{transText}, #{menuDesc}, 
+                 #{color_bg}, #{color_txt})
+    </insert>
+
+
+</mapper>

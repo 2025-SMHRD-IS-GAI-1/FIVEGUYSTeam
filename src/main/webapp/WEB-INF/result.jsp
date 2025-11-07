@@ -73,9 +73,12 @@ String ctx = request.getContextPath();
 					<!-- 언어 선택 -->
 					<label class="label" for="lang">번역할 언어</label> <select id="lang"
 						name="targetLang" class="select" required>
-						<option value="" selected disabled>예: 한국어, 영어, 일본어, 중국어…</option>
-						<option value="en">한국어 (Korea)</option>
-						<option value="en">영어 (English)</option>
+						<option value="Korean">한글</option>
+					    <option value="English" selected>English</option>
+					    <option value="Japanese">日本語</option>
+					    <option value="French">Français</option>
+					    <option value="中文普通話">中文普通話</option>
+					    <option value="中文广东话">中文广东话</option>
 					</select>
 
 					<!-- 체크/가이드 라인 -->

@@ -8,6 +8,7 @@ import java.util.Map;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -22,12 +23,14 @@ import com.pro.controller.FindPasswordService;
 import com.pro.controller.JoinService;
 import com.pro.controller.LoginService;
 import com.pro.controller.LogoutService;
+import com.pro.controller.SaveMenuDataService;
 import com.pro.controller.SearchSurvice;
 import com.pro.controller.SelectAllService;
 import com.pro.controller.UpdateUserService;
 
 
 @WebServlet("*.do")
+@MultipartConfig // FormData (multipart/form-data) 처리를 위한 어노테이션
 public class FrontController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	Map<String, Command> map = new HashMap<String, Command>();
@@ -45,7 +48,9 @@ public class FrontController extends HttpServlet {
 		map.put("ChangePw.do", new ChangePw());
 		map.put("UpdateUser.do", new UpdateUserService());
 		map.put("Search.do", new SearchSurvice());
-		map.put("check.do", new Checkid());
+		map.put("SaveMenu.do", new SaveMenuDataService());
+	    map.put("check.do", new Checkid());
+
 	}
 
 	protected void service(HttpServletRequest request, HttpServletResponse response)

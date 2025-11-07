@@ -124,7 +124,7 @@ String ctx = request.getContextPath();
 			    if(!id){ 
 			        check.textContent = ""; 
 			        return; 
-			    }
+			    }w
 
 			    fetch("check.do?id=" + encodeURIComponent(id))
 			    .then(res => res.json())
