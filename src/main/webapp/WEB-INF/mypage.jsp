@@ -1,6 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ page import="com.pro.model.MemberVO" %>
 <c:set var="ctx" value="${pageContext.request.contextPath}" />
 <!DOCTYPE html>
 <html lang="ko">
@@ -9,6 +10,76 @@
 <title>마이페이지</title>
 <meta name="viewport" content="width=device-width,initial-scale=1" />
 <link rel="stylesheet" href="${ctx}/assets/css/mypage.css" />
+<style>
+/* 아이콘 컨테이너 스타일 (Flexbox 사용) */
+.icon-grid {
+  display: flex; /* 자식 요소들을 가로로 정렬 */
+  flex-wrap: wrap; /* 컨테이너를 넘치면 다음 줄로 */
+  gap: 15px; /* 이미지들 사이의 간격 */
+  padding: 20px;
+  border: 1px solid #eee;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  max-width: 1000px; /* 컨테이너 최대 너비 설정 (선택 사항) */
+  margin: 0 auto; /* 가운데 정렬 (선택 사항) */
+}
+
+/* 개별 아이콘 이미지 스타일 */
+.icon-grid img {
+  width: 200px; /* 너비 200px */
+  height: 200px; /* 높이 200px */
+  object-fit: cover; /* 이미지가 잘리지 않도록 비율 유지 */
+  border-radius: 8px; /* 모서리를 둥글게 (아이콘 느낌) */
+  box-shadow: 2px 2px 5px rgba(0,0,0,0.1); /* 그림자 효과 (선택 사항) */
+  transition: transform 0.2s ease-in-out; /* 호버 효과를 위한 전환 */
+  cursor: pointer; /* 클릭 가능한 모양으로 변경 */
+}
+
+/* 마우스 오버 시 효과 (선택 사항) */
+.icon-grid img:hover {
+  transform: scale(1.05); /* 약간 확대 */
+}
+</style>
+<script>
+function getImages(){
+	let userId = '<%= (   (MemberVO)session.getAttribute("info")   ).getId() %>';
+	let patchurl = 'GetImages.do?userId='+userId;
+	
+	let iconContainer = document.getElementById("iconContainer");
+	
+	fetch(patchurl)
+	.then(function(res){
+		return res.json();
+	})
+	.then(function(data){
+		//img_sticky.innerText = "<p>사진을 가져왔습니다.</p>";
+		iconContainer.innerText = "";
+		//alert(data.myImages.length);
+		var str = "";
+		for(var i = 0 ; i<data.myImages.length ;i++){
+			var base64Data = data.myImages[i].imgFileBase64
+			var imageType = "image/png"; // 마임타입
+			var mimetype = 'data:image/png;base64,';
+			var dataUrl = mimetype + base64Data;
+  
+  			const img = document.createElement("img");
+  			img.src = dataUrl;
+  			img.alt = data.myImages[i].uploadDt;
+  
+			img.addEventListener('click', () => {
+			  alert(data.myImages[i].uploadDt);
+			});
+  
+			iconContainer.appendChild(img);
+			
+		}
+		
+	})
+	.catch(function(){
+		
+	});
+}
+</script>
 </head>
 <body>
 	<div class="wrap">
@@ -96,39 +167,11 @@
 					<h2>내 활동</h2>
 					<!-- 내 사진 목록 -->
 					<h3 style="margin-top: 0">내 사진</h3>
-					<c:choose>
-						<c:when test="${not empty myImages}">
-							<ul style="list-style: none; padding: 0; margin: 0 0 12px 0;">
-								<c:forEach var="i" items="${myImages}">
-									<li
-										style="display: flex; align-items: center; justify-content: space-between; border: 1px solid #e5e7ef; border-radius: 12px; padding: 10px 12px; margin: 8px 0;">
-										<div>
-											<div style="font-weight: 600">${i.RES_NAME}</div>
-											<div style="color: #6b7280; font-size: 12px">${i.IMG_NAME}
-												<c:if test="${not empty i.UPLOAD_DT}">
-                        · <fmt:formatDate value="${i.UPLOAD_DT}"
-														pattern="yyyy-MM-dd HH:mm" />
-												</c:if>
-											</div>
-										</div>
-										<div style="display: flex; gap: 8px;">
-											<a class="btn ghost"
-												href="${ctx}/ImageView.do?imgId=${i.IMG_ID}">열기</a>
-											<form method="post" action="${ctx}/FavoriteToggle.do"
-												style="margin: 0">
-												<input type="hidden" name="imgId" value="${i.IMG_ID}" /> <input
-													type="hidden" name="act" value="add" />
-												<button class="btn">즐겨찾기</button>
-											</form>
-										</div>
-									</li>
-								</c:forEach>
-							</ul>
-						</c:when>
-						<c:otherwise>
-							<p class="muted">아직 업로드한 사진이 없습니다.</p>
-						</c:otherwise>
-					</c:choose>
+					<input type="button" onclick="getImages()" value="사진가져오기"/>
+					<div id="iconContainer" class="icon-grid">	
+					<p class="muted">아직 업로드한 사진이 없습니다.</p>
+					</div>
+					
 
 					<!-- 즐겨찾기 목록 -->
 					<h3>즐겨찾기</h3>
@@ -191,23 +234,22 @@
 		.then(function(res) {
 				// console.log("받아온 데이터 >> ", res);
 				return res.json();
-			})
-			.then(function(result) {
-	            if (result.result == "false") {
-	               alert("다시 확인해주세요");
-	            }else if(result.result =="false2"){
-	               alert("기존비번안맞음요");
-	            }else {
-	               alert("비밀번호가 변경되었습니다!");
-	               location.href = "Gologin.do";
-	            }
+		})
+		.then(function(result) {
+            if (result.result == "false") {
+               alert("다시 확인해주세요");
+            }else if(result.result =="false2"){
+               alert("기존비번안맞음요");
+            }else {
+               alert("비밀번호가 변경되었습니다!");
+               location.href = "Gologin.do";
+            }
 
-	         })
-	         .catch(function(err) {
-	            console.error(err);
-	         })
-	   })
-
-
+         })
+         .catch(function(err) {
+            console.error(err);
+         })
+    });
+	
 	</script>
 </html>

@@ -33,11 +33,11 @@ public class MenuDataDAO {
 		return row;
 	}
 	
-	public List<ImageVO> getImages(MemberVO mvo){
+	public List<ImageVO> getImages(String id){
 		// 20251107 cyonn 생성
 		SqlSession sqlSession = factory.openSession(true);
 		
-		List<ImageVO> list = sqlSession.selectList("getImages", mvo.getId());
+		List<ImageVO> list = sqlSession.selectList("getImages", id);
 		
 		sqlSession.close();
 		

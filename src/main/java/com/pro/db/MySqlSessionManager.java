@@ -12,7 +12,8 @@ public class MySqlSessionManager {
 	static SqlSessionFactory sqlSessionFactory;
 
 	static {
-		String resource = "com/pro/db/mybatis-config.xml";
+//		String resource = "com/pro/db/mybatis-config.xml";
+		String resource = "mybatis-config.xml";
 		InputStream inputStream;
 
 		try {

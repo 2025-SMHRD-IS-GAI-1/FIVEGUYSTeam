@@ -13,21 +13,22 @@ import com.pro.model.MemberDAO;
 import com.pro.model.MemberVO;
 
 public class MypageService implements Command {
-
     // 세션에서 로그인 이메일 얻기 (네 로그인서비스에서 setAttribute 해두세요: "LOGIN_EMAIL")
     private String getLoginEmail(HttpServletRequest request) {
-        HttpSession session = request.getSession(false);
+        HttpSession session = request.getSession(); //cyonn false -> true로 수정
         if (session != null) {
             Object e1 = session.getAttribute("LOGIN_EMAIL");
             if (e1 instanceof String) return (String)e1;
             // 혹시 기존에 MemberVO를 저장했다면 이름이 info라고 가정
             Object info = session.getAttribute("info");
+            System.out.println(info==null);
             if (info instanceof MemberVO) {
             	// 20251107 cyonn 추가
             	//유저 정보가 있을 경우에만 유저id 소유의 image 가져옴 -> session
             	// t_image 내 이미지정보 가져와서 myImages 세션에 저장하는 로직
             	MenuDataDAO dao = new MenuDataDAO();
-            	List<ImageVO> list = dao.getImages(((MemberVO)info));
+            	List<ImageVO> list = dao.getImages(((MemberVO)info).getId());
+            	System.out.println(list.size());
             	session.setAttribute("myImages", list);
             	
             	

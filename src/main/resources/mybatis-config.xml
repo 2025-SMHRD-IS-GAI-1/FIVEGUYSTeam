@@ -1,11 +1,15 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE configuration
   PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
-  "https://mybatis.org/dtd/mybatis-3-config.dtd">
-<!-- 해당 xml파일을 mybatis로 쓰기위한 설정  -->
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
 
 <!-- DB에 대한 연결, 설정을 지정하는 태그  -->
 <configuration>
+
+<typeHandlers>
+        <typeHandler handler="com.pro.db.typehandler.BlobInputStreamTypeHandler" />
+    </typeHandlers>
+
 <!-- environments : web 프로젝트에서 사용할 데이터베이스를 기술하는 공간 -->
   <environments default="development">
   <!-- environment : 데이터베이스 1개에 대한 정보들 서술하는 공간! -->
@@ -34,4 +38,7 @@
     <mapper resource="com/pro/db/MemberMapper.xml"/> 
     <mapper resource="com/pro/db/MenuDataMapper.xml"/>
   </mappers>
+  <!-- 20251107 cyonn 추가 -->
+  
+  
 </configuration>
