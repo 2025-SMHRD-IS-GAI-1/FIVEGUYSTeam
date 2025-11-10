@@ -36,9 +36,10 @@
 		    RATINGS, IMG_CHECK, UPLOAD_DT
 		FROM T_IMAGE
 		WHERE ID = #{id}
+		ORDER BY UPLOAD_DT
 	</select>
 	
-
+	
     
 	<insert id="insertImage" parameterType="com.pro.menu.model.ImageVO">
         INSERT INTO T_IMAGE 
@@ -53,5 +54,19 @@
                  #{menuName}, #{transText}, #{menuDesc}, 
                  #{color_bg}, #{color_txt})
     </insert>
+    
+    
+    <select id="getTranslations" resultType="com.pro.menu.model.TranslationVO" parameterType="string">
+		SELECT 
+		    TRANS_ID AS transId, X1, Y1, X2, Y2, MENU_NAME AS menuName
+		    		, TRANS_TEXT AS transText, MENU_DESC AS menuDesc
+		    		, COLOR_BG, COLOR_TXT
+		    FROM T_TRANSLATION
+		    WHERE IMG_ID = #{imgId} 
+		
+	</select>
+    
+    
+    
     
 </mapper>
