@@ -40,46 +40,13 @@
   transform: scale(1.05); /* 약간 확대 */
 }
 </style>
-<script>
-function getImages(){
-	let userId = '<%= (   (MemberVO)session.getAttribute("info")   ).getId() %>';
-	let patchurl = 'GetImages.do?userId='+userId;
-	
-	let iconContainer = document.getElementById("iconContainer");
-	
-	fetch(patchurl)
-	.then(function(res){
-		return res.json();
-	})
-	.then(function(data){
-		//img_sticky.innerText = "<p>사진을 가져왔습니다.</p>";
-		iconContainer.innerText = "";
-		//alert(data.myImages.length);
-		var str = "";
-		for(var i = 0 ; i<data.myImages.length ;i++){
-			var base64Data = data.myImages[i].imgFileBase64
-			var imageType = "image/png"; // 마임타입
-			var mimetype = 'data:image/png;base64,';
-			var dataUrl = mimetype + base64Data;
-  
-  			const img = document.createElement("img");
-  			img.src = dataUrl;
-  			img.alt = data.myImages[i].uploadDt;
-  
-			img.addEventListener('click', () => {
-			  alert(data.myImages[i].uploadDt);
-			});
-  
-			iconContainer.appendChild(img);
-			
-		}
-		
-	})
-	.catch(function(){
-		
-	});
-}
-</script>
+
+<script type="text/javascript" src="http://dapi.kakao.com/v2/maps/sdk.js?appkey=396336d1f7971253dd7edc7d3d680240&amp;libraries=services"></script>
+
+<!-- 
+<script charset="UTF-8" src="http://t1.daumcdn.net/mapjsapi/js/main/4.4.20/kakao.js"></script>
+<script charset="UTF-8" src="http://t1.daumcdn.net/mapjsapi/js/libs/services/1.0.2/services.js"></script>
+ -->
 </head>
 <body>
 	<div class="wrap">
@@ -218,6 +185,116 @@ function getImages(){
 			</div>
 		</div>
 	</div>
+	
+	
+	<!-- 다른 페이지처럼 세부기능은 모달창 사용하여 구현  -->
+	<div id="infoModal" class="modal">
+        <div class="modal-content" 
+             style="display: flex; flex-direction: column; 
+                    max-width: 900px; max-height: 100vh; 
+                    overflow: hidden;
+                    position: relative;">
+            
+            <span class="close-button" 
+                  style="position: absolute; top: 12px; right: 15px; 
+                         font-size: 28px; font-weight: bold; 
+                         cursor: pointer; z-index: 10; 
+                         line-height: 1;">&times;</span>
+
+            <div class="top-section" 
+                 style="flex: 1; min-height: 0; display: flex; gap: 20px; 
+                        padding: 10px; border-bottom: 2px solid #ccc;">
+
+                <div class="modal-image-section" 
+                     style="flex: 1.5; position: relative; overflow: auto; 
+                            border: 1px solid #ccc; background: #f0f0f0;">
+                    
+                    <img id="modalImg" style="display: block; width: auto; height: auto; max-width: none;" /> 
+                    <div id="modalOverlayContainer" 
+                         style="position: absolute; top: 0; left: 0; width: 0; height: 0;">
+                    </div>
+                </div>
+
+                <div class="modal-right-info" style="flex: 1; overflow-y: auto;">
+                    <p class="muted" style="font-size: 13px; margin-top: -10px; margin-bottom: 10px;">
+                    <h3 style="margin-top:0;">이미지 위의 번역된 메뉴를 클릭하세요.</h3>
+                    </p>
+                    
+                    <label style="font-size: 12px; color: #555; display: block; margin-bottom: 5px;">
+                        메뉴 이름 (원본)
+                    </label>
+                    <input type="text" id="inputMenuName" readonly 
+                           style="width: 100%; box-sizing: border-box; padding: 8px; background: #eee;">
+                    <label style="font-size: 12px; color: #555; display: block; margin-top: 10px; margin-bottom: 5px;">
+                        메뉴명 번역
+                    </label>
+                    <input type="text" id="inputMenuTrans" readonly 
+                           style="width: 100%; box-sizing: border-box; padding: 8px; background: #eee;">
+                    <label style="font-size: 12px; color: #555; display: block; margin-top: 10px; margin-bottom: 5px;">
+                        메뉴 설명
+                    </label>
+                    <textarea id="inputMenuDesc" readonly placeholder="메뉴 설명 데이터가 없습니다."
+                           style="width: 100%; box-sizing: border-box; padding: 8px; background: #eee; height: 120px; resize: vertical; font-family: inherit;"></textarea>
+                </div>
+            </div>
+
+            <div class="bottom-section" 
+                 style="flex: 0 0 160px; /* 160px 고정 높이 유지 */
+                        padding: 5px 5px 10px 10px;
+                        box-sizing: border-box;">
+
+                <table style="width: 100%; height: 100%; border-collapse: collapse;">
+                    <tbody>
+                        <tr>
+                            <td style="width: 60%; vertical-align: top; padding-right: 10px;">
+                                <div id="map" 
+                                     style="width: 100%; height: 100%; 
+                                            background: #e0e0e0; border-radius: 4px; 
+                                            display: flex; align-items: center; justify-content: center;">
+                                    <p style="color: #888; font-size: 16px;">지도 영역</p>
+                                </div>
+                            </td>
+                            
+                            <td style="width: 40%; vertical-align: top; padding-left: 10px;">
+                                <div class="store-info" style="width: 100%; height: 100%; display: flex; flex-direction: column; gap: 8px;">
+                    
+                                    <div style="display: flex; gap: 5px;">
+                                        <input type="text" id="storeName" placeholder="상호명" 
+                                               style="flex: 3; padding: 5px; box-sizing: border-box; background: #eee; font-size: 12px;">
+                                        <div style="flex: 2; padding: 5px; background: #eee; border-radius: 4px; font-size: 12px; color: #555;">
+                                        <div style="display: flex; justify-content: space-between; align-items: center; font-size: 12px;">
+                                            <input type="radio" id="rate1" name="storeRating" value="1" ><label for="rate1">1</label>
+                                            <input type="radio" id="rate2" name="storeRating" value="2" ><label for="rate2">2</label>
+                                            <input type="radio" id="rate3" name="storeRating" value="3" ><label for="rate3">3</label>
+                                            <input type="radio" id="rate4" name="storeRating" value="4" ><label for="rate4">4</label>
+                                            <input type="radio" id="rate5" name="storeRating" value="5" ><label for="rate5">5</label>
+                                        </div>
+                                        </div>
+                                    </div>
+
+                                    <div style="display: flex; gap: 5px;">
+                                        <input type="text" id="storeAddress" placeholder="주소" 
+                                               style="flex: 1; padding: 5px; box-sizing: border-box; background: #eee; font-size: 12px;">
+                                        <button type="button" id="addressSearchBtn" 
+                                                style="width: 50px; padding: 5px; box-sizing: border-box; font-size: 12px; cursor: pointer;">검색</button>
+                                    </div>
+                                    <div style="display: flex; gap: 5px;">
+                                        <input type="text" id="storeLon" placeholder="경도" readonly
+                                               style="flex: 1; padding: 5px; box-sizing: border-box; background: #eee; font-size: 12px;">
+                                        <input type="text" id="storeLat" placeholder="위도" readonly
+                                               style="flex: 1; padding: 5px; box-sizing: border-box; background: #eee; font-size: 12px;">
+                                    </div>
+
+                                    <input type="text" id="storeEtcInput" placeholder="추가 정보 입력"
+                                           style="width: 100%; padding: 5px; box-sizing: border-box; font-size: 12px;">
+                                </div>
+                                </td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+            </div> </div>
+    </div>
 </body>
 <script>
 	
@@ -252,5 +329,257 @@ function getImages(){
          })
     });
 	
-	</script>
+</script>
+
+
+<script>
+
+//(첫 번째 스크립트 - Pwbtn 이벤트 - 는 그대로 둡니다)
+
+let modal = document.getElementById("infoModal");
+let closeBtn = document.querySelector(".close-button");
+let modalImg = document.getElementById("modalImg");
+
+let overlayContainer = document.getElementById("modalOverlayContainer");
+let inputMenuName = document.getElementById("inputMenuName");
+let inputMenuTrans = document.getElementById("inputMenuTrans");
+let inputMenuDesc = document.getElementById("inputMenuDesc"); // textarea
+
+// 지도 변수 전역 선언
+var map; 
+var geocoder;
+
+function getImages(){
+ let userId = '<%= (   (MemberVO)session.getAttribute("info")   ).getId() %>';
+ let patchurl = 'GetImages.do?userId='+userId;
+ 
+ let iconContainer = document.getElementById("iconContainer");
+ fetch(patchurl)
+ .then(function(res){
+     return res.json();
+ })
+ .then(function(data){
+     iconContainer.innerText = ""; // 컨테이너 비우기
+     var str = "";
+     var dataUrl = [];
+     
+     if (data.myImages.length === 0) {
+          iconContainer.innerHTML = '<p class="muted">아직 업로드한 사진이 없습니다.</p>';
+          return;
+     }
+     
+     for(let i = 0 ; i<data.myImages.length ;i++){
+         var base64Data = data.myImages[i].imgFileBase64
+         var imageType = "image/png"; // 마임타입
+         var mimetype = 'data:image/png;base64,';
+         dataUrl.push(mimetype + base64Data);
+
+         const img = document.createElement("img");
+         img.src = dataUrl[i];
+         img.alt = data.myImages[i].uploadDt;
+         
+         img.addEventListener('click', () => {
+             
+             var imgId = data.myImages[i].imgId;
+             var fetchUrl = "GetTranslations.do?imgId="+imgId;
+             
+             overlayContainer.innerHTML = "";
+             inputMenuName.value = "";
+             inputMenuTrans.value = "";
+             inputMenuDesc.value = ""; 
+             inputMenuDesc.placeholder = "메뉴 설명 데이터가 없습니다.";
+             
+             // ==================================================
+             // (★수정★) 가게 정보 input 초기화
+             // ==================================================
+             document.getElementById("storeName").value = "";
+             document.getElementById("storeAddress").value = "";
+             document.getElementById("storeLon").value = "";
+             document.getElementById("storeLat").value = "";
+             // document.getElementById("storeRating").value = "";  <-- 이 줄이 에러의 원인이었습니다. 삭제합니다.
+             
+             // 대신 라디오 버튼을 모두 선택 해제합니다.
+             let radios = document.getElementsByName("storeRating");
+             for(let k=0; k<radios.length; k++) {
+                 radios[k].checked = false;
+             }
+             // ==================================================
+
+             modalImg.onload = () => {
+                 
+                 const naturalW = modalImg.naturalWidth; 
+                 const naturalH = modalImg.naturalHeight;
+                 
+                 if (naturalW === 0 || naturalH === 0) {
+                     console.error("이미지 원본 크기를 읽을 수 없습니다.");
+                     modal.style.display = "flex";
+                     return; 
+                 }
+                 
+                 modalImg.style.width = naturalW + "px";
+                 modalImg.style.height = naturalH + "px";
+                 overlayContainer.style.width = naturalW + "px";
+                 overlayContainer.style.height = naturalH + "px";
+
+                 fetch(fetchUrl)
+                     .then(function(res){
+                         return res.json();
+                     })
+                     .then(function(data){
+                         
+                         let itemsize = data.myTranslations.length;
+
+                         for (let j = 0; j < itemsize; j++) {
+                             let item = data.myTranslations[j];
+                             let x1 = Number(item.x1);
+                             let y1 = Number(item.y1);
+                             let x2 = Number(item.x2);
+                             let y2 = Number(item.y2);
+
+                             let left = x1;
+                             let top = y1;
+                             let width = x2 - x1;
+                             let height = y2 - y1;
+                             
+                             if (width < 0) width = 0;
+                             if (height < 0) height = 0;
+
+                             let overlayBox = document.createElement("div");
+                             overlayBox.style.position = "absolute";
+                             overlayBox.style.left = left + "px";
+                             overlayBox.style.top = top + "px";
+                             overlayBox.style.width = width + "px";
+                             overlayBox.style.height = height + "px";
+                             
+                             overlayBox.style.backgroundColor = item.colorBg;
+                             overlayBox.style.color = item.colorTxt;
+                             overlayBox.innerText = item.transText; 
+                             overlayBox.style.border = "1px solid dodgerblue";
+                             overlayBox.style.boxSizing = "border-box";
+                             overlayBox.style.padding = "2px 4px";
+                             overlayBox.style.fontSize = "14px";
+                             overlayBox.style.fontWeight = "bold";
+                             overlayBox.style.overflow = "hidden";
+                             overlayBox.style.cursor = "pointer";
+                             overlayBox.style.textShadow = "0 0 3px rgba(0,0,0,0.7)"; 
+
+                             overlayBox.addEventListener('mouseenter', () => {
+                                 overlayBox.style.opacity = "0";
+                                 overlayBox.style.transition = "opacity 0.2s ease-in-out";
+                             });
+                             overlayBox.addEventListener('mouseleave', () => {
+                                 overlayBox.style.opacity = "1";
+                             });
+                             
+                             overlayBox.addEventListener('click', () => {
+                                 inputMenuName.value = item.menuName;
+                                 inputMenuTrans.value = item.transText;
+                                 inputMenuDesc.value = item.menuDesc || ""; 
+                             });
+                             
+                             overlayContainer.appendChild(overlayBox);
+                         } // for loop 끝
+
+                         modal.style.display = "flex";
+                         initMap(35.1599555, 126.8516494);
+
+                     }) // fetch .then(data)
+                     .catch(function(err){
+                         console.error("번역 정보 로딩 실패:", err);
+                         modal.style.display = "flex";
+                     });
+                     
+             }; // modalImg.onload 끝
+
+             modalImg.src = dataUrl[i]; 
+         
+         }); // img.addEventListener (썸네일 클릭) 끝
+
+         iconContainer.appendChild(img);
+         
+     } // getImages for loop 끝
+     
+ })
+ .catch(function(err){
+     console.error("이미지 목록 로딩 실패:", err);
+     iconContainer.innerHTML = '<p class="err">사진을 가져오는 데 실패했습니다.</p>';
+ });
+}
+
+closeBtn.onclick = function() {
+ modal.style.display = "none"; 
+ modalImg.src = "";
+ overlayContainer.innerHTML = "";
+}
+
+function initMap(lat, lon) {
+    let mapContainer = document.getElementById('map');
+    let centerCoord = new daum.maps.LatLng(lat, lon);
+    
+    if (!map) { 
+        let mapOption = {
+            center: centerCoord,
+            mapTypeId: daum.maps.MapTypeId.HYBRID,
+            level: 1
+        };  
+        map = new daum.maps.Map(mapContainer, mapOption); 
+        geocoder = new daum.maps.services.Geocoder();
+        
+        daum.maps.event.addListener(map, 'rightclick', function(mouseEvent) {
+            searchDetailAddrFromCoords(mouseEvent.latLng, function(result, status) {
+                if (status === daum.maps.services.Status.OK) {
+                    var detailAddr = !!result[0].road_address ? result[0].road_address.address_name : result[0].address.address_name;
+                    document.getElementById("storeLat").value = mouseEvent.latLng.getLat();
+                    document.getElementById("storeLon").value = mouseEvent.latLng.getLng();
+                    document.getElementById("storeAddress").value = detailAddr;
+                }   
+            });
+        });
+    }
+
+    setTimeout(function() {
+        map.relayout();
+        map.setCenter(centerCoord); 
+    }, 100); 
+}
+
+function searchAddrFromCoords(coords, callback) {
+    if (geocoder) geocoder.coord2RegionCode(coords.getLng(), coords.getLat(), callback);         
+}
+
+function searchDetailAddrFromCoords(coords, callback) {
+    if (geocoder) geocoder.coord2Address(coords.getLng(), coords.getLat(), callback);
+}
+
+document.getElementById("addressSearchBtn").onclick = () =>{
+	let addr = document.getElementById("storeAddress").value;
+	let storename = document.getElementById("storeName").value;
+	if(addr!=null && addr!= ""){
+		geocoder.addressSearch(addr, function(result, status) {
+	
+		    // 정상적으로 검색이 완료됐으면 
+		     if (status === kakao.maps.services.Status.OK) {
+	
+		        var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+	
+		        // 결과값으로 받은 위치를 마커로 표시합니다
+		        var marker = new kakao.maps.Marker({
+		            map: map,
+		            position: coords
+		        });
+	
+		        // 인포윈도우로 장소에 대한 설명을 표시합니다
+		        var infowindow = new kakao.maps.InfoWindow({
+		            content: '<div style="width:150px;text-align:center;padding:6px 0;">'+storename+'</div>'
+		        });
+		        infowindow.open(map, marker);
+	
+		        // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
+		        map.setCenter(coords);
+		    } 
+		}); 
+	}
+}
+</script>
+
 </html>

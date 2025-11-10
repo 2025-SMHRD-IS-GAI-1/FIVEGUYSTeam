@@ -43,4 +43,15 @@ public class MenuDataDAO {
 		
 		return list;
 	}
+	
+	public List<TranslationVO> getTranslations(String imgId){
+		// 20251110 cyonn 생성
+		SqlSession sqlSession = factory.openSession(true);
+		
+		List<TranslationVO> list = sqlSession.selectList("getTranslations", imgId);
+		
+		sqlSession.close();
+		
+		return list;
+	}
 }

@@ -94,9 +94,9 @@ ocrButton.addEventListener('click', () => {
     drawOcrResults(data); // 결과를 화면에 그리는 함수 호출
     
     // [수정됨] 처리 결과 저장 및 저장 버튼 표시
-    if (data.images[0].fields && data.images[0].fields.length > 0) {
+	if (data.images[0].fields && data.images[0].fields.length > 0) {
         processedOcrFields = data.images[0].fields;
-        saveButton.style.display = 'inline-block'; // 저장 버튼 보이기
+		saveButton.style.display = 'inline-block'; // 저장 버튼 보이기
     }
 
   })
