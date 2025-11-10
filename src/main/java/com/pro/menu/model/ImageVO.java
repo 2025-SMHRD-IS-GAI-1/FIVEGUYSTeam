@@ -19,6 +19,12 @@ public class ImageVO {
     private String id;
     private String imgName;
     private InputStream imgFile; // BLOB 처리를 위해 InputStream 사용
+    private String resName;
+    private String addr;
+    private String lat;
+    private String lon;
+    private String ratings;
+    private String imgCheck;
     private Timestamp uploadDt;
     
 }

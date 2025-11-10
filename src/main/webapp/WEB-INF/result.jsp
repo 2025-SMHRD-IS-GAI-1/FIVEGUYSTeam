@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page import="com.pro.model.MemberVO" %>
 <%
 String ctx = request.getContextPath();
 %>
@@ -14,9 +15,19 @@ String ctx = request.getContextPath();
 <link rel="stylesheet" href="assets/css/result.css">
 <!-- 이 페이지 전용 스타일 -->
 <link rel="stylesheet" href="assets/css/upload.css">
+
 </head>
 <body>
-	
+	<c:if test="${info!=null }">
+	<script>
+	let userId = '<%= (   (MemberVO)session.getAttribute("info")   ).getId() %>';
+	</script>
+	</c:if>
+	<c:if test="${info==null }">
+    <script>
+	let userId = 'anonymous';
+	</script>        
+	</c:if>
 	<!-- 상단 미니 헤더 (두번째 이미지 톤 맞춤) -->
 	<header class="mini-header">
 		<div class="mini-inner">
@@ -52,26 +63,31 @@ String ctx = request.getContextPath();
 		<section class="card-side">
 			<div class="card">
 				<h2 class="card-title">사진 업로드 & 언어 선택</h2>
-				<p class="card-desc">JPG, PNG, HEIC</p>
+				<p class="card-desc">JPG, PNG, WEBP</p>
 		<section class="page-title">
 			<h1>메뉴판 사진만 올리면 바로 번역</h1>
 			<p>업로드 → 언어 선택 → 번역하기, 단 3단계로 끝!</p>
 		</section>
-				<!-- 드롭존 -->
-				<form action="<%=ctx%>/translate.do" method="post"
-					enctype="multipart/form-data" class="form">
+					
 					<div id="dropzone" class="dropzone"
 						data-placeholder="사진 끌어놓기 또는 클릭하여 업로드">
-						<input id="file" name="menuImage" type="file" accept="image/*"
-							required>
-						<div class="drop-hint">
+						
+    					
+    					<canvas id="captureCanvas" style="display: none;"></canvas>
+    
+						
+						
+						
+						<div id="dropper" class="drop-hint">
 							<span class="icon">🖼️</span> <strong>이미지 선택</strong> <small>또는
 								드래그 앤 드롭</small>
 						</div>
 					</div>
-
+					<input id="file" name="menuImage" type="file" accept="image/*">
+					<button id="ocrButton" >이미지 처리 (OCR)</button>
+  					<button id="saveButton">DB에 저장</button>
 					<!-- 언어 선택 -->
-					<label class="label" for="lang">번역할 언어</label> <select id="lang"
+					<select id="lang"
 						name="targetLang" class="select" required>
 						<option value="Korean">한글</option>
 					    <option value="English" selected>English</option>
@@ -80,19 +96,29 @@ String ctx = request.getContextPath();
 					    <option value="中文普通話">中文普通話</option>
 					    <option value="中文广东话">中文广东话</option>
 					</select>
-
 					<!-- 체크/가이드 라인 -->
 					<div class="helper-row">
 						<span class="helper">지원 언어 계속 추가 중</span> <span class="helper">원본
 							이미지는 서버에 안전하게 보관</span> <span class="helper">번역 결과 저장 및 공유 가능</span>
 					</div>
 
-					<!-- 버튼 -->
-					<button type="submit" class="btn-primary">번역하기 ➜</button>
-				</form>
+					
+					
+									
 			</div>
 
 		</section>
 	</main>
+	<!-- 커스텀 모달 HTML -->
+  <div id="infoModal" class="modal">
+    <div class="modal-content">
+      <span class="close-button">&times;</span>
+      <div id="modalText"></div>
+    </div>
+  </div>
+	<!-- 추가된 JavaScript: 파일 핸들링 및 캔버스 드로잉 -->
+	<script src="assets/js/dropzone.js"></script>
+	<script src="assets/js/capture.js"></script>
+	
 </body>
 </html>

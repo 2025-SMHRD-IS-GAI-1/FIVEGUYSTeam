@@ -20,6 +20,7 @@ import com.pro.controller.CheckEmail;
 import com.pro.controller.Checkid;
 import com.pro.controller.DeleteAccount;
 import com.pro.controller.FindPasswordService;
+import com.pro.controller.GetImagesService;
 import com.pro.controller.JoinService;
 import com.pro.controller.LoginService;
 import com.pro.controller.LogoutService;
@@ -50,6 +51,7 @@ public class FrontController extends HttpServlet {
 		map.put("Search.do", new SearchSurvice());
 		map.put("SaveMenu.do", new SaveMenuDataService());
 	    map.put("check.do", new Checkid());
+	    map.put("GetImages.do", new GetImagesService()); // 20251107 cyonn
 	}
 
 	protected void service(HttpServletRequest request, HttpServletResponse response)

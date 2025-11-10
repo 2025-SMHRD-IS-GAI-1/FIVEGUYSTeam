@@ -158,7 +158,7 @@ public boolean existsId(String id) {
     SqlSession sqlSession = factory.openSession(true);
     
     int count = sqlSession.selectOne("existsId",id);
-    
+    sqlSession.close();
     return count > 0;
 }
 	
