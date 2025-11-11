@@ -54,4 +54,11 @@ public class MenuDataDAO {
 		
 		return list;
 	}
+	public int updateImage(ImageVO image) {
+		// 20251111 cyonn 생성
+		SqlSession sqlSession = factory.openSession(true);
+		int row = sqlSession.update("updateImage", image);
+		sqlSession.close();
+		return row;
+	}
 }

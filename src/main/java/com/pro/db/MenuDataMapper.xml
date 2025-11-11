@@ -66,7 +66,16 @@
 		
 	</select>
     
-    
+    <update id="updateImage" parameterType="com.pro.menu.model.ImageVO">
+        UPDATE T_IMAGE 
+            SET RES_NAME = #{resName},
+            	ADDR = #{addr},
+            	RATINGS = #{ratings},
+            	LAT = #{lat},
+            	LON = #{lon},
+            	IMG_CHECK = #{imgCheck}
+        	WHERE IMG_ID = #{imgId}
+    </update>
     
     
 </mapper>
