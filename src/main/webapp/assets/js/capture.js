@@ -44,6 +44,7 @@ window.addEventListener("click", (event) => {
 
 // 2. '이미지 처리' 버튼 클릭 이벤트 리스너
 ocrButton.addEventListener('click', () => {
+	//alert(userId);
   // 캔버스의 현재 이미지를 Base64 데이터 URL로 변환
   const dataUrl = canvas.toDataURL('image/png');
 
@@ -96,7 +97,8 @@ ocrButton.addEventListener('click', () => {
     // [수정됨] 처리 결과 저장 및 저장 버튼 표시
 	if (data.images[0].fields && data.images[0].fields.length > 0) {
         processedOcrFields = data.images[0].fields;
-		saveButton.style.display = 'inline-block'; // 저장 버튼 보이기
+		if(userId!="anonymous")
+			saveButton.style.display = 'inline-block'; // 저장 버튼 보이기
     }
 
   })
