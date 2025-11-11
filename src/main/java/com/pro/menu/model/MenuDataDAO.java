@@ -43,6 +43,22 @@ public class MenuDataDAO {
 		
 		return list;
 	}
+	public byte[] getImageFile(String imgId) {
+		// 20251111 cyonn 생성
+        SqlSession session = factory.openSession(true);
+        
+        byte[] imageData = null;
+        try {
+            // 위에서 만든 "getImageBytes" 쿼리 실행
+        	imageData = session.selectOne("getImageFile", imgId);
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (session != null) session.close();
+        }
+        return imageData;
+    }
 	
 	public List<TranslationVO> getTranslations(String imgId){
 		// 20251110 cyonn 생성

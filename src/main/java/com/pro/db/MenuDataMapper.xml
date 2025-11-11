@@ -31,15 +31,20 @@
     <!-- resultType 대신 resultMap을 사용하고, 모든 컬럼을 조회합니다. -->
     <select id="getImages" resultMap="ImageVOResultMap" parameterType="string">
 		SELECT 
-		    IMG_ID, ID, IMG_NAME, IMG_FILE, 
+		    IMG_ID, ID, IMG_NAME, <!--  IMG_FILE,  --> 
 		    RES_NAME, ADDR, LAT, LON, 
 		    RATINGS, IMG_CHECK, UPLOAD_DT
 		FROM T_IMAGE
 		WHERE ID = #{id}
 		ORDER BY UPLOAD_DT
+		<!-- 20251111 cyonn 수정  -->
 	</select>
 	
-	
+	<select id="getImageFile" parameterType="string" resultType="_byte[]">
+    SELECT IMG_FILE 
+    	FROM T_IMAGE
+    	WHERE IMG_ID = #{imgId}
+	</select>
     
 	<insert id="insertImage" parameterType="com.pro.menu.model.ImageVO">
         INSERT INTO T_IMAGE 

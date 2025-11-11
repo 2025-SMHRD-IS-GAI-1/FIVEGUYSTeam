@@ -50,20 +50,20 @@ public class GetImagesService implements Command {
                 imageJson.put("uploadDt", vo.getUploadDt().toString()); // Timestamp를 문자열로
 
                 // 2. InputStream(BLOB) -> byte[] -> Base64 String 변환
-                InputStream imgFileStream = vo.getImgFile();
-                if (imgFileStream != null) {
-                    try {
-                        byte[] bytes = imgFileStream.readAllBytes(); // InputStream을 byte[]로
-                        String base64Image = Base64.getEncoder().encodeToString(bytes); // byte[]를 Base64로
-                        
-                        // JSON에는 Base64 문자열 저장 (용량이 클 수 있음)
-                        imageJson.put("imgFileBase64", base64Image); 
-                    } finally {
-                        imgFileStream.close(); // 스트림 닫기
-                    }
-                } else {
-                    imageJson.put("imgFileBase64", JSONObject.NULL); // BLOB이 NULL인 경우
-                }
+//                InputStream imgFileStream = vo.getImgFile();
+//                if (imgFileStream != null) {
+//                    try {
+//                        byte[] bytes = imgFileStream.readAllBytes(); // InputStream을 byte[]로
+//                        String base64Image = Base64.getEncoder().encodeToString(bytes); // byte[]를 Base64로
+//                        
+//                        // JSON에는 Base64 문자열 저장 (용량이 클 수 있음)
+//                        imageJson.put("imgFileBase64", base64Image); 
+//                    } finally {
+//                        imgFileStream.close(); // 스트림 닫기
+//                    }
+//                } else {
+//                    imageJson.put("imgFileBase64", JSONObject.NULL); // BLOB이 NULL인 경우
+//                }
                 
                 imagesJsonArray.put(imageJson); // 배열에 추가
             }

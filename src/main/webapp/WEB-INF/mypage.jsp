@@ -375,11 +375,12 @@ function getImages(){
      // resName, addr은 null일 경우 안들어온다
      
      for(let i = 0 ; i<data.myImages.length ;i++){
-         var base64Data = data.myImages[i].imgFileBase64
+         /*
+    	 var base64Data = data.myImages[i].imgFileBase64
          var imageType = "image/png"; // 마임타입
          var mimetype = 'data:image/png;base64,';
          dataUrl.push(mimetype + base64Data);
-
+			*/
          
          let resName = data.myImages[i].resName;
          //let imgName = data.myImages[i].imgName;
@@ -397,13 +398,15 @@ function getImages(){
          if(resName==null)resName="";
          if(addr==null)addr="";
          
+         var imgId = data.myImages[i].imgId;
          const img = document.createElement("img");
-         img.src = dataUrl[i];
+         //img.src = dataUrl[i];
+         img.src = "${ctx}/GetImageFile.po?imgId=" + imgId;
          img.alt = data.myImages[i].uploadDt;
          
          img.addEventListener('click', () => {
              
-             var imgId = data.myImages[i].imgId;
+             
              var fetchUrl = "GetTranslations.do?imgId="+imgId;
              
              overlayContainer.innerHTML = "";
@@ -519,8 +522,8 @@ function getImages(){
                      });
                      
              }; // modalImg.onload 끝
-
-             modalImg.src = dataUrl[i]; 
+			 //modalImg.src = dataUrl[i];
+             modalImg.src = "${ctx}/GetImageFile.po?imgId=" + imgId; 
          
          }); // img.addEventListener (썸네일 클릭) 끝
 
@@ -531,7 +534,8 @@ function getImages(){
         	 
          
 	         const img2 = document.createElement("img");
-	         img2.src = dataUrl[i];
+	         //img2.src = dataUrl[i];
+	         img2.src = "${ctx}/GetImageFile.po?imgId=" + imgId;
 	         img2.alt = data.myImages[i].uploadDt;
 	         
 	         img2.addEventListener('click', () => {
@@ -653,7 +657,8 @@ function getImages(){
 	                     
 	             }; // modalImg.onload 끝
 	
-	             modalImg.src = dataUrl[i]; 
+	             //modalImg.src = dataUrl[i]; 
+	             modalImg.src = "${ctx}/GetImageFile.po?imgId=" + imgId; 
 	         
 	         }); // img.addEventListener (썸네일 클릭) 끝
 	
