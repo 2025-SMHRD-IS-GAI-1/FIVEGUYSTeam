@@ -28,6 +28,7 @@ import com.pro.controller.LogoutService;
 import com.pro.controller.SaveMenuDataService;
 import com.pro.controller.SearchSurvice;
 import com.pro.controller.SelectAllService;
+import com.pro.controller.UpdateImageInfoService;
 import com.pro.controller.UpdateUserService;
 
 
@@ -54,6 +55,7 @@ public class FrontController extends HttpServlet {
 	    map.put("check.do", new Checkid());
 	    map.put("GetImages.do", new GetImagesService()); // 20251107 cyonn
 	    map.put("GetTranslations.do", new GetTranslationsService()); // 20251107 cyonn
+	    map.put("UpdateImage.do", new UpdateImageInfoService()); // 20251111 cyonn
 	}
 
 	protected void service(HttpServletRequest request, HttpServletResponse response)

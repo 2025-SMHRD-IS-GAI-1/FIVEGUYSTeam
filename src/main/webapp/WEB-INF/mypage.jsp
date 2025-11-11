@@ -49,10 +49,21 @@
  -->
 </head>
 <body>
+<c:if test="${empty sessionScope.info}">
+	<script>location.href = "Gologin.do"</script>                     
+</c:if>
+<%
+
+if(session.getAttribute("imageupdate")!=null){
+	if(   ( (String)session.getAttribute("imageupdate") ).equals("ok")      ){
+%>
+		<script>alert("이미지정보 업데이트 성공");</script>
+<%
+		session.setAttribute("imageupdate", "notok");
+	}
+}
+%>
 	<div class="wrap">
-		<c:if test="${empty sessionScope.info}">
-			<script>location.href = "Gologin.do"</script>                     
-        </c:if>
 		<!-- 상단 브랜드 바 -->
 		<div class="brand">
 			<img src="${ctx}/img/팀로고.png" alt="FIVE GUYS" />
@@ -284,9 +295,22 @@
                                         <input type="text" id="storeLat" placeholder="위도" readonly
                                                style="flex: 1; padding: 5px; box-sizing: border-box; background: #eee; font-size: 12px;">
                                     </div>
-
-                                    <input type="text" id="storeEtcInput" placeholder="추가 정보 입력"
-                                           style="width: 100%; padding: 5px; box-sizing: border-box; font-size: 12px;">
+									<table>
+									<tr>
+									<td>
+									<input type="button" id="reg_menupan" style="width:100%;padding: 5px; box-sizing: border-box; font-size: 12px;" onclick="regInfo()" value="정보 등록/갱신" />
+									</td>
+									<td>
+									<select name="sel_fav"  style="width:100%;padding: 5px; box-sizing: border-box; font-size: 12px;">
+										<option value="Y">즐겨찾기 등록</option>
+                                    	<option value="N">즐겨찾기 해제</option>
+                                    </select>
+									</td>
+									</tr>
+									</table>
+                                    <input id="hiddenImgId" type="hidden"/>
+                                    
+                                    	
                                 </div>
                                 </td>
                         </tr>
@@ -368,12 +392,31 @@ function getImages(){
           return;
      }
      
+     // 맛집정보, 즐겨찾기 기능 위한 formdata 사용
+     let formdata = new FormData();
+     //전달할 정보는 imgId, res_name, addr, lat, lon, ratings, img_check
+     //전달받은 정보는 imgName, imgFileBase64, imgCheck, imgId,ratings,
+     // uploadDt, lan, lon, id
+     // resName, addr은 null일 경우 안들어온다
+     
      for(let i = 0 ; i<data.myImages.length ;i++){
          var base64Data = data.myImages[i].imgFileBase64
          var imageType = "image/png"; // 마임타입
          var mimetype = 'data:image/png;base64,';
          dataUrl.push(mimetype + base64Data);
 
+         
+         let resName = data.myImages[i].resName;
+         //let imgName = data.myImages[i].imgName;
+         let addr = data.myImages[i].addr;
+         let lat = data.myImages[i].lat;
+         let lon = data.myImages[i].lon;
+         let imgCheck = data.myImages[i].imgCheck;
+         let ratings = Number(data.myImages[i].ratings);
+         
+         if(resName==null)resName="";
+         if(addr==null)addr="";
+         
          const img = document.createElement("img");
          img.src = dataUrl[i];
          img.alt = data.myImages[i].uploadDt;
@@ -392,17 +435,20 @@ function getImages(){
              // ==================================================
              // (★수정★) 가게 정보 input 초기화
              // ==================================================
-             document.getElementById("storeName").value = "";
-             document.getElementById("storeAddress").value = "";
-             document.getElementById("storeLon").value = "";
-             document.getElementById("storeLat").value = "";
-             // document.getElementById("storeRating").value = "";  <-- 이 줄이 에러의 원인이었습니다. 삭제합니다.
+             document.getElementById("storeName").value = resName;
+             document.getElementById("storeAddress").value = addr;
+             document.getElementById("storeLon").value = lon;
+             document.getElementById("storeLat").value = lat;
+               
              
              // 대신 라디오 버튼을 모두 선택 해제합니다.
              let radios = document.getElementsByName("storeRating");
              for(let k=0; k<radios.length; k++) {
                  radios[k].checked = false;
+                 if(k+1 == ratings)radios[k].checked = true;
              }
+             document.getElementById("hiddenImgId").value = imgId;
+             document.getElementsByName("sel_fav")[0].value = imgCheck;
              // ==================================================
 
              modalImg.onload = () => {
@@ -420,7 +466,7 @@ function getImages(){
                  modalImg.style.height = naturalH + "px";
                  overlayContainer.style.width = naturalW + "px";
                  overlayContainer.style.height = naturalH + "px";
-
+				 
                  fetch(fetchUrl)
                      .then(function(res){
                          return res.json();
@@ -481,7 +527,10 @@ function getImages(){
                          } // for loop 끝
 
                          modal.style.display = "flex";
-                         initMap(35.1599555, 126.8516494);
+                         if(lat!="0" && lon!="0")
+                         	initMap(Number(lat), Number(lon));
+                         else
+                        	 initMap(35.1599555, 126.8516494);
 
                      }) // fetch .then(data)
                      .catch(function(err){
@@ -581,5 +630,41 @@ document.getElementById("addressSearchBtn").onclick = () =>{
 	}
 }
 </script>
-
+<script>
+function regInfo(){
+	
+	let storeName = document.getElementById("storeName");
+	let storeAddress = document.getElementById("storeAddress");
+	let ratings = document.getElementsByName("storeRating");
+	let rating = 0;
+	for(let i =0; i <ratings.length ; i++){
+		if(ratings[i].checked)rating=ratings[i].value;
+	}
+	let lat = document.getElementById("storeLat");
+	let lon = document.getElementById("storeLon");
+	let sel_fav = document.getElementsByName("sel_fav");
+	
+	let formData = new FormData();
+	let imgId = document.getElementById("hiddenImgId");
+	
+	
+	
+	//let values = formData.values();
+	//for (const pair of values) {}
+	modal.style.display = "none"; 
+ 	modalImg.src = "";
+ 	overlayContainer.innerHTML = "";
+ 
+	location.replace("UpdateImage.do?"
+			+ "imgId="+imgId.value
+			+ "&storeName="+storeName.value
+			+ "&storeAddress="+storeAddress.value
+			+ "&ratings="+rating
+			+ "&lat="+lat.value
+			+ "&lon="+lon.value
+			+ "&imgCheck="+sel_fav[0].value);
+	
+	
+}
+</script>
 </html>
