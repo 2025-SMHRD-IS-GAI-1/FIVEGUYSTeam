@@ -50,14 +50,14 @@ String ctx = request.getContextPath(); // 컨텍스트 경로
 				<div class="grid">
 					<div class="form-row">
 						<label for="uid" class="label">아이디</label> <input id="uid"
-							name="id" type="text" class="input" placeholder="ID (선택)"
+							name="id" type="text" class="input" placeholder="ID"
 							required />
 					</div>
 
 					<div class="form-row">
 						<label for="uemail" class="label">이메일</label> <input id="uemail"
 							name="email" type="email" class="input"
-							placeholder="email@example.com (선택)" required />
+							placeholder="email@example.com" required />
 					</div>
 				</div>
 

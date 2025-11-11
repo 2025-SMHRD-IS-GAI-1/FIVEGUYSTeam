@@ -1,7 +1,5 @@
 package com.pro.menu.model;
 
-import com.pro.model.MemberVO;
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

@@ -7,6 +7,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 
 import com.pro.db.MySqlSessionManager;
+import com.pro.model.MemberVO;
 
 
 public class MenuDataDAO {
@@ -30,5 +31,34 @@ public class MenuDataDAO {
 		int row = sqlSession.insert("insertTranslation", translation);
 		sqlSession.close();
 		return row;
-	}	
+	}
+	
+	public List<ImageVO> getImages(String id){
+		// 20251107 cyonn 생성
+		SqlSession sqlSession = factory.openSession(true);
+		
+		List<ImageVO> list = sqlSession.selectList("getImages", id);
+		
+		sqlSession.close();
+		
+		return list;
+	}
+	
+	public List<TranslationVO> getTranslations(String imgId){
+		// 20251110 cyonn 생성
+		SqlSession sqlSession = factory.openSession(true);
+		
+		List<TranslationVO> list = sqlSession.selectList("getTranslations", imgId);
+		
+		sqlSession.close();
+		
+		return list;
+	}
+	public int updateImage(ImageVO image) {
+		// 20251111 cyonn 생성
+		SqlSession sqlSession = factory.openSession(true);
+		int row = sqlSession.update("updateImage", image);
+		sqlSession.close();
+		return row;
+	}
 }

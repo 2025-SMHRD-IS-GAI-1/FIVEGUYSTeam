@@ -1,34 +1,81 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.pro.db.MenuDataMapper">
-<insert id="insertImage" parameterType="com.pro.menu.model.ImageVO">
+
+    <!-- [ ★★★ 1. ResultMap 정의 ★★★ ] -->
+    <!-- T_IMAGE의 모든 컬럼을 ImageVO 객체에 매핑합니다. -->
+    <resultMap id="ImageVOResultMap" type="com.pro.menu.model.ImageVO">
+        <!-- PK (Primary Key) -->
+        <id property="imgId" column="IMG_ID" />
+        
+        <!-- 나머지 일반 컬럼 -->
+        <result property="id" column="ID" />
+        <result property="imgName" column="IMG_NAME" />
+        <result property="resName" column="RES_NAME" />
+        <result property="addr" column="ADDR" />
+        <result property="lat" column="LAT" />
+        <result property="lon" column="LON" />
+        <result property="ratings" column="RATINGS" />
+        <result property="imgCheck" column="IMG_CHECK" />
+        <result property="uploadDt" column="UPLOAD_DT" />
+        
+        <!-- [ ★★★ 2. BLOB -> InputStream 매핑 ★★★ ] -->
+        <!-- BLOB을 InputStream으로 변환하기 위해 커스텀 TypeHandler를 지정합니다. -->
+        <result property="imgFile" column="IMG_FILE" 
+                jdbcType="BLOB" 
+                typeHandler="com.pro.db.typehandler.BlobInputStreamTypeHandler" />
+    </resultMap>
+
+
+    <!-- [ ★★★ 3. Select 쿼리 수정 ★★★ ] -->
+    <!-- resultType 대신 resultMap을 사용하고, 모든 컬럼을 조회합니다. -->
+    <select id="getImages" resultMap="ImageVOResultMap" parameterType="string">
+		SELECT 
+		    IMG_ID, ID, IMG_NAME, IMG_FILE, 
+		    RES_NAME, ADDR, LAT, LON, 
+		    RATINGS, IMG_CHECK, UPLOAD_DT
+		FROM T_IMAGE
+		WHERE ID = #{id}
+		ORDER BY UPLOAD_DT
+	</select>
+	
+	
+    
+	<insert id="insertImage" parameterType="com.pro.menu.model.ImageVO">
         INSERT INTO T_IMAGE 
             (IMG_ID, ID, IMG_NAME, IMG_FILE, UPLOAD_DT, IMG_CHECK) 
         VALUES 
             (#{imgId}, #{id}, #{imgName}, #{imgFile, jdbcType=BLOB}, #{uploadDt}, 'N')
     </insert>
-	<!-- 
-    <insert id="insertTranslations" parameterType="java.util.List">
-        INSERT ALL
-        
-        <foreach collection="list" item="t">
-            INTO T_TRANSLATION 
-                (IMG_ID, X1, Y1, X2, Y2, MENU_NAME, TRANS_TEXT, MENU_DESC, COLOR_BG, COLOR_TXT) 
-            VALUES 
-                (#{t.imgId}, #{t.x1}, #{t.y1}, #{t.x2}, #{t.y2}, 
-                 #{t.menuName}, #{t.transText}, #{t.menuDesc}, 
-                 #{t.color_bg}, #{t.color_txt})
-        </foreach>
-        
-        SELECT * FROM DUAL
-    </insert>
-     -->
+    
     <insert id="insertTranslation" parameterType="com.pro.menu.model.TranslationVO">
         INSERT INTO T_TRANSLATION(IMG_ID, X1, Y1, X2, Y2, MENU_NAME, TRANS_TEXT, MENU_DESC, COLOR_BG, COLOR_TXT) 
             VALUES (#{imgId}, #{x1}, #{y1}, #{x2}, #{y2}, 
                  #{menuName}, #{transText}, #{menuDesc}, 
                  #{color_bg}, #{color_txt})
     </insert>
-
-
+    
+    
+    <select id="getTranslations" resultType="com.pro.menu.model.TranslationVO" parameterType="string">
+		SELECT 
+		    TRANS_ID AS transId, X1, Y1, X2, Y2, MENU_NAME AS menuName
+		    		, TRANS_TEXT AS transText, MENU_DESC AS menuDesc
+		    		, COLOR_BG, COLOR_TXT
+		    FROM T_TRANSLATION
+		    WHERE IMG_ID = #{imgId} 
+		
+	</select>
+    
+    <update id="updateImage" parameterType="com.pro.menu.model.ImageVO">
+        UPDATE T_IMAGE 
+            SET RES_NAME = #{resName},
+            	ADDR = #{addr},
+            	RATINGS = #{ratings},
+            	LAT = #{lat},
+            	LON = #{lon},
+            	IMG_CHECK = #{imgCheck}
+        	WHERE IMG_ID = #{imgId}
+    </update>
+    
+    
 </mapper>

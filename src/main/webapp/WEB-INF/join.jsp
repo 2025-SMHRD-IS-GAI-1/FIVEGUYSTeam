@@ -11,6 +11,8 @@ String ctx = request.getContextPath();
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>FIVE GUYS - 회원가입</title>
 <link rel="stylesheet" href="assets/css/join.css" />
+
+
 </head>
 <body>
 	<div class="wrap">
@@ -72,8 +74,8 @@ String ctx = request.getContextPath();
 							<label for="pw2" class="link">비밀번호 확인</label> <input id="pw2"
 								name="pw2" type="password" class="input"
 								placeholder="Password 확인" minlength="8" required />
-							<button id="checkpw" type="button" >중복여부</button>	
-							<div id="pwMsg" class="hint" style="font-size:14px; margin-top:4px;"></div> <!-- ✅ 이거 있어야 함 -->
+							<button id="checkpw" type="button" class="btn-mini">일치여부</button>	
+							<div id="pwMsg" class="hint mini-hint"></div> 
 						</div>	
 						
 						
@@ -94,7 +96,7 @@ String ctx = request.getContextPath();
 
 						<!-- 버튼: 좌/우 열에 배치 -->
 						<div class="btn-left">
-							<button type="submit" id="joinBtn"  class="btn btn-primary" disabled>회원가입 완료</button>
+							<button type="submit" id="joinBtn"  class="btn btn-primary join-btn col-span-2" disabled>회원가입 완료</button>
 						</div>
 						<div class="btn-right">
 							<a href="<%=ctx%>/Gologin.do" class="btn btn-ghost"
@@ -127,23 +129,35 @@ String ctx = request.getContextPath();
 	  	let userid = document.getElementById("userid")
 	  	const check = document.getElementById("check")
 	  	let joinBtn = document.getElementById("joinBtn"); 
-	  	joinBtn.disabled = false;
+	  	let idTimer = null;
 	  	let idOk = false;
 	  	let pwOk = false;
-	  	function updateBtn(){
-	  	  joinBtn.disabled = !(idOk && pwOk);  
-	  	}
+	  	
+	  	// 버튼 활성화 함수 
+	  	function updateBtn() {
+    	const canJoin = idOk && pwOk;     // 둘 다 true여야 가입 가능
+    	joinBtn.disabled = !canJoin;
 
-		userid.addEventListener("keyup",()=>{
+   		if (canJoin) {
+     	 joinBtn.classList.add("active");
+    	} else {
+      	joinBtn.classList.remove("active");
+   	 	}
+ 		}
+		
+		userid.addEventListener("input",()=>{
 			 const id = userid.value.trim();
-
+				
+				 if (idTimer) {
+				    clearTimeout(idTimer);
+				  }	
 			    if(!id){ 
 			        check.textContent = ""; 
 			        idOk = false;          
 			        updateBtn();
 			        return; 
 			    }
-
+			    idTimer = setTimeout(() => {
 			    fetch("check.do", {
 				    method: "POST",
 				    headers: { "Content-Type": "application/x-www-form-urlencoded" },
@@ -152,18 +166,19 @@ String ctx = request.getContextPath();
 			    .then(res => res.json())
 			    .then(result => {
 
-			        // ✅ 한 칸만 표시 (누적 X)
+			    	// 아이디가 중복일때
 			        if(result.result === "true"){
 			            check.textContent = "중복된 아이디입니다.";
 			            check.style.color = "red";
-			           	idOk= false;
-			        } else {
+			           	idOk= false; // 비활성화
+			        
+			        // 아이디가 중복이 아닐때
+			        } else { 
 			            check.textContent = "사용가능한 아이디입니다.";
-			            idOk= true;
+			            idOk= true; // id는 OK
 			            check.style.color = "green";
-			            idOk= true;
 			        }
-			        updateBtn();      
+			        updateBtn();  // pwOK가 false이므로 비활성화
 			    })
 			    .catch(err => {
 			        console.error(err);
@@ -172,48 +187,66 @@ String ctx = request.getContextPath();
 			        idOk = false;
 			        updateBtn();
 			    });
+			    },300);
 			});
 			
-		const Pw = document.getElementById("pw");
+		const Pw = document.getElementById("pw");  
 		const Pw2 = document.getElementById("pw2");
 		const checkpw = document.getElementById("checkpw")
 		const pwMsg   = document.getElementById("pwMsg"); 
+		/* const joinBtn = document.getElementById("joinBtn"); */
+		
+	
+		
 		function showPwMsg(text, color) {
 				  pwMsg.textContent = text;
 				  pwMsg.style.color = color;
 				}
 
-				checkpw.addEventListener("click", (e) => {
+		
+		
+				checkpw.addEventListener("click", () => {
 				  // e.preventDefault(); // type="button" 사용하면 불필요
-				  const pw  = Pw.value.trim();
-				  const pw2 = Pw2.value.trim();
+				  const pw  = Pw.value.trim();  // 비번
+				  const pw2 = Pw2.value.trim();  // 비번 확인
 
 				  if (pw.length < 8) {
 				    showPwMsg("비밀번호는 8자 이상이어야 합니다.", "red");
-				    // pwOk = false; updateBtn();
-				    pwOk = false;          
+				    pwOk = false; // pw 비활
 				    updateBtn();
 				    return;
 				  }
 				  if (pw !== pw2) {
 				    showPwMsg("비밀번호가 일치하지 않습니다.", "red");
-				    // pwOk = false; updateBtn();
-				    pwOk = false;          
+				    pwOk = false;  // pw 비활
    					 updateBtn();
 				    return;
 				  }
 				  showPwMsg("사용 가능한 비밀번호입니다.", "green");
-				  pwOk=true;
+				  pwOk=true;  // pw OK
 				  updateBtn();
-				  // pwOk = true; updateBtn();
+				  
 				});
+				 // 6. 사용자가 다시 입력을 바꿨을 때는 다시 꺼주기
+				  Pw.addEventListener("input", () => {
+				    pwOk = false;
+				    updateBtn();
+				  });
+				  Pw2.addEventListener("input", () => {
+				    pwOk = false;
+				    updateBtn();
+				  });
+
+				  // 7. 시작할 때 한 번 꺼두기
+				  updateBtn();
+
+				
+	
+				
+				
+				
 		
-		 
+				
 	</script>
-	
-	
-	
-	
-	
 </body>
 </html>

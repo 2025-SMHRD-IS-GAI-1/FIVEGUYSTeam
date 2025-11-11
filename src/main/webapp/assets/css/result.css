@@ -180,12 +180,14 @@ body {
 }
 
 .label {
+	
 	font-size: 14px;
-	color: var(--sub);
+	/* color: var(--sub); */
+	color: #000000;
 }
 
-.select,
-.btn-primary {
+select,
+btn-primary {
 	height: 44px;
 	border-radius: 12px;
 	border: 1px solid var(--border);
@@ -201,7 +203,7 @@ body {
 	box-shadow: 0 0 0 4px var(--ring);
 }
 
-.btn-primary {
+btn-primary {
 	margin-top: 4px;
 	background: var(--primary);
 	color: #fff;
@@ -210,7 +212,7 @@ body {
 	cursor: pointer;
 }
 
-.btn-primary:hover {
+btn-primary:hover {
 	background: var(--primary-d);
 }
 

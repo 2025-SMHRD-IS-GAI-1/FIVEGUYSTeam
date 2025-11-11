@@ -1,5 +1,25 @@
 @charset "UTF-8";
 
+/* 비밀번호 확인 옆 작은 버튼 */
+.btn-mini {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 3px 8px;      /* 작게 */
+  min-height: 26px;       /* 너무 납작하지 않게 */
+  font-size: 12px;        /* 글자도 작게 */
+  border: 1px solid #000; /* 지금 버튼 테두리랑 맞춰줌 */
+  border-radius: 6px;
+  background: #fff;
+  cursor: pointer;
+  line-height: 1;
+}
+
+.btn-mini:hover {
+  background: #f2f2f2;
+}
+
+
 /* ========== 0. 색/토큰 ========== */
 :root {
 	--bg: #f5f6fb;
@@ -354,6 +374,19 @@ h2 {
 	color: #000;
 }
 
+
+
+.join-btn[disabled] {
+  background: #d1d5db;        /* 연회색 */
+  cursor: not-allowed;
+  opacity: 1;                 /* 흐리게 안 하고 싶으면 1 */
+}
+
+/* 조건 맞아서 켜졌을 때 */
+.join-btn.active {
+  background: var(--primary);
+  cursor: pointer;
+}
 /* 4. 약관 내용이 스크롤되는 영역 */
 #termsModal #rules_text {
 	height: 400px; /* 스크롤 영역의 높이를 고정합니다. (모달창 전체 높이가 아님) */
