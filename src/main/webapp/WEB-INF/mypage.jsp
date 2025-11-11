@@ -398,8 +398,8 @@ function getImages(){
          if(resName==null)resName="";
          if(addr==null)addr="";
          
-         var imgId = data.myImages[i].imgId;
-         const img = document.createElement("img");
+         let imgId = data.myImages[i].imgId;
+         let img = document.createElement("img");
          //img.src = dataUrl[i];
          img.src = "${ctx}/GetImageFile.po?imgId=" + imgId;
          img.alt = data.myImages[i].uploadDt;
@@ -533,15 +533,15 @@ function getImages(){
          if(imgCheck=="Y"){
         	 
          
-	         const img2 = document.createElement("img");
+	         let img2 = document.createElement("img");
 	         //img2.src = dataUrl[i];
 	         img2.src = "${ctx}/GetImageFile.po?imgId=" + imgId;
 	         img2.alt = data.myImages[i].uploadDt;
 	         
 	         img2.addEventListener('click', () => {
 	             
-	             var imgId = data.myImages[i].imgId;
-	             var fetchUrl = "GetTranslations.do?imgId="+imgId;
+	             let imgId = data.myImages[i].imgId;
+	             let fetchUrl = "GetTranslations.do?imgId="+imgId;
 	             
 	             overlayContainer.innerHTML = "";
 	             inputMenuName.value = "";
