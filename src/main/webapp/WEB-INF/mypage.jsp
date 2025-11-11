@@ -345,7 +345,7 @@ var geocoder;
 function getImages(){
  let userId = '<%= (   (MemberVO)session.getAttribute("info")   ).getId() %>';
  let patchurl = 'GetImages.do?userId='+userId;
- 
+ let fav_delete_once = true;
  let iconContainer = document.getElementById("iconContainer");
  let iconContainer2 = document.getElementById("iconContainer2");
  
@@ -355,6 +355,9 @@ function getImages(){
  })
  .then(function(data){
      iconContainer.innerText = ""; // 컨테이너 비우기
+     
+     
+     
      
      var str = "";
      var dataUrl = [];
@@ -385,6 +388,11 @@ function getImages(){
          let lon = data.myImages[i].lon;
          let imgCheck = data.myImages[i].imgCheck;
          let ratings = Number(data.myImages[i].ratings);
+         
+         if(imgCheck=="Y" && fav_delete_once == true){
+        	 fav_delete_once = false;
+        	 iconContainer2.innerText = "";
+         }
          
          if(resName==null)resName="";
          if(addr==null)addr="";
@@ -520,7 +528,7 @@ function getImages(){
          
 		 //즐겨찾기가 하나라도 있으면 container2를 지우고 이미지를 넣을 준비
          if(imgCheck=="Y"){
-        	 iconContainer2.innerText = "";
+        	 
          
 	         const img2 = document.createElement("img");
 	         img2.src = dataUrl[i];
