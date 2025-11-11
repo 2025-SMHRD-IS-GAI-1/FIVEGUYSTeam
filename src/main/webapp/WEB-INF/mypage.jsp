@@ -47,6 +47,7 @@
 <script charset="UTF-8" src="http://t1.daumcdn.net/mapjsapi/js/main/4.4.20/kakao.js"></script>
 <script charset="UTF-8" src="http://t1.daumcdn.net/mapjsapi/js/libs/services/1.0.2/services.js"></script>
  -->
+
 </head>
 <body>
 <c:if test="${empty sessionScope.info}">
@@ -146,52 +147,20 @@ if(session.getAttribute("imageupdate")!=null){
 					<h2>내 활동</h2>
 					<!-- 내 사진 목록 -->
 					<h3 style="margin-top: 0">내 사진</h3>
+					<!-- 
 					<input type="button" onclick="getImages()" value="사진가져오기"/>
+					 -->
 					<div id="iconContainer" class="icon-grid">	
 					<p class="muted">아직 업로드한 사진이 없습니다.</p>
 					</div>
 					
 
 					<!-- 즐겨찾기 목록 -->
-					<h3>즐겨찾기</h3>
-					<c:choose>
-						<c:when test="${not empty favs}">
-							<ul style="list-style: none; padding: 0; margin: 0;">
-								<c:forEach var="f" items="${favs}">
-									<li
-										style="display: flex; align-items: center; justify-content: space-between; border: 1px solid #e5e7ef; border-radius: 12px; padding: 10px 12px; margin: 8px 0;">
-										<div>
-											<div style="font-weight: 600">${f.RES_NAME}</div>
-											<div style="color: #6b7280; font-size: 12px">${f.IMG_NAME}
-												<c:if test="${not empty f.REG_DT}">
-                        · <fmt:formatDate value="${f.REG_DT}"
-														pattern="yyyy-MM-dd HH:mm" />
-												</c:if>
-											</div>
-										</div>
-										<div style="display: flex; gap: 8px;">
-											<a class="btn ghost"
-												href="${ctx}/ImageView.do?imgId=${f.IMG_ID}">열기</a>
-											<form method="post" action="${ctx}/FavoriteToggle.do"
-												style="margin: 0">
-												<input type="hidden" name="imgId" value="${f.IMG_ID}" /> <input
-													type="hidden" name="act" value="remove" />
-												<button class="btn outline">해제</button>
-											</form>
-										</div>
-									</li>
-								</c:forEach>
-							</ul>
-						</c:when>
-						<c:otherwise>
-							<p class="muted">즐겨찾기한 항목이 없습니다.</p>
-						</c:otherwise>
-					</c:choose>
-
-					<!-- 업로드 바로가기 -->
-					<div style="margin-top: 12px;">
-						<a class="btn ghost" href="${ctx}/Upload.do">이미지 업로드 바로가기</a>
+					<h3 style="margin-top: 0">즐겨찾기</h3>
+					<div id="iconContainer2" class="icon-grid">	
+					<p class="muted">즐겨찾기로 등록한 사진이 없습니다.</p>
 					</div>
+					
 				</div>
 			</div>
 		</div>
@@ -378,12 +347,15 @@ function getImages(){
  let patchurl = 'GetImages.do?userId='+userId;
  
  let iconContainer = document.getElementById("iconContainer");
+ let iconContainer2 = document.getElementById("iconContainer2");
+ 
  fetch(patchurl)
  .then(function(res){
      return res.json();
  })
  .then(function(data){
      iconContainer.innerText = ""; // 컨테이너 비우기
+     
      var str = "";
      var dataUrl = [];
      
@@ -546,6 +518,140 @@ function getImages(){
 
          iconContainer.appendChild(img);
          
+		 //즐겨찾기가 하나라도 있으면 container2를 지우고 이미지를 넣을 준비
+         if(imgCheck=="Y"){
+        	 iconContainer2.innerText = "";
+         
+	         const img2 = document.createElement("img");
+	         img2.src = dataUrl[i];
+	         img2.alt = data.myImages[i].uploadDt;
+	         
+	         img2.addEventListener('click', () => {
+	             
+	             var imgId = data.myImages[i].imgId;
+	             var fetchUrl = "GetTranslations.do?imgId="+imgId;
+	             
+	             overlayContainer.innerHTML = "";
+	             inputMenuName.value = "";
+	             inputMenuTrans.value = "";
+	             inputMenuDesc.value = ""; 
+	             inputMenuDesc.placeholder = "메뉴 설명 데이터가 없습니다.";
+	             
+	             // ==================================================
+	             // (★수정★) 가게 정보 input 초기화
+	             // ==================================================
+	             document.getElementById("storeName").value = resName;
+	             document.getElementById("storeAddress").value = addr;
+	             document.getElementById("storeLon").value = lon;
+	             document.getElementById("storeLat").value = lat;
+	               
+	             
+	             // 대신 라디오 버튼을 모두 선택 해제합니다.
+	             let radios = document.getElementsByName("storeRating");
+	             for(let k=0; k<radios.length; k++) {
+	                 radios[k].checked = false;
+	                 if(k+1 == ratings)radios[k].checked = true;
+	             }
+	             document.getElementById("hiddenImgId").value = imgId;
+	             document.getElementsByName("sel_fav")[0].value = imgCheck;
+	             // ==================================================
+	
+	             modalImg.onload = () => {
+	                 
+	                 const naturalW = modalImg.naturalWidth; 
+	                 const naturalH = modalImg.naturalHeight;
+	                 
+	                 if (naturalW === 0 || naturalH === 0) {
+	                     console.error("이미지 원본 크기를 읽을 수 없습니다.");
+	                     modal.style.display = "flex";
+	                     return; 
+	                 }
+	                 
+	                 modalImg.style.width = naturalW + "px";
+	                 modalImg.style.height = naturalH + "px";
+	                 overlayContainer.style.width = naturalW + "px";
+	                 overlayContainer.style.height = naturalH + "px";
+					 
+	                 fetch(fetchUrl)
+	                     .then(function(res){
+	                         return res.json();
+	                     })
+	                     .then(function(data){
+	                         
+	                         let itemsize = data.myTranslations.length;
+	
+	                         for (let j = 0; j < itemsize; j++) {
+	                             let item = data.myTranslations[j];
+	                             let x1 = Number(item.x1);
+	                             let y1 = Number(item.y1);
+	                             let x2 = Number(item.x2);
+	                             let y2 = Number(item.y2);
+	
+	                             let left = x1;
+	                             let top = y1;
+	                             let width = x2 - x1;
+	                             let height = y2 - y1;
+	                             
+	                             if (width < 0) width = 0;
+	                             if (height < 0) height = 0;
+	
+	                             let overlayBox = document.createElement("div");
+	                             overlayBox.style.position = "absolute";
+	                             overlayBox.style.left = left + "px";
+	                             overlayBox.style.top = top + "px";
+	                             overlayBox.style.width = width + "px";
+	                             overlayBox.style.height = height + "px";
+	                             
+	                             overlayBox.style.backgroundColor = item.colorBg;
+	                             overlayBox.style.color = item.colorTxt;
+	                             overlayBox.innerText = item.transText; 
+	                             overlayBox.style.border = "1px solid dodgerblue";
+	                             overlayBox.style.boxSizing = "border-box";
+	                             overlayBox.style.padding = "2px 4px";
+	                             overlayBox.style.fontSize = "14px";
+	                             overlayBox.style.fontWeight = "bold";
+	                             overlayBox.style.overflow = "hidden";
+	                             overlayBox.style.cursor = "pointer";
+	                             overlayBox.style.textShadow = "0 0 3px rgba(0,0,0,0.7)"; 
+	
+	                             overlayBox.addEventListener('mouseenter', () => {
+	                                 overlayBox.style.opacity = "0";
+	                                 overlayBox.style.transition = "opacity 0.2s ease-in-out";
+	                             });
+	                             overlayBox.addEventListener('mouseleave', () => {
+	                                 overlayBox.style.opacity = "1";
+	                             });
+	                             
+	                             overlayBox.addEventListener('click', () => {
+	                                 inputMenuName.value = item.menuName;
+	                                 inputMenuTrans.value = item.transText;
+	                                 inputMenuDesc.value = item.menuDesc || ""; 
+	                             });
+	                             
+	                             overlayContainer.appendChild(overlayBox);
+	                         } // for loop 끝
+	
+	                         modal.style.display = "flex";
+	                         if(lat!="0" && lon!="0")
+	                         	initMap(Number(lat), Number(lon));
+	                         else
+	                        	 initMap(35.1599555, 126.8516494);
+	
+	                     }) // fetch .then(data)
+	                     .catch(function(err){
+	                         console.error("번역 정보 로딩 실패:", err);
+	                         modal.style.display = "flex";
+	                     });
+	                     
+	             }; // modalImg.onload 끝
+	
+	             modalImg.src = dataUrl[i]; 
+	         
+	         }); // img.addEventListener (썸네일 클릭) 끝
+	
+	         iconContainer2.appendChild(img2);
+         }// img2 즐겨찾기
+         
      } // getImages for loop 끝
      
  })
@@ -667,4 +773,9 @@ function regInfo(){
 	
 }
 </script>
+
+<script>
+window.onload = getImages();
+</script>
+
 </html>
