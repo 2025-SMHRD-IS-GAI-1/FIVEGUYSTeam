@@ -54,7 +54,7 @@
   - MyBatis
 
 - **OCR & 번역**
-  - (예: Naver CLOVA OCR API)
+  - Naver CLOVA OCR API
   - Gemini
 
 - **Infra / 기타**
