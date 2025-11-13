@@ -126,5 +126,5 @@
 <img src="docs/images/미리보기 화면.png" width="600" />
 
 ### 8. 확장 프로그램 화면
-<img src="docs/images/확장 프로그램 1.png" width="600" />
-<img src="docs/images/확장 프로그램 2.png" width="600" />
+<img src="docs/images/확장프로그램 1.png" width="600" />
+<img src="docs/images/확장 프로그램2.png" width="600" />
