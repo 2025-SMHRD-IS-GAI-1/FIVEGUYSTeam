@@ -17,7 +17,7 @@
   - 추출된 영역별 좌표 정보를 함께 저장 (X1, Y1, X2, Y2)
 
 - **다국어 번역 & 메뉴 설명**
-  - 번역 대상 언어 선택 (예: 한국어, 영어, 일본어, 중국어 등)
+  - 번역 결과 언어 선택 (예: 한국어, 영어, 일본어, 중국어 등)
   - 메뉴 이름과 설명을 번역해서 한눈에 표시
   - (선택) 알레르기/성분 등 부가 설명 제공
 
@@ -46,48 +46,7 @@
   -  Servlet 
 
 - **Frontend**
-  - JSP, HTML, CSS, JavaScript
-  - JSTL / EL
-
-- **Database**
-  - Oracle
-  - MyBatis
-
-- **OCR & 번역**
-  - Naver CLOVA OCR API
-  - Gemini
-
-- **Infra / 기타**
-  - Apache Tomcat
-  - Maven (war 패키징)
-  - Git / GitHub
-
----
-
-##  주요 테이블 구조 (요약)
-
-※ 자세한 내용은 `/docs` 폴더의 **테이블 명세서 / DB 요구사항 분석서** 등을 참고하도록 안내해도 좋음.
-
-### 1) 회원 테이블 `T_MEMBER`
-
-- `ID` : 회원 아이디 (PK)
-- `PW` : 비밀번호 (해시 저장)
-- `NAME` : 이름
-- `EMAIL` : 이메일
-- `ADMIN_YN` : 관리자 여부 (`M`: 일반, `A`: 관리자 등)
-- `JOIN_DT` : 가입 일자
-
-### 2) 이미지 테이블 `T_IMAGE`
-
-- `IMG_ID` : 이미지 ID (PK, `SYS_GUID()`)
-- `ID` : 회원 아이디 (FK → `T_MEMBER.ID`)
-- `IMG_NAME` : 업로드한 이미지 이름
-- `IMG_FILE` : 이미지 파일 (BLOB)
-- `RES_NAME` : 식당 상호명
-- `ADDR` : 주소
-- `LAT`, `LON` : 위도/경도
-- `RATINGS` : 평점
-- `IMG_CHECK` : 체크 여부
+  - JSP, HTML부
 - `UPLOAD_DT` : 업로드 일자
 
 ### 3) 번역 테이블 `T_TRANSLATION`
