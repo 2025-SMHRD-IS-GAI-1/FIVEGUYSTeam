@@ -43,7 +43,7 @@
 - **Backend**
   - Java (Servlet, JSP)
   - MVC 패턴
-  - (예: Spring 없이 순수 Servlet / 혹은 Spring MVC 사용 여부)
+  -  Servlet 
 
 - **Frontend**
   - JSP, HTML, CSS, JavaScript
@@ -55,7 +55,7 @@
 
 - **OCR & 번역**
   - (예: Naver CLOVA OCR API)
-  - (예: Papago / Naver 번역 API / 기타 번역 API)
+  - Gemini
 
 - **Infra / 기타**
   - Apache Tomcat
