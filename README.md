@@ -135,7 +135,7 @@
 6. JSP 화면에서 번역 결과, 알레르기 정보, 즐겨찾기 등을 렌더링하여 사용자에게 보여줌
 
  
-<img src="docs/images/팀로고.png" width="600" />
+<img src="docs/images/아키텍쳐.png" width="600" />
 
 ---
 
@@ -151,8 +151,7 @@
   - TRANS_ID, IMG_ID, X1, Y1, X2, Y2, MENU_NAME, TRANS_TEXT, MENU_DESC 등
 - `IMAGE_STORAGE` : 이미지 원본 저장용 테이블(또는 파일 경로 관리)
 
-> ERD 이미지가 있다면  
-> `![ERD](./docs/images/erd.png)`
+<img src="docs/images/테이블.png" width="600" />
 
 ---
 
@@ -160,56 +159,39 @@
 
 > 실제 프로젝트에서 사용한 화면 캡처 이미지를 docs/images 폴더 등에 넣고 아래 경로를 맞춰주세요.
 
-1. **메인 화면**
+### 1. **메인 화면**
    - 서비스 소개
    - 메뉴판 번역으로 이동 버튼
 
-2. **로그인 / 회원가입 / 비밀번호 찾기**
+### 2. **로그인 / 회원가입 / 비밀번호 찾기**
    - 기본적인 회원 관리
    - 매크로 방지 기능 포함(비밀번호 찾기)
 <img src="docs/images/로그인 화면.png" width="600" />
 <img src="docs/images/회원가입 화면.png" width="600" />
-3. **메뉴판 번역 화면**
+### 3. **메뉴판 번역 화면**
    - 이미지 업로드 영역
    - 번역 언어 선택
    - 번역 실행 버튼
 <img src="docs/images/메인 화면.png" width="600" />
-4. **번역 결과 화면**
+### 4. **번역 결과 화면**
    - 원문 / 번역문 메뉴 목록
    - 메뉴 설명, 알레르기 정보 표시
    - 복사 / 다운로드(선택 기능) 등
 <img src="docs/images/결과 화면1.png" width="600" />
 <img src="docs/images/결과 화면2.png" width="600" />
-5. **마이페이지**
+### 5. **마이페이지**
    - 프로필 확인 및 비밀번호 변경
    - 회원 탈퇴
    - 즐겨찾기 이미지 관리
 <img src="docs/images/마이페이지 화면.png" width="600" />
-6. **관리자 화면**
+### 6. **관리자 화면**
    - 회원 검색 (ID / 이름)
    - 회원 전체 조회
 <img src="docs/images/관리자 화면.png" width="600" />
-7. **확장프로그램** 
+### 7. **확장프로그램**
 <img src="docs/images/확장프로그램 1.png" width="600" />
 <img src="docs/images/확장 프로그램2.png" width="600" />
 
 ---
 
-## 7. 설치 & 실행 방법 (요약)
-
-> 실제 환경에 맞게 포트 번호, 경로 등은 팀에서 수정해서 사용하세요.
-
-### 7-1. 공통 준비물
-
-- JDK 11 이상
-- Apache Tomcat 9.x
-- Python 3.10 이상
-- Oracle 11g (또는 호환 DB)
-- Git, Eclipse, (선택) VS Code / PyCharm
-
-### 7-2. 프로젝트 실행 순서 예시
-
-1. **GitHub에서 프로젝트 클론**
-   ```bash
-   git clone https://github.com/본인-레포-주소/FIVEGUYS.git
 
