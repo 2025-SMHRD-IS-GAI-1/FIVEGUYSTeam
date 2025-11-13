@@ -101,30 +101,30 @@
 
 ---
 
-##  주요 화면
+## 주요 화면
 
 ### 1. 로그인 화면
-![로그인 화면](docs/images/로그인 화면.png)
+<img src="docs/images/로그인 화면.png" width="600" />
 
 ### 2. 회원가입 화면
-![회원가입 화면](docs/images/회원가입 화면.png)
+<img src="docs/images/회원가입 화면.png" width="600" />
 
 ### 3. 메인 화면
-![메인 화면](docs/images/메인 화면.png)
+<img src="docs/images/메인 화면.png" width="600" />
 
 ### 4. 마이페이지 화면
-![마이페이지 화면](docs/images/마이페이지 화면.png)
+<img src="docs/images/마이페이지 화면.png" width="600" />
 
 ### 5. 관리자 화면
-![관리자 화면](docs/images/관리자 화면.png)
+<img src="docs/images/관리자 화면.png" width="600" />
 
 ### 6. 결과 화면
-![결과 화면1](docs/images/결과 화면1.png)
-![결과 화면2](docs/images/결과 화면2.png)
+<img src="docs/images/결과 화면1.png" width="600" />
+<img src="docs/images/결과 화면2.png" width="600" />
 
 ### 7. 미리보기 화면
-![미리보기 화면](docs/images/미리보기 화면.png)
+<img src="docs/images/미리보기 화면.png" width="600" />
 
 ### 8. 확장 프로그램 화면
-![확장 프로그램 1](docs/images/확장 프로그램 1.png)
-![확장 프로그램2](docs/images/확장 프로그램2.png)
+<img src="docs/images/확장 프로그램 1.png" width="600" />
+<img src="docs/images/확장 프로그램 2.png" width="600" />
