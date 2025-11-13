@@ -1,1 +1,30 @@
+# Eclipse
+.classpath
+.project
+.settings/
+.metadata/
+.recommenders/
+.factorypath
+
+# Maven Build Artifacts
+target/
+
+# Tomcat / Server / Deploy
+Servers/
+**/.metadata/
+**/.tmp/
+work/
+logs/
+temp/
+
+# 기타 로컬 파일
+*.log
+*.swp
+*.bak
+*.tmp
+
+# OS별 임시 파일
+.DS_Store
+Thumbs.db
+
 /build/

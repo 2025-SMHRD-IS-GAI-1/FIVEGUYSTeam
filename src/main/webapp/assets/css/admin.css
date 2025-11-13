@@ -1,0 +1,379 @@
+@charset "UTF-8";
+
+:root {
+	--bg: #edf0f7;
+	--card: #ffffff;
+	--text: #1f2937;
+	--sub: #6b7280;
+	--primary: #6366f1;
+	--primary-d: #4f46e5;
+	--border: #e5e7eb;
+}
+
+* {
+	box-sizing: border-box;
+}
+
+body {
+	margin: 0;
+	background: var(--bg);
+	font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+		"Segoe UI", Arial;
+}
+
+/* 상단 바 */
+
+.link {
+	font-size: 14px;
+	color: var(--sub);
+	text-decoration: none
+}
+
+.link:hover {
+	color: var(--text)
+}
+
+/* 상단바 */
+.topbar {
+    background: #fff;
+    border-bottom: 1px solid rgba(99, 102, 241, .08);
+}
+
+.topbar .logo {
+	width: 32px;
+	height: 32px;
+	border-radius: 8px;
+	object-fit: contain;
+}
+
+/* 안쪽 폭 + 좌우 정렬 */
+.topbar-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 14px;              /* 글자 간격 살짝 줄이기 */
+    padding: 0 18px;        
+}
+
+
+.top-left {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.topbar .logo {
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    object-fit: contain;
+}
+
+
+.topbar .title {
+	font-weight: 600;
+	white-space :nowrap;
+}
+
+.top-actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;          /* 버튼 사이 살짝만 */
+}
+
+
+
+/* 가운데 카드 */
+.wrap {
+	max-width: 1100px;
+	margin: 26px auto;
+	padding: 0 16px;
+}
+
+.card {
+	background: var(--card);
+	border-radius: 20px;
+	box-shadow: 0 18px 40px rgba(15, 23, 42, .08);
+	display: grid;
+	grid-template-columns: 1.05fr 1.6fr;
+	min-height: 520px;
+	overflow: hidden;
+}
+
+/* 왼쪽 영역 */
+.left-panel {
+	background: #fff;
+	padding: 40px 40px 20px 40px;
+	border-right: 1px solid #f1f1f1;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	gap: 16px;
+}
+
+.left-panel img {
+	width: 230px;
+	max-width: 100%;
+	object-fit: contain;
+}
+
+.left-panel .caption {
+	font-size: 14px;
+	color: var(--sub);
+}
+
+/* 오른쪽 내용 */
+.right-panel {
+	padding: 36px 38px;
+	/* block으로 두고 내부 form만 가로로 컨트롤할 거임 */
+	display: block;
+}
+
+.right-header {
+	margin-bottom: 20px;
+}
+
+.right-header h2 {
+	margin: 0;
+	font-size: 18px;
+}
+
+.right-header p {
+	margin: 4px 0 0;
+	color: var(--sub);
+	font-size: 13px;
+}
+
+/* ====== 여기부터 검색영역 정리 ====== */
+
+/* 오른쪽 패널 안에 있는 form 두 개를 한 줄에 */
+.right-panel form {
+	display: inline-flex;
+	align-items: center;
+	gap: 8px;
+	margin-bottom: 8px;
+	vertical-align: middle;
+}
+
+/* 첫 번째 form(검색창 있는 애)은 폭을 좀 줄여서
+   오른쪽에 두 번째 form(회원전체검색)이 들어갈 자리 확보 */
+.right-panel form:first-of-type {
+	width: calc(100% - 140px); /* 오른쪽 버튼 들어갈 공간 140px 남겨둠 */
+}
+
+/* 첫 번째 폼 안에 있는 search-box는 그 안에서 다시 flex */
+.search-box {
+	display: flex;
+	gap: 8px;
+	align-items: center;
+	width: 100%;
+}
+
+.search-box input {
+	padding: 8px 12px;
+	border: 1px solid #d1d5db;
+	border-radius: 10px;
+	flex: 1 1 auto;
+	min-width: 0;
+	background: #f3f4f6;
+}
+
+.search-box .btn-primary {
+	flex: 0 0 auto;
+	white-space: nowrap;
+}
+
+/* 두 번째 form(회원전체검색) 버튼은 원래 크기로 */
+.right-panel form:nth-of-type(2) .btn-primary {
+	white-space: nowrap;
+}
+
+/* 버튼 공통 */
+.btn-primary {
+	background: var(--primary);
+	color: #fff;
+	border: none;
+	border-radius: 10px;
+	padding: 8px 16px;
+	cursor: pointer;
+}
+
+.btn-primary:hover {
+	background: var(--primary-d);
+}
+
+/* 테이블 박스 */
+.table-wrap {
+	background: #fff;
+	border: 1px solid #edf0f7;
+	border-radius: 14px;
+	overflow: hidden;
+	margin-top: 12px;
+}
+
+table {
+	width: 100%;
+	border-collapse: collapse;
+}
+
+thead {
+	background: #f3f4f6;
+}
+
+th, td {
+	padding: 10px 12px;
+	border-bottom: 1px solid #edf0f7;
+	font-size: 14px;
+	text-align: left;
+}
+
+tr:hover {
+	background: #f9fafb;
+}
+
+/* 권한 뱃지 */
+.role {
+	display: inline-block;
+	min-width: 34px;
+	text-align: center;
+	padding: 3px 6px;
+	border-radius: 999px;
+	font-size: 12px;
+	color: #fff;
+}
+
+.role.A {
+	background: #f97316;
+}
+
+.role.M {
+	background: #6366f1;
+}
+
+/* 수정 페이지 열기 버튼 */
+.actions {
+	margin-top: 16px;
+	text-align: right;
+}
+
+.main-action-btn {
+	display: inline-block;
+	background: #6366f1;
+	color: #fff;
+	padding: 10px 20px;
+	border-radius: 12px;
+	text-decoration: none;
+	font-weight: 500;
+	font-size: 14px;
+}
+
+.main-action-btn:hover {
+	background: #4f46e5;
+}
+
+/* footer */
+.footer {
+	margin-top: 18px;
+	text-align: center;
+	color: #94a3b8;
+	font-size: 12px;
+}
+
+
+.mini-nav {
+    display: inline-flex;
+    align-items: center;
+    padding: 6px 14px;
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    text-decoration: none;
+    color: var(--text);
+    font-size: 14px;
+    line-height: 1;
+}
+
+.mini-nav:hover,
+.mini-nav.active {
+    border-color: var(--primary);
+    color: var(--primary);
+}
+
+
+/* 반응형 - 화면 좁아지면 다시 세로로 */
+@media ( max-width : 980px) {
+	.card {
+		grid-template-columns: 1fr;
+	}
+	.left-panel {
+		border-right: none;
+		border-bottom: 1px solid #f1f1f1;
+	}
+	.right-panel form:first-of-type {
+		width: 100%;
+	}
+	.right-panel form {
+		display: block;
+	}
+}
+
+
+/* 이하 약관용 로직 20251104 cyonn*/
+
+/* 1. 모달 배경 (어둡게 처리) */
+.modal-overlay {
+	display: none; /* 평소에는 숨김 */
+	position: fixed; /* 화면 전체에 고정 */
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0, 0, 0, 0.5); /* 반투명 검은색 */
+	z-index: 1000; /* 다른 요소들 위에 표시 */
+	/* 모달창을 중앙에 배치하기 위한 Flexbox */
+	/* display: none; */ /* 맨 위에 이미 있으므로 중복 제거 */
+	justify-content: center;
+	align-items: center;
+}
+
+/* 2. 모달창 본체 */
+.modal-content {
+	background-color: #fff;
+	padding: 20px;
+	border-radius: 8px;
+	width: 90%;
+	max-width: 400px; /* 모달의 최대 너비 */
+	box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+	position: relative;
+    
+}
+
+/* 3. 닫기 버튼 */
+.close-btn {
+	position: absolute;
+	top: 10px;
+	right: 15px;
+	font-size: 24px;
+	font-weight: bold;
+	color: #888;
+	cursor: pointer;
+}
+
+.close-btn:hover {
+	color: #000;
+}
+
+/* 4. 약관 내용이 스크롤되는 영역 */
+#termsModal #rules_text {
+	height: 400px; /* 스크롤 영역의 높이를 고정합니다. (모달창 전체 높이가 아님) */
+	overflow-y: auto; /* 내용이 넘칠 경우 세로 스크롤바 생성 (!important 필요 없음) */
+	border: 1px solid #ddd;
+	padding: 10px;
+	margin-top: 15px;
+	background-color: #f9f9f9;
+	line-height: 1.6;
+}
