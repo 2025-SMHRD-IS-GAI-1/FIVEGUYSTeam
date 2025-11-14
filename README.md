@@ -2,6 +2,8 @@
 
 <img src="docs/images/팀로고.png" width="600" />
 
+<img src="docs/images/시연페이퍼.png" width="600" />
+
 
 > **"사진 한 장, 바로 이해되는 메뉴"**  
 > OCR 기반 다국어 메뉴판 번역 및 메뉴 설명 제공 서비스
